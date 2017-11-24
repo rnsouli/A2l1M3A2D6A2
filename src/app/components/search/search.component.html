@@ -45,7 +45,7 @@
 							</section><!-- /.section-articles-political -->
 						</div><!-- /.content__body -->
 
-						<div class="content__actions">
+						<div class="content__actions" *ngIf="showLoadMore">
 							<a (click)="load_more_articles()" class="btn btn-default btn-default--large loadMore">المزيد <i class="fa fa-plus" aria-hidden="true"></i></a>
 						</div><!-- /.content__actions -->
 					</div><!-- /.content -->

@@ -28,6 +28,7 @@ export class SearchComponent implements OnInit {
   sharedModel:SharedModel;
 
   isLoading:boolean = false;
+  showLoadMore: boolean = false;
   
   constructor(private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { 
   }
@@ -48,6 +49,7 @@ export class SearchComponent implements OnInit {
 
       this.http.get(_globals.API_URL + "Data/GetListingForSearch?keyword=" + this.keyword + "&getTotalCount=true&pageSize=" + this.pageSize).subscribe((data:any) =>{
         
+        this.showLoadMore = true;
         this.pageNumber = 0;
         this.CategoryModel = data;
         if(data.articles){
@@ -59,13 +61,18 @@ export class SearchComponent implements OnInit {
               //this.myFunctions.load_init_category_page();
               //this.startScrollLoading = true;
             },200);
+
+            if(data.articles.length < this.pageSize){
+              this.showLoadMore = false;
+            }
+
         }else{
-          this.myFunctions.HideLoadMore();
+          this.showLoadMore = false;
         }
 
         if(data.articles && data.articles.length == 0)
         {
-          this.myFunctions.HideLoadMore();
+          this.showLoadMore = false;
         }
 
       });
