@@ -62,7 +62,7 @@ export class SearchComponent implements OnInit {
               //this.startScrollLoading = true;
             },200);
 
-            if(data.articles.length < this.pageSize){
+            if(data.articles.length < this.pageSize || data.articles.length == data.totalCount){
               this.showLoadMore = false;
             }
 
@@ -90,9 +90,11 @@ export class SearchComponent implements OnInit {
       + "&page="+ (this.pageNumber) +"&skip=0&pageSize=" + this.pageSize).subscribe((data:any) =>{        
         this.CategoryModel.secondTabOfArticles = this.CategoryModel.secondTabOfArticles.concat(data.articles);
         
-        if(data.articles && data.articles.length == 0)
-        {
-          this.myFunctions.HideLoadMore();
+        if(data.articles && data.articles.length == 0){
+          this.showLoadMore = false;
+        }
+        else if(data.articles.length < this.pageSize){
+          this.showLoadMore = false;
         }
         
         this.myFunctions.ImageAsBgJs();
