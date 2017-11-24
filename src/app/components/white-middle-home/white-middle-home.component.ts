@@ -22,13 +22,13 @@ export class WhiteMiddleHomeComponent implements OnInit {
   displayin_specializedPage:number;
   displayin_middleWhiteBox:number;
 
-  whiteBox: whiteBox;
+  @Input() whiteBox: whiteBox;
 
-  specializedArticles: ArticleModel[];
-  middleArticles: ArticleModel[];
-  tabCategories: Category[];
-  firstBoxCategory: Category;
-  secondBoxCategory: Category;
+  @Input() specializedArticles: ArticleModel[];
+  @Input() middleArticles: ArticleModel[];
+  @Input() tabCategories: Category[];
+  @Input() firstBoxCategory: Category;
+  @Input() secondBoxCategory: Category;
 
   sharedModel: SharedModel;
 
@@ -44,30 +44,30 @@ export class WhiteMiddleHomeComponent implements OnInit {
     this.displayin_specializedPage = _globals.displayin_specializedPage;
     this.displayin_middleWhiteBox = _globals.displayin_middleWhiteBox;
 
-    this.http.get(_globals.API_URL + "Data/GetHomeListingPart3?idsToRemoves=" + this.sharedModel.idsToRemove).subscribe((data:any) =>{
-      this.tabCategories = data.tabCategories;
+    // this.http.get(_globals.API_URL + "Data/GetHomeListingPart3?idsToRemoves=" + this.sharedModel.idsToRemove).subscribe((data:any) =>{
+    //   this.tabCategories = data.tabCategories;
 
-      this.whiteBox = data.whiteBox;
+    //   this.whiteBox = data.whiteBox;
       
-      this.whiteBox.largeTabCategory = data.tabCategories[0];
+    //   this.whiteBox.largeTabCategory = data.tabCategories[0];
 
-      this.whiteBox.whiteBoxArticles = data.whiteBox.whiteBoxArticles;
-      this.whiteBox.smallWhiteBoxArticles = data.whiteBox.smallWhiteBoxArticles;
-      this.firstBoxCategory = data.firstBoxCategory;
-      this.specializedArticles = data.specializedArticles;
-      this.secondBoxCategory = data.secondBoxCategory;
-      this.middleArticles = data.middleArticles;
+    //   this.whiteBox.whiteBoxArticles = data.whiteBox.whiteBoxArticles;
+    //   this.whiteBox.smallWhiteBoxArticles = data.whiteBox.smallWhiteBoxArticles;
+    //   this.firstBoxCategory = data.firstBoxCategory;
+    //   this.specializedArticles = data.specializedArticles;
+    //   this.secondBoxCategory = data.secondBoxCategory;
+    //   this.middleArticles = data.middleArticles;
 
-      this.sharedService.set_idsToRemove(data.articleIds);
+    //   this.sharedService.set_idsToRemove(data.articleIds);
 
-      this.myFunctions.ArticleAsBgJs();
-    });
+    //   this.myFunctions.ArticleAsBgJs();
+    // });
 
   }
 
   load_whitebox_articles(catId:number, catNumber:number){
     //if(!(this.sharedModel.headerCategories[catNumber].SubCategories)){
-      this.http.get(_globals.API_URL + "Data/GetWhiteBoxTabs?idsToRemoves="+""+"&categoryId=" + catId + "&typeId=" + this.displayin_whitebox_medium + "&take=4").subscribe((data:any) =>{
+      this.http.get(_globals.API_URL + "Data/GetWhiteBoxTabs?idsToRemoves="+ "" + "&categoryId=" + catId + "&typeId=" + this.displayin_whitebox_medium + "&take=4").subscribe((data:any) =>{
           
           this.whiteBox = data.whiteBox;
 
@@ -85,7 +85,7 @@ export class WhiteMiddleHomeComponent implements OnInit {
 
   load_specialized_articles(catId:number, catNumber:number, divId:string){
     //if(!(this.sharedModel.headerCategories[catNumber].SubCategories)){
-      this.http.get(_globals.API_URL + "Data/GetHomeBox?idsToRemoves="+""+"&categoryId=" + catId + "&typeId=" + this.displayin_specializedPage + "&take=3").subscribe((data:any) =>{
+      this.http.get(_globals.API_URL + "Data/GetHomeBox?idsToRemoves=" + "" + "&categoryId=" + catId + "&typeId=" + this.displayin_specializedPage + "&take=3").subscribe((data:any) =>{
           if(divId == 'specializedBox'){
             this.specializedArticles = data.entries;
             this.myFunctions.OnTabClick(catNumber, '#specializedBox .tabs-medium');

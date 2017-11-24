@@ -22,10 +22,10 @@ export class MiddleHomeComponent implements OnInit {
   CONTENT_PATH:string;
   RESIZED_CONTENT_PATH:string;
 
-  todaysPicArticle: ArticleModel;
-  underTodaysPic: ArticleModel[];
-  latestNews: ArticleModel[];
-  leftArticles: ArticleModel[];
+  @Input() todaysPicArticle: ArticleModel;
+  @Input() underTodaysPic: ArticleModel[];
+  @Input() latestNews: ArticleModel[];
+  @Input() leftArticles: ArticleModel[];
 
   sharedModel: SharedModel;
 
@@ -38,18 +38,18 @@ export class MiddleHomeComponent implements OnInit {
     this.RESIZED_CONTENT_PATH = _globals.RESIZED_CONTENT_PATH;
     this.sharedService.sharedModel.subscribe((sharedModel:any) => this.sharedModel = sharedModel);
 
-    this.http.get(_globals.API_URL + "Data/GetHomeListingPart1?idsToRemoves=" + this.sharedModel.idsToRemove).subscribe((data:any) =>{
-      this.todaysPicArticle = data.todaysPicArticle;
-      this.underTodaysPic = data.underTodaysPic;
-      this.latestNews = data.latestNews;
-      this.leftArticles = data.leftArticles;
+    // this.http.get(_globals.API_URL + "Data/GetHomeListingPart1?idsToRemoves=" + this.sharedModel.idsToRemove).subscribe((data:any) =>{
+    //   this.todaysPicArticle = data.todaysPicArticle;
+    //   this.underTodaysPic = data.underTodaysPic;
+    //   this.latestNews = data.latestNews;
+    //   this.leftArticles = data.leftArticles;
 
-      this.sharedService.set_idsToRemove(data.articleIds);
+    //   this.sharedService.set_idsToRemove(data.articleIds);
 
-      this.myFunctions.ImageAsBgJs();
-      this.myFunctions.ArticleAsBgJs();
-      this.myFunctions.hide_comments_counter();
-    });
+    //   this.myFunctions.ImageAsBgJs();
+    //   this.myFunctions.ArticleAsBgJs();
+    //   this.myFunctions.hide_comments_counter();
+    // });
 
   }
 

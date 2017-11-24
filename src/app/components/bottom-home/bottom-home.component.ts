@@ -21,11 +21,11 @@ export class BottomHomeComponent implements OnInit {
   CONTENT_PATH:string;
   RESIZED_CONTENT_PATH:string;
 
-  bottomCategory: Category;
-  bottomSlideshowArticles: ArticleModel[];
-  bottomArticles: ArticleModel[];
-  videoArticles: ArticleModel[];
-  currentPoll: ArticleModel;
+  @Input() bottomCategory: Category;
+  @Input() bottomSlideshowArticles: ArticleModel[];
+  @Input() bottomArticles: ArticleModel[];
+  @Input() videoArticles: ArticleModel[];
+  @Input() currentPoll: ArticleModel;
 
   sharedModel: SharedModel;
 
@@ -38,20 +38,20 @@ export class BottomHomeComponent implements OnInit {
     this.RESIZED_CONTENT_PATH = _globals.RESIZED_CONTENT_PATH;
     this.sharedService.sharedModel.subscribe((sharedModel:any) => this.sharedModel = sharedModel);
 
-    this.http.get(_globals.API_URL + "Data/GetHomeListingPart4?idsToRemoves=" + this.sharedModel.idsToRemove).subscribe((data:any) =>{
-      this.bottomCategory = data.bottomCategory;
-      this.bottomSlideshowArticles = data.bottomSlideshowArticles;   
-      this.bottomArticles = data.bottomArticles;
-      this.videoArticles = data.videoArticles;
-      this.currentPoll = data.currentPoll;
+    // this.http.get(_globals.API_URL + "Data/GetHomeListingPart4?idsToRemoves=" + this.sharedModel.idsToRemove).subscribe((data:any) =>{
+    //   this.bottomCategory = data.bottomCategory;
+    //   this.bottomSlideshowArticles = data.bottomSlideshowArticles;   
+    //   this.bottomArticles = data.bottomArticles;
+    //   this.videoArticles = data.videoArticles;
+    //   this.currentPoll = data.currentPoll;
 
-      this.sharedService.set_idsToRemove(data.articleIds);
+    //   this.sharedService.set_idsToRemove(data.articleIds);
       
-      this.myFunctions.SliderSingleSwiper();
+    //   this.myFunctions.SliderSingleSwiper();
 
-      this.myFunctions.ArticleAsBgJs();
-      this.myFunctions.ImageAsBgJs();
-    });
+    //   this.myFunctions.ArticleAsBgJs();
+    //   this.myFunctions.ImageAsBgJs();
+    // });
 
   }
 

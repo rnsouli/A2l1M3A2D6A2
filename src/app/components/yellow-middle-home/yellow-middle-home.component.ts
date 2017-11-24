@@ -21,12 +21,12 @@ export class YellowMiddleHomeComponent implements OnInit {
   CONTENT_PATH:string;
   RESIZED_CONTENT_PATH:string;
 
-  firstBoxCategory: Category;
-  bigPoliticals: ArticleModel;
-  politicalsSmall: ArticleModel[];
-  politicals: ArticleModel[];
-  secondBoxCategory: Category;
-  localNews: ArticleModel[];
+  @Input() firstBoxCategory: Category;
+  @Input() bigPoliticals: ArticleModel;
+  @Input() politicalsSmall: ArticleModel[];
+  @Input() politicals: ArticleModel[];
+  @Input() secondBoxCategory: Category;
+  @Input() localNews: ArticleModel[];
 
   sharedModel: SharedModel;
 
@@ -39,21 +39,21 @@ export class YellowMiddleHomeComponent implements OnInit {
     this.RESIZED_CONTENT_PATH = _globals.RESIZED_CONTENT_PATH;
     this.sharedService.sharedModel.subscribe((sharedModel:any) => this.sharedModel = sharedModel);
 
-    this.http.get(_globals.API_URL + "Data/GetHomeListingPart2?idsToRemoves=" + this.sharedModel.idsToRemove).subscribe((data:any) =>{
-      this.firstBoxCategory = data.firstBoxCategory;
-      this.bigPoliticals = data.bigPoliticals;
-      this.politicalsSmall = data.politicalsSmall;
-      this.politicals = data.politicals;
-      this.secondBoxCategory = data.secondBoxCategory;
-      this.localNews = data.localNews;
+    // this.http.get(_globals.API_URL + "Data/GetHomeListingPart2?idsToRemoves=" + this.sharedModel.idsToRemove).subscribe((data:any) =>{
+    //   this.firstBoxCategory = data.firstBoxCategory;
+    //   this.bigPoliticals = data.bigPoliticals;
+    //   this.politicalsSmall = data.politicalsSmall;
+    //   this.politicals = data.politicals;
+    //   this.secondBoxCategory = data.secondBoxCategory;
+    //   this.localNews = data.localNews;
 
-      this.sharedService.set_idsToRemove(data.articleIds);
+    //   this.sharedService.set_idsToRemove(data.articleIds);
 
-      this.myFunctions.ImageAsBgJs();
-      this.myFunctions.ArticleAsBgJs();
-      this.myFunctions.hide_comments_counter();
+    //   this.myFunctions.ImageAsBgJs();
+    //   this.myFunctions.ArticleAsBgJs();
+    //   this.myFunctions.hide_comments_counter();
       
-    });
+    // });
 
   }
 

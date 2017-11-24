@@ -836,5 +836,24 @@ module.exports.myFunctions = {
 		$('.header .header__content').removeClass('expanded');
 		$('.nav-mobile-outer').removeClass('active');
 		$('.wrapper').scrollLock('disable');
-	}
+	},
+
+	is_dom_in_view:function(id, offset){
+		let el = $(id);
+		if(el.length){
+			windowHeight = $(window).height();
+			distanceFromTop = $(document).scrollTop();
+			minVisibleArea = distanceFromTop - offset;
+			maxVisibleArea = distanceFromTop + windowHeight + offset;
+			
+			elementTopPosition = el.offset().top;
+			elementBottomPosition = elementTopPosition + el.height();
+			
+			if((elementTopPosition > minVisibleArea && elementTopPosition < maxVisibleArea) || (elementBottomPosition > minVisibleArea && elementBottomPosition < maxVisibleArea) || (elementTopPosition < minVisibleArea && elementBottomPosition > maxVisibleArea)){
+				return true;
+			}
+		}
+		
+		return false;
+	},
 }

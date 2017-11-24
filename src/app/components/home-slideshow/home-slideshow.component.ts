@@ -18,8 +18,8 @@ export class HomeSlideshowComponent implements OnInit {
   CONTENT_PATH:string;
   RESIZED_CONTENT_PATH:string;
 
-  topArticle: ArticleModel;
-  slideshow: ArticleModel[];
+  @Input() topArticle: ArticleModel;
+  @Input() slideshow: ArticleModel[];
 
   sharedModel: SharedModel;  
 
@@ -32,15 +32,15 @@ export class HomeSlideshowComponent implements OnInit {
     this.RESIZED_CONTENT_PATH = _globals.RESIZED_CONTENT_PATH;
     this.sharedService.sharedModel.subscribe((sharedModel:any) => this.sharedModel = sharedModel);
 
-    this.http.get(_globals.API_URL + "Data/GetHomeInit").subscribe((data:any) =>{
-      this.topArticle = data.topArticle;
-      this.slideshow = data.slideshow;
-      this.myFunctions.SlideshowSwiper();
-      this.sharedService.set_idsToRemove(data.articleIds);
+    // this.http.get(_globals.API_URL + "Data/GetHomeInit").subscribe((data:any) =>{
+    //   this.topArticle = data.topArticle;
+    //   this.slideshow = data.slideshow;
+    //   this.myFunctions.SlideshowSwiper();
+    //   this.sharedService.set_idsToRemove(data.articleIds);
 
-      this.myFunctions.ImageAsBgJs();
-      this.myFunctions.ArticleAsBgJs();
-    });
+    //   this.myFunctions.ImageAsBgJs();
+    //   this.myFunctions.ArticleAsBgJs();
+    // });
 
   }
 

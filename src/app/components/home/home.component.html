@@ -2,7 +2,8 @@
 		<div class="intro">
 			<div class="shell">
 				<div class="intro__body">
-					<app-home-slideshow></app-home-slideshow>
+					<app-home-slideshow [topArticle]="topArticle"
+					[slideshow]="slideshow"></app-home-slideshow>
 				</div><!-- /.intro__body -->
 			</div><!-- /.shell -->
 		</div><!-- /.intro -->
@@ -23,9 +24,22 @@
 			</div><!-- /.bar__inner -->
 		</div><!-- /.bar-nav -->
 
-		<app-middle-home></app-middle-home>		
+		<div id="middleHome">
+			<app-middle-home [todaysPicArticle]="todaysPicArticle"
+			[underTodaysPic]="underTodaysPic"
+			[latestNews]="latestNews"
+			[leftArticles]="leftArticles"></app-middle-home>
+		</div>
+			
 
-		<app-yellow-middle-home></app-yellow-middle-home>
+		<div id="yellowMiddleHome">
+			<app-yellow-middle-home [firstBoxCategory]="firstBoxCategory"
+			[bigPoliticals]="bigPoliticals"
+			[politicalsSmall]="politicalsSmall"
+			[politicals]="politicals"
+			[secondBoxCategory]="secondBoxCategory"
+			[localNews]="localNews"></app-yellow-middle-home>
+		</div>
 
 		<div class="main main--primary">
 			<div class="shell">
@@ -33,8 +47,21 @@
 					<div class="content">
 						<div class="content__body">
 							
-							<app-white-middle-home></app-white-middle-home>
-							<app-bottom-home></app-bottom-home>							
+							<div id="whiteMiddleHome">
+								<app-white-middle-home [whiteBox]="whiteBox"
+								[specializedArticles]="specializedArticles"
+								[middleArticles]="middleArticles"
+								[tabCategories]="tabCategories"
+								[firstBoxCategory]="firstBoxCategoryForWhite"
+								[secondBoxCategory]="secondBoxCategoryForWhite"></app-white-middle-home>
+							</div>
+							<div id="bottomHome">
+								<app-bottom-home [bottomCategory]="bottomCategory"
+								[bottomSlideshowArticles]="bottomSlideshowArticles"
+								[bottomArticles]="bottomArticles"
+								[videoArticles]="videoArticles"
+								[currentPoll]="currentPoll"></app-bottom-home>	
+							</div>						
 							
 						</div><!-- /.content__body -->
 					</div><!-- /.content -->

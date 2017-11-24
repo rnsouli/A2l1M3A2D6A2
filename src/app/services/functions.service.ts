@@ -88,4 +88,8 @@ export class FunctionsService {
     myFunctions.CloseMenuOnMobile();
   }
 
+  is_dom_in_view(id:string, offset:number){
+    return myFunctions.is_dom_in_view(id, offset);
+  }
+
 }
