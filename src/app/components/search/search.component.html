@@ -1,0 +1,58 @@
+<div class="container container--alt">
+		<div class="main main--primary main--alt">
+			<div class="shell">
+				<div class="main__body">
+					<div class="content">
+						<div class="content__body">
+							<section class="section-default section-articles-political section-articles-political--results">
+								<header class="section__head">
+									<h3 class="section__title">
+										تم العثور على <span>{{CategoryModel?.totalCount}}</span> نتيجة لكلمة <span>“{{keyword}}”</span>
+									</h3><!-- /.section__title -->
+
+									<div class="section__head-inner">
+										<nav class="breadcrumbs">
+											<ul>
+                          <li>
+                            <a routerLink="/">الصفحة الرئيسية</a>
+                          </li>
+                          
+                          <li>
+                            <a>البحث</a>
+                          </li>
+											</ul>
+										</nav><!-- /.breadcrumbs -->
+									</div><!-- /.section__head-inner -->
+								</header><!-- /.section__head -->
+
+								<div class="section__body">
+                    <div class="articles articles--medium articles--news" app-articles [entries]="CategoryModel?.firstTabOfArticles">
+                    </div><!-- /.articles articles--medium -->
+								</div><!-- /.section__body -->
+
+								<div class="section__bar hidden-xs">
+									<div class="section__image">
+										<img src="assets/css/images/temp/banner-image1.jpg" height="92" width="730" alt="">
+									</div><!-- /.section__image -->
+								</div><!-- /.section__bar -->
+							</section><!-- /.-->
+
+							<section class="section-default section-articles-political">
+								<div class="section__body">
+                    <div class="articles articles--medium articles--news" app-articles [entries]="CategoryModel?.secondTabOfArticles">
+                      </div><!-- /.articles articles--medium -->
+								</div><!-- /.section__body -->
+							</section><!-- /.section-articles-political -->
+						</div><!-- /.content__body -->
+
+						<div class="content__actions">
+							<a (click)="load_more_articles()" class="btn btn-default btn-default--large loadMore">المزيد <i class="fa fa-plus" aria-hidden="true"></i></a>
+						</div><!-- /.content__actions -->
+					</div><!-- /.content -->
+				
+          <app-sidebar></app-sidebar>
+          
+				</div><!-- /.main__body -->
+			</div><!-- /.shell -->
+		</div><!-- /.main -->
+	</div><!-- /.container -->

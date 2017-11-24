@@ -1,0 +1,49 @@
+<div class="container container--alt">
+		<div class="main main--primary main--alt">
+			<div class="shell">
+				<div class="main__body">
+					<div class="content">
+						<div class="content__body">
+							<section class="section-default section-default--info section-default--privacy">
+								<header class="section__head">
+									<div class="widget-banner visible-xs-block">
+										<div class="widget__image">
+											<img src="css/images/temp/widget-banner-image4.jpg" height="50" width="300" alt="">
+										</div><!-- /.widget__image -->
+									</div><!-- /.widget-banner -->
+									
+									<h2 class="section__title">سياسة الخصوصية</h2><!-- /.section__title -->
+
+									<div class="section__head-inner">
+										<nav class="breadcrumbs">
+											<ul>
+												<li>
+													<a routerLink="/">الصفحة الرئيسية</a>
+												</li>
+												
+												<li>
+													<a>سياسة الخصوصية</a>
+												</li>
+											</ul>
+										</nav><!-- /.breadcrumbs -->
+									</div><!-- /.section__head-inner -->
+								</header><!-- /.section__head -->
+
+								<div class="section__body">
+                  
+                  <div class="section__row" *ngFor="let item of Model">
+										<h4 [innerHTML]="item?.title"></h4>
+										<p [innerHTML]="item?.description"></p>
+                  </div><!-- /.section__row -->
+                  
+								</div><!-- /.section__body -->
+							</section><!-- /.section-default section-default--about -->
+						</div><!-- /.content__body -->
+					</div><!-- /.content -->
+				
+          <app-sidebar></app-sidebar>
+          
+				</div><!-- /.main__body -->
+			</div><!-- /.shell -->
+		</div><!-- /.main -->
+	</div><!-- /.container -->

@@ -1,0 +1,160 @@
+<div class="container container--alt">
+		<div class="main main--primary main--alt">
+			<div class="shell">
+				<div class="main__body">
+					<div class="content">
+						<div class="content__body">
+							<section class="section-default section-default--contacts">
+								<header class="section__head">
+									<h2 class="section__title">إتصل بنا</h2><!-- /.section__title -->
+
+									<div class="section__head-inner">
+										<nav class="breadcrumbs">
+											<ul>
+												<li>
+													<a routerLink="/">الصفحة الرئيسية</a>
+												</li>
+												
+												<li>
+													<a>إتصل بنا</a>
+												</li>
+											</ul>
+										</nav><!-- /.breadcrumbs -->
+									</div><!-- /.section__head-inner -->
+								</header><!-- /.section__head -->
+
+								<div class="section__body">
+									<div class="cols">
+										<div class="col col--1of2">
+											<div class="section__content">
+												<div class="widget-form">
+													<div class="form form--contacts js-form-message">
+                              							<form id="contactForm" (submit)="SubmitContact($event, contactForm.value)" #contactForm="ngForm" ngNativeValidate>
+															<div class="form__inner">
+																<div class="form__head">
+																	<h4>لارسال تعليقاتكم واستفسارتكم يرجى <br>تعبئة النموذج ادناه.</h4>
+																</div><!-- /.form__head -->
+																
+																<div class="form__body">
+																	<div class="form__row">
+																		<div class="form__cols">
+																			<div class="form__col">
+																				<label for="fullName" class="form__label">الاسم الكامل *</label>
+																				
+																				<div class="form__controls">
+																					<input type="text" class="field" name="fullName" id="fullName" required [(ngModel)]="contactFormModel.fullName" />
+																				</div><!-- /.form__controls -->
+																			</div><!-- /.form__col -->
+																			
+																			<div class="form__col">
+																				<label for="countryId" class="form__label">البلد *</label>
+																				
+																				<div class="form__controls">
+																					<div class="select select-custom select-custom--large" data-label="&nbsp;">
+																						<select name="countryId" id="countryId" required [(ngModel)]="contactFormModel.countryId">
+																							<option value="">البلد</option>
+																							<option value="{{item?.id}}" *ngFor="let item of countries">{{item?.title}}</option>
+																						</select>
+																					</div><!-- /.select -->
+																				</div><!-- /.form__controls -->
+																			</div><!-- /.form__col -->
+																		</div><!-- /.form__cols -->
+																	</div><!-- /.form__row -->
+																	
+																	<div class="form__row">
+																		<div class="form__cols">
+																			<div class="form__col">
+																				<label for="field-phone-3#" class="form__label">الهاتف</label>
+																				
+																				<div class="form__controls">
+																					<input type="text" class="field" name="phone" id="field-phone-3#" [(ngModel)]="contactFormModel.phone" />
+																				</div><!-- /.form__controls -->
+																			</div><!-- /.form__col -->
+																			
+																			<div class="form__col">
+																				<label for="field-email-4#" class="form__label">البريد الالكتروني *</label>
+																				
+																				<div class="form__controls">
+																					<input type="email" class="field" name="email" id="field-email-4#" required [(ngModel)]="contactFormModel.email" />
+																				</div><!-- /.form__controls -->
+																			</div><!-- /.form__col -->
+																		</div><!-- /.form__cols -->
+																	</div><!-- /.form__row -->
+												
+																	<div class="form__row">
+																		<label for="field-message-1#" class="form__label">الرسالة *</label>
+																		
+																		<div class="form__controls">
+																			<textarea class="textarea" name="message" id="field-message-1#" required [(ngModel)]="contactFormModel.message"></textarea>
+																		</div><!-- /.form__controls -->
+																	</div><!-- /.form__row -->
+																</div><!-- /.form__body -->
+																
+																<div class="form__actions">
+																	<input type="submit" value="أرسل" class="form__btn btn btn-default btn-default--wide">
+												
+																	<span class="form__notice hidden-xs">إلزامي *</span>
+																</div><!-- /.form__actions -->
+															</div><!-- /.form__inner -->
+												
+															<div class="form__message">
+																<h2>شكرا</h2>
+
+																<h4>سوف نعود إليكم قريبا</h4>
+															</div><!-- /.form__message -->
+														</form>
+													</div><!-- /.form -->
+												</div><!-- /.widget-form -->
+											</div><!-- /.section__content -->
+										</div><!-- /.col col--1of2 -->
+										
+										<div class="col col--1of2">
+											<div class="section__content">
+												<div class="widget-contacts">
+													<header class="widget__head" *ngIf="Model">
+														<h4>{{Model[0]?.name}}</h4>
+
+														<h5>{{Model[0]?.position}}</h5>
+
+														<p class="text-en">
+															<a href="mailto:{{Model[0]?.email}}">
+                                  {{Model[0]?.email}}
+
+																<i class="fa fa-envelope" aria-hidden="true"></i>
+															</a>
+														</p>
+													</header><!-- /.widget__head -->
+
+													<div class="widget__body" *ngIf="Model && Model.length > 1">
+														<ul class="list-contacts">
+                              
+                              <li *ngFor="let item of Model?.slice(1)">
+																<h5>{{item?.position}}</h5>
+
+																<p class="text-en">
+																	<a href="mailto:{{item?.email}}">
+                                      {{item?.email}}
+
+																		<i class="fa fa-envelope" aria-hidden="true"></i>
+																	</a>
+																</p>
+															</li>
+															
+														</ul><!-- /.list-contacts -->
+													</div><!-- /.widget__body -->
+												</div><!-- /.widget-contacts -->
+											</div><!-- /.section__content -->
+										</div><!-- /.col col--1of2 -->
+									</div><!-- /.cols -->
+								</div><!-- /.section__body -->
+							</section><!-- /.section-default -->
+						</div><!-- /.content__body -->
+					</div><!-- /.content -->
+				
+          <app-sidebar></app-sidebar>
+          
+				</div><!-- /.main__body -->
+			</div><!-- /.shell -->
+		</div><!-- /.main -->
+	</div><!-- /.container -->
+

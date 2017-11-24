@@ -1,0 +1,34 @@
+<article class="article article--political template_232_140 template__listing big-on-mobile" *ngFor="let item of entries">
+  <div class="article__image__wrapper">
+    <div class="article__image article-bg-image {{item?.isVideo ? 'article__video' : ''}}">
+      <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+        <span *ngIf="item.isVideo" class="btn btn-play btn-play--xsmall"></span>
+        <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/232x140xo/{{item?.image}}" height="140" width="232" alt="">
+      </a>
+    </div><!-- /.article__image -->
+  </div>
+          
+  <div class="article__content">
+    <h4><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h4>
+          
+    <div class="article__content-bar">
+      <ul class="list-meta">
+        <li>
+          <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+            <span>بسام فرج</span>
+            
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+          </a>
+        </li>
+
+        <li>
+          <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+            <span class="text-en">{{item?.date | amTimeAgo }}</span>
+            
+            <i class="fa fa-clock-o" aria-hidden="true"></i>
+          </a>
+        </li>
+      </ul><!-- /.list-meta -->
+    </div><!-- /.article__content-bar -->
+  </div><!-- /.article__content -->
+</article><!-- /.article -->

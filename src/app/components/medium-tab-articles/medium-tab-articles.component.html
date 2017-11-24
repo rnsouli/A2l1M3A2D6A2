@@ -1,0 +1,51 @@
+<div class="tabs__body" *ngIf="entries">
+  <div class="tabs__body-inner">
+
+    <div class="tab current" id="tab-small1">
+      <ol class="news-items news-items--small">
+
+        <li class="news-item template_142_85" *ngFor="let item of entries">
+          <div class="news__image__wrapper">
+            <div class="news__image article-bg-image">
+              <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/142x85xo/{{item?.image}}" height="85" width="142" alt="" class="hide">
+              </a>
+            </div>
+          </div>
+          <!-- /.news__image -->
+
+          <div class="news__content">
+            <h6><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h6>
+
+            <ul class="list-meta">
+              <li>
+                <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                    <span class="text-en">{{item?.date | amTimeAgo }}</span>
+                    
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                  </a>
+              </li>
+
+              <li>
+                <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                    <span class="text-en">500</span>
+                    
+                    <i class="fa fa-comment-o" aria-hidden="true"></i>
+                  </a>
+              </li>
+            </ul>
+            <!-- /.list-meta -->
+          </div>
+          <!-- /.news__content -->
+        </li>
+        <!-- /.news-item -->
+
+      </ol>
+      <!-- /.news-items -->
+    </div>
+    <!-- /.tab -->
+
+  </div>
+  <!-- /.tabs__body-inner -->
+</div>
+<!-- /.tabs__body -->

@@ -1,0 +1,291 @@
+<aside class="sidebar">
+  <div class="sidebar__inner">
+    <div class="widgets">
+      <div class="widget-banner">
+        <div class="widget__image hidden-xs">
+          <img src="assets/css/images/temp/widget-banner-image1.jpg" height="250" width="300" alt="">
+        </div>
+        <!-- /.widget__image -->
+
+        <div class="widget__image visible-xs-block">
+          <img src="assets/css/images/temp/widget-banner-image4.jpg" height="50" width="300" alt="">
+        </div>
+        <!-- /.widget__image -->
+      </div>
+      <!-- /.widget-banner -->
+
+      <div class="widget widget--editors" *ngIf="editorialArticles && editorialArticles.length">
+        <div class="widget__head">
+          <h3 class="widget__title">
+            <a routerLink="/Category/{{editorialId}}" class="btn btn-plus"><i class="fa fa-plus" aria-hidden="true"></i></a>            مقالات رئيس التحرير
+          </h3>
+          <!-- /.widget__title -->
+        </div>
+        <!-- /.widget__head -->
+
+        <div class="widget__body">
+          <div class="articles-block articles-block--editors">
+
+            <article class="article article--columns article--editors template_142_85" *ngFor="let item of editorialArticles">
+              <div class="article__image__wrapper">
+                <div class="article__image article-bg-image">
+                  <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">						
+                    <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/142x85xo/{{item?.image}}" height="85" width="142" alt="">
+                  </a>
+                </div>
+                <!-- /.article__image -->
+              </div>
+              <div class="article__content">
+                <h6><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h6>
+              </div>
+              <!-- /.article__content -->
+            </article>
+            <!-- /.article -->
+
+          </div>
+          <!-- /.articles-block -->
+        </div>
+        <!-- /.widget__body -->
+
+        <div class="widget__actions">
+          <a routerLink="/Category/{{editorialId}}" class="link link--red link-more">
+              <i class="fa fa-long-arrow-left" aria-hidden="true"></i>المزيد
+            </a>
+        </div>
+        <!-- /.widget__actions -->
+      </div>
+      <!-- /.widget -->
+
+      <div class="widget widget--today" *ngIf="todaysWord">
+        <div class="widget__head">
+          <h3 class="widget__title">
+            <a routerLink="/Category/{{todaysWordId}}" class="btn btn-plus"><i class="fa fa-plus" aria-hidden="true"></i></a>            كلام اليوم
+          </h3>
+          <!-- /.widget__title -->
+        </div>
+        <!-- /.widget__head -->
+
+        <div class="widget__body">
+          <div class="articles-block articles-block--editors">
+            <article class="article article--columns article--today template_142_85">
+              <div class="article__image__wrapper">
+                <div class="article__image article-bg-image">
+                  <a routerLink="/Details/{{todaysWord?.id}}/{{todaysWord?.customUrlTitle}}">						
+                    <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/142x85xo/{{todaysWord?.image}}" height="85" width="142" alt="">
+                  </a>
+                </div>
+              </div>
+              <!-- /.article__image -->
+
+              <div class="article__content">
+                <h6><a routerLink="/Details/{{todaysWord?.id}}/{{todaysWord?.customUrlTitle}}">{{todaysWord?.title}}</a></h6>
+
+                <p><a routerLink="/Details/{{todaysWord?.id}}/{{todaysWord?.customUrlTitle}}">شاكر كتاب </a></p>
+
+                <ul class="list-meta">
+                  <li>
+                    <a routerLink="/Details/{{todaysWord?.id}}/{{todaysWord?.customUrlTitle}}">
+                        <span class="text-en">{{todaysWord?.date | amTimeAgo }}</span>
+                        
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                      </a>
+                  </li>
+                </ul>
+                <!-- /.list-meta -->
+              </div>
+              <!-- /.article__content -->
+            </article>
+            <!-- /.article -->
+          </div>
+          <!-- /.articles-block -->
+        </div>
+        <!-- /.widget__body -->
+      </div>
+      <!-- /.widget -->
+
+      <div class="widget widget--person" *ngIf="pillarsOfTheDayArticles">
+        <div class="widget__head">
+          <h3 class="widget__title">
+            <a routerLink="/Category/{{pillarOfTheDayId}}" class="btn btn-plus"><i class="fa fa-plus" aria-hidden="true"></i></a>            اعمدة اليوم
+          </h3>
+          <!-- /.widget__title -->
+        </div>
+        <!-- /.widget__head -->
+
+        <div class="widget__body">
+          <div class="articles-block articles-block--editors">
+
+            <article class="article article--columns article--person template_72_72" *ngFor="let item of pillarsOfTheDayArticles">
+              <div class="article__image__wrapper">
+                <div class="article__image article-bg-image">
+                  <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">						
+                    <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/72x72xo/{{item?.image}}" height="72" width="72" alt="">
+                  </a>
+                </div>
+              </div>
+              <!-- /.article__image -->
+
+              <div class="article__content">
+                <h6><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">مقال رئيس التحرير</a></h6>
+
+                <p>{{item?.title}}</p>
+              </div>
+              <!-- /.article__content -->
+            </article>
+            <!-- /.article -->
+
+          </div>
+          <!-- /.articles-block -->
+        </div>
+        <!-- /.widget__body -->
+      </div>
+      <!-- /.widget -->
+
+      <div class="widget widget--comics" *ngIf="todaysCaricature">
+        <div class="widget__head">
+          <h3 class="widget__title">
+            <a routerLink="/Category/{{caricatureId}}" class="btn btn-plus"><i class="fa fa-plus" aria-hidden="true"></i></a>            كاريكاتير اليوم
+          </h3>
+          <!-- /.widget__title -->
+        </div>
+        <!-- /.widget__head -->
+
+        <div class="widget__body">
+          <div class="widget__image">
+            <a routerLink="/Details/{{todaysCaricature?.id}}/{{todaysCaricature?.customUrlTitle}}">
+                <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/272x189xo/{{todaysCaricature?.image}}" height="189" width="272" alt="">
+              </a>
+          </div>
+          <!-- /.widget__image -->
+
+          <div class="widget__content">
+            <span>{{todaysCaricature?.title}}</span>
+          </div>
+          <!-- /.widget__content -->
+        </div>
+        <!-- /.widget__body -->
+      </div>
+      <!-- /.widget -->
+
+      <div class="widget widget--range hidden-lg">
+        <div class="widget__head">
+          <h3 class="widget__title">
+            <a routerLink="/Polls" class="btn btn-plus"><i class="fa fa-plus" aria-hidden="true"></i></a> استطلاع المدى
+          </h3>
+          <!-- /.widget__title -->
+        </div>
+        <!-- /.widget__head -->
+
+        <div class="widget__body">
+          <div class="form-range">
+            <form action="?" method="post">
+              <div class="form__head">
+                <h4>هل تواجه صعوبة في الدخول <br>على موقع بوابة المدى؟</h4>
+              </div>
+              <!-- /.form__head -->
+
+              <div class="form__body">
+                <ul class="list-radios">
+                  <li>
+                    <div class="radio">
+                      <input type="radio" name="radios20" id="radio-21#">
+
+                      <label for="radio-21#">الموقع يفتح بشكل عادي</label>
+                    </div>
+                    <!-- /.radio -->
+                  </li>
+
+                  <li>
+                    <div class="radio">
+                      <input type="radio" name="radios20" id="radio-22#">
+
+                      <label for="radio-22#">الموقع لا يفتح بالمتصفح «كروم»</label>
+                    </div>
+                    <!-- /.radio -->
+                  </li>
+
+                  <li>
+                    <div class="radio">
+                      <input type="radio" name="radios20" id="radio-23#">
+
+                      <label for="radio-23#">الموقع لا يفتح بالمتصفح «فاير فوكس»</label>
+                    </div>
+                    <!-- /.radio -->
+                  </li>
+
+                  <li>
+                    <div class="radio">
+                      <input type="radio" name="radios20" id="radio-24#">
+
+                      <label for="radio-24#">الموقع لا يفتح أحيانا</label>
+                    </div>
+                    <!-- /.radio -->
+                  </li>
+                </ul>
+                <!-- /.list-radios -->
+              </div>
+              <!-- /.form__body -->
+
+              <div class="form__actions">
+                <input type="submit" value="تصويت" class="form__btn btn btn-default btn-default--alt btn-default--small">
+
+                <a class="btn btn-default btn-default--small btn--white"> نتيجة التصويت</a>
+              </div>
+              <!-- /.form__actions -->
+            </form>
+          </div>
+          <!-- /.form -->
+        </div>
+        <!-- /.widget__body -->
+      </div>
+      <!-- /.widget -->
+
+      <div class="widget-radio">
+        <div class="widget__bg fullsize-image">
+          <img src="assets/css/images/radio-bg.jpg" height="171" width="299" alt="">
+        </div>
+        <!-- /.widget__bg -->
+
+        <div class="widget__body">
+          <div class="widget__bar text-en">
+            <span>92.8 FM</span>
+          </div>
+          <!-- /.widget__bar -->
+
+          <div class="widget__content">
+            <a href="#" class="logo logo--green"></a>
+          </div>
+          <!-- /.widget__content -->
+
+          <div class="widget__actions">
+            <a href="#" class="btn btn-default btn-default--medium"><i class="ico-radio"></i> إستمع للبث المباشر</a>
+          </div>
+          <!-- /.widget__actions -->
+        </div>
+        <!-- /.widget__body -->
+      </div>
+      <!-- /.widget-radio -->
+
+      <div id="facebookPage" class="fb-page" [attr.data-href]="FACEBOOK_PAGE_LINK" data-tabs="timeline" data-small-header="true"
+        data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true" data-width="300" data-height="300">
+        <blockquote [attr.cite]="FACEBOOK_PAGE_LINK" class="fb-xfbml-parse-ignore">
+          <a [attr.href]="FACEBOOK_PAGE_LINK">‎مؤسسة المدى‎</a>
+        </blockquote>
+      </div>
+
+      <!-- <a class="twitter-timeline" href="https://twitter.com/madanewspaper" data-width="300" data-height="300">
+          Tweets by @madanewspaper
+        </a> -->
+
+        <a class="twitter-timeline" data-lang="en" data-width="300" data-height="200" href="https://twitter.com/Dar_Almada?ref_src=twsrc%5Etfw">Tweets by Dar_Almada</a> 
+        <!-- <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
+      
+        <!-- <ng4-twitter-timeline [dataSrc]="{sourceType: 'profile',screenName: 'Dar_Almada'}" [opts]="{tweetLimit: 2}"></ng4-twitter-timeline>
+         -->
+
+    </div>
+    <!-- /.widgets -->
+  </div>
+  <!-- /.sidebar__inner -->
+</aside>
+<!-- /.sidebar -->

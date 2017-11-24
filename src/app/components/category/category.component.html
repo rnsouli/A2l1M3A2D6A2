@@ -1,0 +1,16 @@
+<div [ngSwitch]="templateId">
+    <app-caricature-template *ngSwitchCase="category_template_caricature" [CategoryModel]="CategoryModel" 
+    [categoryId]="categoryId" [pageNumber]="pageNumber"></app-caricature-template>
+    
+    <app-editorial-template *ngSwitchCase="category_template_editorial" [CategoryModel]="CategoryModel" 
+    [categoryId]="categoryId" [pageNumber]="pageNumber"></app-editorial-template>
+    
+    <app-hassubcategories-template *ngSwitchCase="category_template_withsubcategories" [CategoryModel]="CategoryModel" 
+    [categoryId]="categoryId"></app-hassubcategories-template>
+    
+    <app-listing-template *ngSwitchCase="category_template_listing" [CategoryModel]="CategoryModel" 
+    [categoryId]="categoryId" [pageNumber]="pageNumber"></app-listing-template>
+    
+    <app-subcategory-template *ngSwitchCase="category_template_subcategories" [idsToRemove]="idsToRemove" 
+    [CategoryModel]="CategoryModel" [categoryId]="categoryId" [pageNumber]="pageNumber"></app-subcategory-template>
+</div>

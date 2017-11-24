@@ -1,0 +1,41 @@
+<div class="tabs__body">
+    <div class="tabs__body-inner">
+
+      <div class="tab current" id="tab-large1" *ngIf="whiteBox.whiteBoxArticles">
+        <div class="tab__content-head">
+          <div class="articles articles--medium">
+
+            <article class="article article--large template_239_144" *ngFor="let item of whiteBox.whiteBoxArticles">
+              <div class="article__image article-bg-image">
+                <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                  <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/232x140xo/{{item?.image}}" height="140" width="232" alt="" class="hide">
+                </a>
+              </div><!-- /.article__image -->
+        
+              <div class="article__content">
+                <h4><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h4>
+              </div><!-- /.article__content -->
+            </article><!-- /.article -->  
+            
+          </div><!-- /.articles articles--medium -->
+        </div><!-- /.tab__content-head -->
+        
+        <div class="tab__content-body" *ngIf="whiteBox.smallWhiteBoxArticles">
+          <ul class="list-squares list-squares--small">
+
+            <li *ngFor="let item of whiteBox.smallWhiteBoxArticles">
+              <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a>
+            </li>
+            
+          </ul><!-- /.list-squares -->
+        </div><!-- /.tab__content-body -->
+        
+        <div class="tab__content-actions hidden-sm hidden-md">
+          <a routerLink="/Category/{{whiteBox.largeTabCategory?.id}}/{{whiteBox.largeTabCategory?.customUrlTitle}}" class="link link--red link-more">
+            <i class="fa fa-long-arrow-left" aria-hidden="true"></i>المزيد
+          </a>
+        </div><!-- /.tab__content-actions -->
+      </div><!-- /.tab -->
+    
+    </div><!-- /.tabs__body-inner -->
+  </div><!-- /.tabs__body -->

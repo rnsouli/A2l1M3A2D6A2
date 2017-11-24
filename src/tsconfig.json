@@ -1,4 +1,5 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "",
     "declaration": false,
@@ -11,6 +12,8 @@
     "outDir": "../dist/out-tsc",
     "sourceMap": true,
     "target": "es5",
+    "allowJs": true,
+    "allowUnreachableCode": true,
     "typeRoots": [
       "../node_modules/@types"
     ]

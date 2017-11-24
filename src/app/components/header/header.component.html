@@ -1,0 +1,95 @@
+<header class="header {{sharedModel?.currentRoute == 'home' ? 'header--default' : 'header--large'}}">
+		<div class="shell">
+			<div class="header__body">
+				<a href="#" class="btn btn-search">
+					<i class="fa fa-search" aria-hidden="true"></i>
+				</a>
+
+				<a routerLink="/" class="logo logo--default"></a>
+
+				<div class="header__aside">
+					<div class="header__aside-inner">
+						<div class="header__bar">
+							<nav class="nav-utilities">
+								<ul>
+									<li>
+										<a routerLink="/">العدد 3750 - الثلاثاء, 4 تشرين الأول 2016 <i class="fa fa-clock-o" aria-hidden="true"></i></a>
+									</li>
+									
+									<li>
+										<a routerLink="/AboutUs">من نحن</a>
+									</li>
+									
+									<li>
+										<a routerLink="/ContactUs">اتصل بنا</a>
+									</li>
+								</ul>
+							</nav><!-- /.nav-utilities -->
+					
+							<div class="socials socials--medium" *ngIf="globalModel?.socialMedia && globalModel?.socialMedia?.length > 0">
+								<ul>  
+
+                  					<li *ngFor="let item of globalModel?.socialMedia">
+										<a target="_blank" href="{{item.link}}">
+											<i class="fa {{'fa-' + item.className}}"  aria-hidden="true"></i><!-- fa-instagram,fa-youtube-play,fa-linkedin,fa-google-plus,fa-twitter,fa-facebook -->
+										</a>
+									</li>
+					
+								</ul>
+							</div><!-- /.socials socials--medium -->
+						</div><!-- /.header__bar -->
+					
+						<div class="header__inner">
+							<div class="search search--large">
+								<form (submit)="onSearch()" method="POST">
+									<div class="search__body">
+										<label for="q" class="hidden">Search</label>
+					
+										<div class="search__field">
+											<input type="search" name="keyword" id="q" value="" placeholder="البحث بحسب ...">
+										</div><!-- /.search__field -->
+										
+										<div class="search__select">
+											<select name="search-select-1#" id="search-select-1#">
+												<option value="1">كلمة المفتاح</option>
+												<option value="2">كلمة</option>
+											</select>
+										</div><!-- /.search__select -->
+					
+										<button type="submit" class="search__btn">
+											<i class="fa fa-search" aria-hidden="true"></i>
+										</button>
+									</div><!-- /.search__body -->
+								</form>
+							</div><!-- /.search -->
+
+							<a href="#" class="nav-mobile-outer">
+								<span class="nav-mobile">
+									<span></span>
+									
+									<span></span>
+									
+									<span></span>
+								</span>
+							</a>
+						</div><!-- /.header__inner -->
+					</div><!-- /.header__aside-inner -->
+
+					<div class="header__content">
+						<div class="header__content-body">
+							<nav class="nav nav--default">
+								<ul app-navigation>
+								</ul>
+							</nav><!-- /.nav -->
+						</div><!-- /.header__content-body -->
+
+						<div class="header__content-foot">
+							<div class="header__content-inner">
+								<a routerLink="/" class="logo-medium"></a>
+							</div><!-- /.header__content-inner -->
+						</div><!-- /.header__content-foot -->
+					</div><!-- /.header__content -->
+				</div><!-- /.header__aside -->
+			</div><!-- /.header__body -->
+		</div><!-- /.shell -->
+	</header><!-- /.header -->

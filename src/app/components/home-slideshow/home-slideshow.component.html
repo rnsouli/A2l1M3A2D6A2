@@ -1,0 +1,232 @@
+<div class="intro__content">
+
+  <article class="article-alt article-alt--xlarge template_1216_433" *ngIf="topArticle">
+    <a routerLink="/Details/{{topArticle?.id}}/{{topArticle?.customUrlTitle}}">
+      <div class="article__image fullsize-image">
+        <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/1217x434xo/{{topArticle?.image}}" height="434" width="1217" alt="">
+      </div>
+      <!-- /.article__image -->
+
+      <div class="article__content">
+        <span *ngIf="topArticle?.isVideo" class="btn btn-play btn-play--large"></span>
+
+        <h1>{{topArticle?.title}}</h1>
+      </div>
+      <!-- /.article__content -->
+    </a>
+  </article>
+  <!-- /.article-alt article--xlarge -->
+
+
+  <div class="slider slider-articles js-slider-articles" *ngIf="slideshow" data-slides="5" data-slides-tablet="5" data-slides-mobile="2">
+    <div class="slider__clip swiper-container">
+      <div class="slider__slides swiper-wrapper">
+
+
+        <div class="slider__slide swiper-slide" *ngFor="let item of slideshow">
+          <article class="article article--medium template_230_140">
+            <div class="article__image article-bg-image {{item?.isVideo ? 'article__video' : ''}}">
+              <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                <span *ngIf="item?.isVideo" class="btn btn-play btn-play--small"></span>
+                <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/232x140xo/{{item?.image}}" height="140" width="232" alt=""/>
+              </a>
+            </div>
+            <!-- /.article__image -->
+
+            <div class="article__content">
+              <h4><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h4>
+            </div>
+            <!-- /.article__content -->
+          </article>
+          <!-- /.article -->
+        </div>
+        <!-- /.slider__slide -->
+
+
+      </div>
+      <!-- /.slider__slides -->
+    </div>
+    <!-- /.slider__clip -->
+
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+  <!-- /.slider -->
+
+  <div class="widget-brochures visible-xs-block">
+    <div class="widget__body">
+      <div class="brochures">
+        <div class="brochure brochure--red brochure--inline">
+          <div class="brochure__head">
+            <h3>عدد اليوم </h3>
+          </div>
+          <!-- /.brochure__head -->
+
+          <div class="brochure__body">
+            <div class="brochure__body-inner">
+              <div class="slider slider-brochure js-slider-single">
+                <div class="slider__clip swiper-container">
+                  <div class="slider__slides swiper-wrapper">
+                    <div class="slider__slide swiper-slide">
+                      <a routerLink="/Issues">
+                        <div class="slider__slide-image">
+                          <img src="assets/css/images/temp/brochure-image1.jpg" height="320" width="276" alt="">
+                        </div>
+                        <!-- /.slider__slide-image -->
+
+                        <div class="slider__slide-content">
+                          <span>العدد  3750  الثلاثاء, 4 تشرين الأول 2016</span>
+                        </div>
+                        <!-- /.slider__slide-content -->
+                      </a>
+                    </div>
+                    <!-- /.slider__slide -->
+
+                    <div class="slider__slide swiper-slide">
+                      <a routerLink="/Issues">
+                        <div class="slider__slide-image">
+                          <img src="assets/css/images/temp/brochure-image1.jpg" height="320" width="276" alt="">
+                        </div>
+                        <!-- /.slider__slide-image -->
+
+                        <div class="slider__slide-content">
+                          <span>العدد  3750  الثلاثاء, 4 تشرين الأول 2016</span>
+                        </div>
+                        <!-- /.slider__slide-content -->
+                      </a>
+                    </div>
+                    <!-- /.slider__slide -->
+
+                    <div class="slider__slide swiper-slide">
+                      <a routerLink="/Issues">
+                        <div class="slider__slide-image">
+                          <img src="assets/css/images/temp/brochure-image1.jpg" height="320" width="276" alt="">
+                        </div>
+                        <!-- /.slider__slide-image -->
+
+                        <div class="slider__slide-content">
+                          <span>العدد  3750  الثلاثاء, 4 تشرين الأول 2016</span>
+                        </div>
+                        <!-- /.slider__slide-content -->
+                      </a>
+                    </div>
+                    <!-- /.slider__slide -->
+                  </div>
+                  <!-- /.slider__slides -->
+                </div>
+                <!-- /.slider__clip -->
+
+                <div class="swiper-button-next"></div>
+
+                <div class="swiper-button-prev"></div>
+              </div>
+              <!-- /.slider -->
+
+              <div class="brochure__body-bar">
+                <a routerLink="/Issues">
+                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+              
+                    تصفح عدد اليوم
+                  </a>
+              </div>
+              <!-- /.brochure__body-bar -->
+            </div>
+            <!-- /.brochure__body-inner -->
+
+            <div class="brochure__body-content">
+              <div class="search search--small">
+                <form action="?" method="get">
+                  <div class="search__body">
+                    <label for="q2" class="hidden">Search</label>
+
+                    <div class="search__field">
+                      <input type="search" name="q5" id="q5" value="" placeholder="البحث حسب ...">
+                    </div>
+                    <!-- /.search__field -->
+
+                    <div class="search__select">
+                      <select name="search-select-5#" id="search-select-5#">
+                          <option value="1">رقم العدد </option>
+                          <option value="2">رقم1</option>
+                        </select>
+                    </div>
+                    <!-- /.search__select -->
+
+                    <button type="submit" class="search__btn">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                      </button>
+                  </div>
+                  <!-- /.search__body -->
+                </form>
+              </div>
+              <!-- /.search -->
+            </div>
+            <!-- /.brochure__body-content -->
+          </div>
+          <!-- /.brochure__body -->
+        </div>
+        <!-- /.brochure -->
+
+        <div class="brochure brochure--green">
+          <div class="brochure__head">
+            <h3>ملحق اليوم</h3>
+          </div>
+          <!-- /.brochure__head -->
+
+          <div class="brochure__body">
+            <div class="brochure__body-inner">
+              <div class="slider slider-brochure js-slider-single">
+                <div class="slider__clip swiper-container">
+                  <div class="slider__slides swiper-wrapper">
+                    <div class="slider__slide swiper-slide">
+                      <a routerLink="/Issues">
+                        <div class="slider__slide-image">
+                          <img src="assets/css/images/temp/brochure-image1.jpg" height="320" width="276" alt="">
+                        </div>
+                        <!-- /.slider__slide-image -->
+
+                        <div class="slider__slide-content">
+                          <span>ملحق يوم الثلاثاء, 4 تشرين الأول 2016</span>
+                        </div>
+                        <!-- /.slider__slide-content -->
+                      </a>
+                    </div>
+                    <!-- /.slider__slide -->
+                  </div>
+                  <!-- /.slider__slides -->
+                </div>
+                <!-- /.slider__clip -->
+
+                <div class="swiper-button-next"></div>
+
+                <div class="swiper-button-prev"></div>
+              </div>
+              <!-- /.slider -->
+
+              <div class="brochure__body-bar">
+                <a routerLink="/Issues">
+                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+              
+                    تصفح ملحق اليوم
+                  </a>
+              </div>
+              <!-- /.brochure__body-bar -->
+            </div>
+            <!-- /.brochure__body-inner -->
+          </div>
+          <!-- /.brochure__body -->
+        </div>
+        <!-- /.brochure -->
+      </div>
+      <!-- /.brochures -->
+    </div>
+    <!-- /.widget__body -->
+  </div>
+  <!-- /.widget -->
+</div>
+<!-- /.intro__content -->
+
+<div class="intro__aside">
+  <img src="assets/css/images/temp/rectangle-image1.jpg" height="693" width="150" alt="">
+</div>
+<!-- /.intro__aside -->

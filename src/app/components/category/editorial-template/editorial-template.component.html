@@ -1,0 +1,74 @@
+<div class="container container--alt">
+		<div class="main main--primary main--alt">
+			<div class="shell">
+				<div class="main__body">
+					<div class="content content--alt">
+						<div class="content__body">
+							<section class="section-breadcrumbs">
+								<div class="section__body">
+									<nav class="breadcrumbs">
+										<ul>
+											<li>
+												<a routerLink="/">الصفحة الرئيسية</a>
+											</li>
+											
+											<li>
+												<a routerLink="/Category/{{CategoryModel?.id}}/{{CategoryModel?.customUrlTitle}}">{{CategoryModel?.title}}</a>
+											</li>
+										</ul>
+									</nav><!-- /.breadcrumbs -->
+								</div><!-- /.section__body -->
+							</section><!-- /.section-breadcrumbs -->
+
+							<section class="section-default section-articles-profile">
+								<div class="section__body">
+									<div class="widget-banner visible-xs-block">
+										<div class="widget__image">
+											<img src="assets/css/images/temp/widget-banner-image4.jpg" height="50" width="300" alt="">
+										</div><!-- /.widget__image -->
+									</div><!-- /.widget-banner -->
+
+									<div class="articles articles--text articles--profile">
+										<div class="profile">
+											<div class="profile__inner">
+												<div class="profile__image fullsize-image">
+													<img src="assets/css/images/temp/profile-image1.jpg" height="303" width="233" alt="">
+												</div><!-- /.profile__image -->
+											
+												<div class="profile__content">
+													<span>فخري كريم</span>
+												</div><!-- /.profile__content -->
+											</div><!-- /.profile__inner -->
+										</div><!-- /.profile -->
+
+										<div class="articlesEditorialContainer" app-articles-text [entries]="CategoryModel.firstTabOfArticles"></div>
+										
+									</div><!-- /.articles articles--text articles--profile -->
+								</div><!-- /.section__body -->
+
+								<div class="section__bar hidden-xs">
+									<div class="section__image">
+										<img src="assets/css/images/temp/banner-image1.jpg" height="92" width="730" alt="">
+									</div><!-- /.section__image -->
+								</div><!-- /.section__bar -->
+							</section><!-- /.section-articles-profile -->
+
+							<section class="section-default section-articles-profile">
+								<div class="section__body">
+									<div class="articles articles--text articles--text-alt" app-articles-text [entries]="CategoryModel.secondTabOfArticles">
+																				
+									</div><!-- /.articles articles--text -->
+								</div><!-- /.section__body -->
+							</section><!-- /.section-articles-alt -->
+						</div><!-- /.content__body -->
+
+						<div class="content__actions">
+							<a (click)="load_more_articles()" class="btn btn-default btn-default--large loadMore">المزيد <i class="fa fa-plus" aria-hidden="true"></i></a>
+						</div><!-- /.content__actions -->
+					</div><!-- /.content -->
+				
+					<app-sidebar></app-sidebar>
+				</div><!-- /.main__body -->
+			</div><!-- /.shell -->
+		</div><!-- /.main -->
+	</div><!-- /.container -->

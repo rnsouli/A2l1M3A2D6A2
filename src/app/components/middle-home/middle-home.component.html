@@ -1,0 +1,156 @@
+<section class="section-articles">
+  <div class="shell">
+    <div class="section__body">
+      <div class="cols cols--large">
+        <div class="col col--size-1">
+
+          <article class="article-alt article-alt--large template_793_574" *ngIf="todaysPicArticle">
+            <div class="article__image fullsize-image">
+              <a routerLink="/Details/{{todaysPicArticle?.id}}/{{todaysPicArticle?.customUrlTitle}}">
+                  <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/795x576xo/{{todaysPicArticle?.image}}" height="576" width="795" alt="">
+                </a>
+            </div>
+            <!-- /.article__image -->
+
+            <div class="article__content">
+              <a routerLink="/Details/{{todaysPicArticle?.id}}/{{todaysPicArticle?.customUrlTitle}}" class="btn btn-default btn-default--mobile btn-red">صورة اليوم <i class="fa fa-plus" aria-hidden="true"></i></a>
+
+              <h2>{{todaysPicArticle?.title}}</h2>
+
+              <a routerLink="/Details/{{todaysPicArticle?.id}}/{{todaysPicArticle?.customUrlTitle}}" class="link link-more">
+                  <i class="fa fa-long-arrow-left" aria-hidden="true"></i> صور سابقة
+                </a>
+            </div>
+            <!-- /.article__content -->
+          </article>
+          <!-- /.article -->
+
+          <div class="articles articles--default" *ngIf="underTodaysPic">
+
+            <article class="article article--medium template_231_139" *ngFor="let item of underTodaysPic">
+              <div class="article__image article-bg-image">
+                <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                    <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/189x112xo/{{item?.image}}" height="112" width="189" alt="">
+                  </a>
+              </div>
+              <!-- /.article__image -->
+
+              <div class="article__content">
+                <h4><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h4>
+              </div>
+              <!-- /.article__content -->
+            </article>
+            <!-- /.article -->
+
+          </div>
+          <!-- /.articles -->
+
+          <div class="widget-banner visible-xs-block">
+            <div class="widget__image">
+              <img src="assets/css/images/temp/widget-banner-image4.jpg" height="50" width="300" alt="">
+            </div>
+            <!-- /.widget__image -->
+          </div>
+          <!-- /.widget-banner -->
+        </div>
+        <!-- /.col -->
+
+        <div class="col col--size-2" *ngIf="latestNews">
+          <div class="widget-default widget-last-news">
+            <header class="widget__head">
+              <h3 class="widget__title">أحدث الأخبار</h3>
+              <!-- /.widget__title -->
+            </header>
+            <!-- /.widget__head -->
+
+            <div class="widget__body">
+              <ol class="news-items">
+
+                <li class="news-item" *ngFor="let item of latestNews">
+                  <div class="news__content">
+                    <h6><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h6>
+
+                    <ul class="list-meta">
+                      <li>
+                        <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                            <span class="text-en">{{item?.date | amTimeAgo }}</span>
+                            
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                          </a>
+                      </li>
+
+                      <li>
+                        <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                            <span class="text-en">500</span>
+                            
+                            <i class="fa fa-comment-o" aria-hidden="true"></i>
+                          </a>
+                      </li>
+                    </ul>
+                    <!-- /.list-meta -->
+                  </div>
+                  <!-- /.news__content -->
+                </li>
+                <!-- /.news-item -->
+
+              </ol>
+              <!-- /.news-items -->
+            </div>
+            <!-- /.widget__body -->
+
+            <!-- <div class="widget__actions">
+              <a class="link link--red link-more">
+                  <i class="fa fa-long-arrow-left" aria-hidden="true"></i>المزيد
+                </a>
+            </div> -->
+
+            <!-- /.widget__actions -->
+          </div>
+          <!-- /.widget-default widget-last-news -->
+
+          <div class="widget-banner visible-xs-block">
+            <div class="widget__image">
+              <img src="assets/css/images/temp/widget-banner-image3.jpg" height="250" width="300" alt="">
+            </div>
+            <!-- /.widget__image -->
+          </div>
+          <!-- /.widget-banner -->
+        </div>
+        <!-- /.col -->
+
+        <div class="col col--size-3" *ngIf="leftArticles">
+          <div class="widget-articles">
+            <div class="widget__body">
+              <div class="articles-block">
+
+                <article class="article template_232_140" *ngFor="let item of leftArticles">
+                  <div class="article__image article-bg-image">
+                    <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                        <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/232x140xo/{{item?.image}}" height="140" width="232" alt="">
+                      </a>
+                  </div>
+                  <!-- /.article__image -->
+
+                  <div class="article__content">
+                    <h4><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h4>
+                  </div>
+                  <!-- /.article__content -->
+                </article>
+                <!-- /.article -->
+
+              </div>
+              <!-- /.articles-block -->
+            </div>
+            <!-- /.widget__body -->
+          </div>
+          <!-- /.widget-articles -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.cols -->
+    </div>
+    <!-- /.section__body -->
+  </div>
+  <!-- /.shell -->
+</section>
+<!-- /.section-articles -->

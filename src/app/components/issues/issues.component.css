@@ -1,0 +1,11 @@
+.thumbnail {
+    display: inline-block;
+    width: 120px;
+    height: 160px;
+    background-color: #ccc;
+    margin: 0 5px;
+    cursor: pointer;
+  }
+.fullscreen {
+    background-color: #333;
+}

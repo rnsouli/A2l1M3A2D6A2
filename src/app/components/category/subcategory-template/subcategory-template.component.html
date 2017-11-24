@@ -1,0 +1,134 @@
+<div class="container container--alt">
+	<div class="main main--primary main--alt">
+		<div class="shell">
+			<div class="main__body">
+				<div class="content">
+					<div class="content__body">
+						<section class="section-default section-default--political alt">
+							<header class="section__head">
+								<h2 class="section__title">
+									<!-- no need for this one in videos -->
+									<a *ngIf="CategoryModel.parentId != 0" routerLink="/Category/{{CategoryModel?.parentId}}/{{CategoryModel?.parentCustomUrlTitle}}" class="btn btn-plus"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+									<!-- الفيديوهات -->
+									<a >{{CategoryModel?.title}}</a>
+								</h2><!-- /.section__title -->
+
+								<div class="section__head-inner">
+									<nav class="breadcrumbs">
+										<ul>
+											<li>
+												<a routerLink="/">الصفحة الرئيسية</a>
+											</li>
+											
+											<li *ngIf="CategoryModel.parentId != 0">
+												<a routerLink="/Category/{{CategoryModel?.parentId}}/{{CategoryModel?.parentCustomUrlTitle}}">{{CategoryModel?.parentTitle}}</a>
+											</li>
+											
+											<li>
+												<a routerLink="/Category/{{CategoryModel?.id}}/{{CategoryModel?.customUrlTitle}}">{{CategoryModel?.title}}</a>
+											</li>
+										</ul>
+									</nav><!-- /.breadcrumbs -->
+								</div><!-- /.section__head-inner -->
+							</header><!-- /.section__head -->
+					
+							<div class="section__body">
+								<div class="widget-banner visible-xs-block">
+									<div class="widget__image">
+										<img src="assets/css/images/temp/widget-banner-image4.jpg" height="50" width="300" alt="">
+									</div><!-- /.widget__image -->
+								</div><!-- /.widget-banner -->
+
+								<div class="cols">
+									
+									<div class="col col--1of2" *ngFor="let item of CategoryModel.topArticles">
+										<div class="section__content">
+											<article class="article-alt article-alt--medium template_492_357 template__listing">
+												<div class="article__image fullsize-image">
+													<img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/492x357xo/{{item?.image}}" height="357" width="492" alt="">
+												</div><!-- /.article__image -->
+							
+												<div class="article__content">
+													<a *ngIf="item?.isVideo" routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}" class="btn btn-play btn-play--large"></a>
+													<h2>{{item?.title}}</h2>
+							
+													<div class="article__content-bar">
+														<ul class="list-meta">
+															<li>
+																<a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+																	<span class="text-en">{{item?.date | amTimeAgo }}</span>
+																	
+																	<i class="fa fa-clock-o" aria-hidden="true"></i>
+																</a>
+															</li>
+							
+															<li>
+																<a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+																	<span class="text-en">500</span>
+																	
+																	<i class="fa fa-comment-o" aria-hidden="true"></i>
+																</a>
+															</li>
+														</ul><!-- /.list-meta -->
+						
+														<a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}" class="link link-more">
+															<i class="fa fa-long-arrow-left" aria-hidden="true"></i> إقرأ المزيد
+														</a>
+													</div><!-- /.article__content-bar -->
+												</div><!-- /.article__content -->
+											</article><!-- /.article -->
+										</div><!-- /.section__content -->
+									</div><!-- /.col col--1of2 -->									
+									
+								</div><!-- /.cols -->
+							</div><!-- /.section__body -->
+					
+							<footer class="section__foot">
+								<div class="widget-banner visible-xs-block">
+									<div class="widget__image">
+										<img src="assets/css/images/temp/widget-banner-image4.jpg" height="50" width="300" alt="">
+									</div><!-- /.widget__image -->
+								</div><!-- /.widget-banner -->
+
+								<div class="articles articles--medium articles--news" app-articles [entries]="CategoryModel.firstTabOfArticles">
+									
+								</div><!-- /.articles articles--medium -->
+							</footer><!-- /.section__foot -->
+					
+							<div class="section__bar hidden-xs">
+								<div class="section__image">
+									<img src="assets/css/images/temp/banner-image1.jpg" height="92" width="730" alt="">
+								</div><!-- /.section__image -->
+							</div><!-- /.section__bar -->
+						</section><!-- /.section-default -->
+					
+						<!-- <section class="section-default section-default--videos" app-video-partial [entries]="CategoryModel.videoArticles">
+						</section> -->
+						<!-- /.section-default -->
+
+
+						<section class="section-default section-articles-alt">
+							<div class="section__body">
+								<div class="widget-banner visible-xs-block">
+									<div class="widget__image">
+										<img src="assets/css/images/temp/widget-banner-image3.jpg" height="250" width="300" alt="">
+									</div><!-- /.widget__image -->
+								</div><!-- /.widget-banner -->
+
+								<div class="articles articles--medium articles--news" app-articles [entries]="CategoryModel.secondTabOfArticles">										
+								</div><!-- /.articles articles--medium -->
+							</div><!-- /.section__body -->
+						</section><!-- /.section-articles-alt -->
+					</div><!-- /.content__body -->
+
+					<div class="content__actions">
+						<a (click)="load_more_articles(idsToRemove)" class="btn btn-default btn-default--large loadMore">المزيد <i class="fa fa-plus" aria-hidden="true"></i></a>
+					</div><!-- /.content__actions -->
+				</div><!-- /.content -->
+			
+				<app-sidebar></app-sidebar>
+		
+			</div><!-- /.main__body -->
+		</div><!-- /.shell -->
+	</div><!-- /.main -->
+</div><!-- /.container -->

@@ -1,0 +1,206 @@
+<div class="container container--alt">
+		<div class="main main--primary main--alt">
+			<div class="shell">
+				<div class="main__body">
+					<div class="content">
+						<div class="content__body">
+							<section class="section-default section-default--contacts">
+								<header class="section__head">
+									<h2 class="section__title">أعلن معنا</h2><!-- /.section__title -->
+
+									<div class="section__head-inner">
+										<nav class="breadcrumbs">
+											<ul>
+												<li>
+													<a routerLink="/">الصفحة الرئيسية</a>
+												</li>
+												
+												<li>
+													<a>أعلن معنا</a>
+												</li>
+											</ul>
+										</nav><!-- /.breadcrumbs -->
+									</div><!-- /.section__head-inner -->
+								</header><!-- /.section__head -->
+
+								<div class="section__body">
+									<div class="cols">
+										<div class="col col--1of2">
+											<div class="section__content">
+												<div class="widget-form">
+													<div class="form form--advertise js-form-message">
+														<form id="advertiseForm" (submit)="SubmitAdvertise($event, advertiseForm.value)" #advertiseForm="ngForm" ngNativeValidate>
+															<div class="form__inner">
+																<div class="form__head">
+																	<h4>للإعلان في جريدة المدى ملء الطلب أدناه و سوف نعود إليكم قريبا.</h4>
+																</div><!-- /.form__head -->
+																
+																<div class="form__body">
+																	<div class="form__row">
+																		<div class="form__cols">
+																			<div class="form__col">
+																				<label for="field-name-1#" class="form__label">الاسم الكامل *</label>
+																				
+																				<div class="form__controls">
+																					<input type="text" class="field" name="fullName" id="fullName" required [(ngModel)]="advertiseFormModel.fullName" />
+																				</div><!-- /.form__controls -->
+																			</div><!-- /.form__col -->
+																			
+																			<div class="form__col">
+																				<label for="field-company-3#" class="form__label">الشركة*</label>
+																				
+																				<div class="form__controls">
+																					<input type="text" class="field" name="company" id="company" required [(ngModel)]="advertiseFormModel.company" />
+																				</div><!-- /.form__controls -->
+																			</div><!-- /.form__col -->
+																		</div><!-- /.form__cols -->
+																	</div><!-- /.form__row -->
+																	
+																	<div class="form__row">
+																		<div class="form__cols">
+																			<div class="form__col">
+																				<label for="field-mobile-3#" class="form__label">الهاتف / الجوال</label>
+																				
+																				<div class="form__controls">
+																					<input type="text" class="field" name="phone" id="phone" required [(ngModel)]="advertiseFormModel.phone" />
+																				</div><!-- /.form__controls -->
+																			</div><!-- /.form__col -->
+																			
+																			<div class="form__col">
+																				<label for="field-email-5#" class="form__label">البريد الالكتروني *</label>
+																				
+																				<div class="form__controls">
+																					<input type="email" class="field"  name="email" id="email" required [(ngModel)]="advertiseFormModel.email" />
+																				</div><!-- /.form__controls -->
+																			</div><!-- /.form__col -->
+																		</div><!-- /.form__cols -->
+																	</div><!-- /.form__row -->
+												
+																	<div class="form__bar">
+																		<ul class="list-radios-inline">
+																			<li>
+																				<div class="radio radio--large">
+																					<input type="radio" name="isSingle" required [(ngModel)]="advertiseFormModel.isSingle" id="radio-inline-1#" checked>
+																					
+																					<label for="radio-inline-1#">فرد</label>
+																				</div><!-- /.radio -->
+																			</li>
+																			
+																			<li>
+																				<div class="radio radio--large">
+																					<input type="radio" name="isSingle" required [(ngModel)]="advertiseFormModel.isSingle" id="radio-inline-2#">
+																					
+																					<label for="radio-inline-2#">وكالة إعلامية</label>
+																				</div><!-- /.radio -->
+																			</li>
+																		</ul><!-- /.list-radios-inline -->
+																	</div><!-- /.form__bar -->
+
+																	<div class="form__row">
+																		<div class="form__cols">
+																			<div class="form__col">
+																				<label for="select-amount-1#" class="form__label">المبلغ *</label>
+																				
+																				<div class="form__controls">
+																					<div class="select select-custom select-custom--large" data-label="&nbsp;">
+                                            <select name="budgetId" id="budgetId" required [(ngModel)]="advertiseFormModel.budgetId">
+                                              <option value="">المبلغ</option>
+                                              <option value="{{item?.id}}" *ngFor="let item of budgets">{{item?.title}}</option>
+                                            </select>
+																					</div><!-- /.select -->
+																				</div><!-- /.form__controls -->
+																			</div><!-- /.form__col -->
+																			
+																			<div class="form__col">
+																				<label for="select-time-1#" class="form__label">مدة الاعلان *</label>
+																				
+																				<div class="form__controls">
+																					<div class="select select-custom select-custom--large" data-label="&nbsp;">
+                                              <select name="timeId" id="timeId" required [(ngModel)]="advertiseFormModel.timeId">
+                                                <option value="">مدة الاعلان</option>
+                                                <option value="{{item?.id}}" *ngFor="let item of advertiseTimes">{{item?.title}}</option>
+                                              </select>
+																					</div><!-- /.select -->
+																				</div><!-- /.form__controls -->
+																			</div><!-- /.form__col -->
+																		</div><!-- /.form__cols -->
+																	</div><!-- /.form__row -->
+
+																	<div class="form__row">
+																		<div class="form__cols">
+																			<div class="form__col">
+																				<label for="select-target-1#" class="form__label">الجنس المستهدف *</label>
+																				
+																				<div class="form__controls">
+																					<div class="select select-custom select-custom--large" data-label="&nbsp;">
+                                              <select name="genderId" id="genderId" required [(ngModel)]="advertiseFormModel.genderId">
+                                                <option value="">الجنس المستهدف</option>
+                                                <option value="{{item?.id}}" *ngFor="let item of advertiseGenders">{{item?.title}}</option>
+                                              </select>
+																					</div><!-- /.select -->
+																				</div><!-- /.form__controls -->
+																			</div><!-- /.form__col -->
+																			
+																			<div class="form__col">
+																				<label for="select-age-1#" class="form__label">العمر المستهدف *</label>
+																				
+																				<div class="form__controls">
+																					<div class="select select-custom select-custom--large" data-label="&nbsp;">
+                                              <select name="ageId" id="ageId" required [(ngModel)]="advertiseFormModel.ageId">
+                                                <option value="">العمر</option>
+                                                <option value="{{item?.id}}" *ngFor="let item of targetAges">{{item?.title}}</option>
+                                              </select>
+																					</div><!-- /.select -->
+																				</div><!-- /.form__controls -->
+																			</div><!-- /.form__col -->
+																		</div><!-- /.form__cols -->
+																	</div><!-- /.form__row -->
+																</div><!-- /.form__body -->
+																
+																<div class="form__actions">
+																	<input type="submit" value="أرسل" class="form__btn btn btn-default btn-default--wide">
+												
+																	<span class="form__notice hidden-xs">إلزامي *</span>
+																</div><!-- /.form__actions -->
+															</div><!-- /.form__inner -->
+												
+															<div class="form__message">
+																<h2>شكرا</h2>
+
+																<h4>سوف نعود إليكم قريبا</h4>
+															</div><!-- /.form__message -->
+														</form>
+													</div><!-- /.form -->
+												</div><!-- /.widget-form -->
+											</div><!-- /.section__content -->
+										</div><!-- /.col col--1of2 -->
+										
+										<div class="col col--1of2">
+											<div class="section__content">
+												<div class="widget-contacts widget-contacts--alt">
+													<div class="widget__inner">
+														<h4>قسم الإعلانات</h4>
+
+														<p class="text-en">
+															<a href="mailto:ammar.s@almada-group.com">
+																ammar.s@almada-group.com
+
+																<i class="fa fa-envelope" aria-hidden="true"></i>
+															</a>
+														</p>
+													</div><!-- /.widget__inner -->
+												</div><!-- /.widget-contacts -->
+											</div><!-- /.section__content -->
+										</div><!-- /.col col--1of2 -->
+									</div><!-- /.cols -->
+								</div><!-- /.section__body -->
+							</section><!-- /.section-default -->
+						</div><!-- /.content__body -->
+					</div><!-- /.content -->
+        
+          <app-sidebar></app-sidebar>
+					
+				</div><!-- /.main__body -->
+			</div><!-- /.shell -->
+		</div><!-- /.main -->
+	</div><!-- /.container -->

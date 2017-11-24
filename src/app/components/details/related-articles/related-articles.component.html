@@ -1,0 +1,28 @@
+<div class="sidebar__inner" *ngIf="entries && entries.length">
+  <div class="widgets">
+    <div class="widget widget--related">
+      <header class="widget__head">
+        <h3>أخبار ذات صلى</h3>
+      </header><!-- /.widget__head -->
+
+      <div class="widget__body">
+        <div class="articles-block articles-block--related articles--news">
+
+          <article class="article article--related" *ngFor="let item of entries">
+            <div class="article__image">
+              <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">						
+                <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/142x85xo/{{item?.image}}" height="85" width="142" alt="">
+              </a>
+            </div><!-- /.article__image -->
+
+            <div class="article__content">
+              <h6><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h6>
+            </div><!-- /.article__content -->
+          </article><!-- /.article -->
+
+          
+        </div><!-- /.articles-block -->
+      </div><!-- /.widget__body -->
+    </div><!-- /.widget -->
+  </div><!-- /.widgets -->
+</div><!-- /.sidebar__inner -->

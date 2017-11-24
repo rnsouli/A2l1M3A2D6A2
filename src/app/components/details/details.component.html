@@ -1,0 +1,289 @@
+<div class="container container--secondary">
+		<div class="main {{isVideo || (entry?.relatedArticles) || (entry?.relatedArticles.length == 0)  ? 'main--full' : 'main--secondary'}}">
+			<div class="shell">
+				<div class="main__body">
+					<div class="content">
+						<div class="content__body">
+							<section class="section-article-single {{isVideo ? 'article-single--alt' : ''}}">
+								<div class="section__body">
+									<article class="article-single">
+										<header class="article__head">
+											<nav class="breadcrumbs">
+												<ul>
+													<li>
+														<a routerLink="/">الصفحة الرئيسية</a>
+													</li>
+													
+													<li *ngIf="entry?.categoryId && entry?.categoryId != 0">
+														<a routerLink="/Category/{{entry?.categoryId}}/{{entry?.categoryCustomUrlTitle}}">{{entry?.categoryTitle}}</a>
+													</li>
+													
+													<li *ngIf="entry?.subcategoryId && entry?.subcategoryId != 0">
+														<a routerLink="/Category/{{entry?.subcategoryId}}/{{entry?.subcategoryCustomUrlTitle}}">{{entry?.subcategoryTitle}}</a>
+													</li>
+												</ul>
+											</nav><!-- /.breadcrumbs -->
+
+											<div class="widget-banner visible-xs-block" *ngIf="!isVideo">
+												<div class="widget__image">
+													<img src="assets/css/images/temp/widget-banner-image4.jpg" height="50" width="300" alt="">
+												</div><!-- /.widget__image -->
+											</div><!-- /.widget-banner -->
+
+											<a *ngIf="entry?.subcategoryId && entry?.subcategoryId != 0" routerLink="/Category/{{entry?.subcategoryId}}/{{entry?.subcategoryCustomUrlTitle}}" class="btn btn-plus js-btn-back">
+												<i class="fa fa-times" aria-hidden="true"></i>
+											</a>
+
+											<a *ngIf="!entry?.subcategoryId || entry?.subcategoryId == 0" routerLink="/Category/{{entry?.categoryId}}/{{entry?.categoryCustomUrlTitle}}" class="btn btn-plus js-btn-back">
+												<i class="fa fa-times" aria-hidden="true"></i>
+											</a>
+
+											<h1>{{entry?.title}}</h1>
+
+											<span *ngIf="entry?.writer"><a routerLink="/Writer/{{entry.writer?.customUrlTitle}}">{{entry.writer?.title}}</a></span>
+										</header><!-- /.article__head -->
+
+										<div class="article__bar">
+											<div class="article__bar-actions text-en">
+												<a href="#" class="btn btn-social btn-social--alt btn-social--share">
+													<i class="fa fa-share" aria-hidden="true"></i>
+													<span>Share</span>
+												</a>
+												<!-- <a href="#" class="btn btn-social btn-social--alt btn-social--twitter">
+													<i class="fa fa-twitter" aria-hidden="true"></i>
+													<span>Tweet</span>
+												</a> -->
+
+												<div class="btn btn-social btn-social--alt btn-social--twitter">
+													<a class="twitter-share-button" href="https://twitter.com/intent/tweet">Tweet</a>
+												</div>
+
+												<!-- <a href="#" class="btn btn-social btn-social--alt btn-social--facebook">
+													<i class="ico-like"></i>
+													<span>Like 25</span>
+												</a> -->
+
+												<!-- <fb-like [attr.href]="entry?.urlBrowser"></fb-like> -->
+
+												<div class="fb-like" [attr.data-href]="entry?.urlBrowser" 
+												data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" 
+												data-share="false"></div>
+
+											</div><!-- /.article__bar-actions -->
+
+											<div class="article__bar-aside">
+												<ul class="list-meta list-meta--dark">
+													<li>
+														<a href="#">
+															<i class="fa fa-clock-o" aria-hidden="true"></i>
+															<span class="text-en">{{entry?.date | amTimeAgo }}</span>
+														</a>
+													</li>
+													<li>
+														<a href="#">
+															<i class="fa fa-eye" aria-hidden="true"></i>
+															<span class="text-en">{{entry?.viewCounter}}</span>
+														</a>
+													</li>			
+													<li>
+														<a id="commentCounter">
+															<i class="fa fa-comment-o" aria-hidden="true"></i>
+															<span class="text-en">0</span>
+														</a>
+													</li>
+												</ul><!-- /.list-meta -->
+											</div><!-- /.article__bar-aside -->
+										</div><!-- /.article__bar -->
+
+										<div class="article__body">
+
+											<div class="article__iframe" *ngIf="isVideo">
+												<div class="video_iframe">
+													<iframe [src]="youtubeLink | safeUrl" frameborder="0" allowfullscreen></iframe>
+												</div>													
+											</div><!-- /.article__iframe -->
+
+											<div class="article__banner" *ngIf="isVideo">
+												<img src="assets/css/images/temp/banner-image1.jpg" height="92" width="730" alt="">
+											</div><!-- /.article__banner -->
+                      
+                     						<div class="article__entry" *ngIf="!isVideo && entry?.descriptionBeforeBanner.length > 0">
+												<p [innerHTML]="entry?.description"></p>
+											</div><!-- /.article__entry -->
+
+											<div class="article__inner" *ngIf="!isVideo && entry?.ArticleImages">
+												<div class="article__inner-body">
+													<div class="slider slider-article-single js-slider-single">
+														<div class="slider__clip swiper-container">
+															<div class="slider__slides swiper-wrapper">
+
+																<div class="slider__slide swiper-slide" *ngFor="let item of entry?.ArticleImages">
+																	<div class="slider__slide-image">
+																		<img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/720x520xo/{{item}}" height="520" width="720" alt="">
+																	</div><!-- /.slider__slide-image -->
+																</div><!-- /.slider__slide -->
+
+															</div><!-- /.slider__slides -->
+
+															<div *ngIf="entry?.ArticleImages && entry?.ArticleImages.length > 1" class="swiper-button-next swiper-button-next-circle"></div>
+												    						
+							    							<div *ngIf="entry?.ArticleImages && entry?.ArticleImages.length > 1" class="swiper-button-prev swiper-button-prev-circle"></div>
+														</div><!-- /.slider__clip -->
+
+														<!--<div class="slider__foot">
+															<ul class="list-icons-actions">
+																<li>
+																	<a href="#">
+																		<i class="fa fa-volume-up" aria-hidden="true"></i>
+																		0
+																	</a>
+																</li>
+																
+																<li>
+																	<a href="#">
+																		<i class="fa fa-video-camera" aria-hidden="true"></i>
+																		0
+																	</a>
+																</li>
+																
+																<li>
+																	<a href="#">
+																		<i class="fa fa-camera" aria-hidden="true"></i>
+																		{{entry?.ArticleImages.length}}
+																	</a>
+																</li>
+															</ul><!-- /.list-icons-actions -->
+														<!--</div><!-- /.slider__foot -->
+														
+													</div><!-- /.slider -->
+												</div><!-- /.article__inner-body -->
+
+												<div class="article__inner-foot">
+													<!-- <p>الموصليّون الذين يقطنون ضفتي نهر دجلة بعضهم البعض</p> -->
+												</div><!-- /.article__inner-foot -->
+											</div><!-- /.article__inner -->
+
+											<div class="article__entry" *ngIf="!isVideo">
+
+												<p *ngIf="entry?.descriptionBeforeBanner.length == 0" [innerHTML]="entry?.description"></p>
+
+												<p [innerHTML]="entry?.descriptionBeforeBanner"></p>
+
+												<img *ngIf="entry?.bannerInDescription" src="assets/css/images/temp/widget-banner-image3.jpg" height="250" width="300" alt="" class="alignleft">
+
+												<p [innerHTML]="entry?.descriptionAfterBanner"></p>
+
+											</div><!-- /.article__entry -->
+										</div><!-- /.article__body -->
+
+										<div class="article__actions" *ngIf="entry?.tags && entry?.tags.length">
+											<a *ngFor="let item of entry?.tags" routerLink="/Search?keyword={{item?.title}}" class="btn btn-default btn-default--xsmall btn--beige">{{item?.title}}</a>
+										</div><!-- /.article__actions -->
+
+										<footer class="article__foot">
+											<div class="article__foot-image">
+												<div id="fbComment" class="fb-comments" [attr.data-href]="entry?.urlBrowser" data-numposts="2" data-width="100%"></div>
+											</div><!-- /.article__foot-image -->
+										</footer><!-- /.article__foot -->
+									</article><!-- /.article-single -->
+								</div><!-- /.section__body -->
+				 				
+								<aside class="section__aside hidden-xs hidden-sm">
+
+									<div class="widget-banner widget-banner--alt">
+										<div class="widget__image">
+											<img src="/assets/css/images/temp/widget-banner-image2.jpg" height="600" width="300" alt="">
+										</div><!-- /.widget__image -->
+									</div><!-- /.widget-banner widget-banner--alt -->
+
+									<div class="widget-default widget-last-news">
+										<header class="widget__head">
+											<h3 class="widget__title">أحدث الأخبار</h3><!-- /.widget__title -->
+										</header><!-- /.widget__head -->
+
+										<div class="widget__body" *ngIf="entry?.latestNews && entry?.latestNews.length">
+											<ol class="news-items">
+
+												<li class="news-item" *ngFor="let item of entry?.latestNews">
+													<div class="news__content">
+														<h6><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h6>
+									
+														<ul class="list-meta">
+														<li>
+															<a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+																<span class="text-en">{{item?.date | amTimeAgo }}</span>
+																
+																<i class="fa fa-clock-o" aria-hidden="true"></i>
+															</a>
+														</li>
+									
+														<li>
+															<a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+																<span class="text-en">500</span>
+																
+																<i class="fa fa-comment-o" aria-hidden="true"></i>
+															</a>
+														</li>
+														</ul><!-- /.list-meta -->
+													</div><!-- /.news__content -->
+												</li><!-- /.news-item -->
+												
+											</ol><!-- /.news-items -->
+										</div><!-- /.widget__body -->
+
+										<!-- <div class="widget__actions">
+											<a href="#" class="link link--red link-more">
+												<i class="fa fa-long-arrow-left" aria-hidden="true"></i>المزيد
+											</a>
+										</div> --><!-- /.widget__actions -->
+									</div><!-- /.widget-default widget-last-news -->
+								</aside><!-- /.section__aside -->
+							</section><!-- /.section-article-single -->
+						</div><!-- /.content__body -->
+					</div><!-- /.content -->
+				
+					<aside class="sidebar" app-related-articles [entries]="entry?.relatedArticles" *ngIf="!isVideo && entry?.relatedArticles && entry?.relatedArticles.length">						
+          </aside><!-- /.sidebar -->
+          
+				</div><!-- /.main__body -->
+			</div><!-- /.shell -->
+		</div><!-- /.main -->
+	</div><!-- /.container -->
+
+	<div class="widget-socials" *ngIf="!isVideo">
+		<div class="widget__body">
+			<div class="socials-circles">
+				<ul>
+					<li>
+						<a href="#" class="link-share">
+							<i class="fa fa-share-alt" aria-hidden="true"></i>
+						</a>
+					</li>
+					
+					<li>
+						<a href="#" class="link-whatsapp">
+							<i class="fa fa-whatsapp" aria-hidden="true"></i>
+						</a>
+					</li>
+					
+					<li>
+						<a href="#" class="link-googleplus">
+							<i class="fa fa-google-plus" aria-hidden="true"></i>
+						</a>
+					</li>
+					
+					<li>
+						<a href="#" class="link-twitter">
+							<i class="fa fa-twitter" aria-hidden="true"></i>
+						</a>
+					</li>
+					
+					<li>
+						<a href="#" class="link-facebook">
+							<i class="fa fa-facebook" aria-hidden="true"></i>
+						</a>
+					</li>
+				</ul>
+			</div><!-- /.socials -->
+		</div><!-- /.widget__body -->
+	</div><!-- /.widget-socials -->

@@ -1,0 +1,200 @@
+<section class="section-default section-slider">
+  <header class="section__head">
+    <h3 class="section__title">
+      <a routerLink="/Category/{{bottomCategory?.id}}/{{bottomCategory?.customUrlTitle}}" class="btn btn-plus"><i class="fa fa-plus" aria-hidden="true"></i></a>      {{bottomCategory?.title}}
+    </h3>
+    <!-- /.section__title -->
+  </header>
+  <!-- /.section__head -->
+
+  <div class="section__body" *ngIf="bottomSlideshowArticles">
+    <div class="slider slider-news js-slider-single visible-lg-block">
+      <div class="slider__clip swiper-container">
+        <div class="slider__slides swiper-wrapper">
+
+
+          <div class="slider__slide swiper-slide template_1008_434" *ngFor="let item of bottomSlideshowArticles">
+            <div class="slider__slide-image article-bg-image">
+              <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/1008x434xo/{{item?.image}}" height="434" width="1008" alt="">
+            </div>
+            <!-- /.slider__slide-image -->
+
+            <div class="slider__slide-content">
+              <h2><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h2>
+            </div>
+            <!-- /.slider__slide-content -->
+          </div>
+          <!-- /.slider__slide -->
+
+
+        </div>
+        <!-- /.slider__slides -->
+      </div>
+      <!-- /.slider__clip -->
+
+      <div class="swiper-button-next swiper-button-next-circle"></div>
+      <div class="swiper-button-prev swiper-button-prev-circle"></div>
+    </div>
+    <!-- /.slider -->
+
+    <article class="article-alt article-alt--medium hidden-lg template_524_314" *ngIf="bottomSlideshowArticles">
+      <div class="article__image fullsize-image">
+        <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/524x314xo/{{bottomSlideshowArticles[0]?.image}}" height="314" width="524" alt="" />
+      </div>
+      <!-- /.article__image -->
+
+      <div class="article__content">
+        <h2>{{bottomSlideshowArticles[0]?.title}}</h2>
+
+        <div class="article__content-bar">
+          <ul class="list-meta">
+            <li>
+              <a routerLink="/Details/{{bottomSlideshowArticles[0]?.id}}/{{bottomSlideshowArticles[0]?.customUrlTitle}}">
+                <span class="text-en">{{bottomSlideshowArticles[0]?.date | amTimeAgo }}</span>
+                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                </a>
+            </li>
+
+            <li>
+              <a routerLink="/Details/{{bottomSlideshowArticles[0]?.id}}/{{bottomSlideshowArticles[0]?.customUrlTitle}}">
+                <span class="text-en">500</span>
+                <i class="fa fa-comment-o" aria-hidden="true"></i>
+                </a>
+            </li>
+          </ul>
+          <!-- /.list-meta -->
+
+          <a routerLink="/Details/{{bottomSlideshowArticles[0]?.id}}/{{bottomSlideshowArticles[0]?.customUrlTitle}}" class="link link-more">
+                <i class="fa fa-long-arrow-left" aria-hidden="true"></i> إقرأ المزيد
+                </a>
+        </div>
+        <!-- /.article__content-bar -->
+      </div>
+      <!-- /.article__content -->
+    </article>
+    <!-- /.article -->
+
+  </div>
+  <!-- /.section__body -->
+
+  <footer class="section__foot" *ngIf="bottomArticles">
+    <div class="articles articles--medium">
+
+      <article class="article article--default template_233_140" *ngFor="let item of bottomArticles">
+        <div class="article__image article-bg-image">
+          <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+              <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/232x140xo/{{item?.image}}" height="140" width="232" alt="">
+            </a>
+        </div>
+        <!-- /.article__image -->
+
+        <div class="article__content">
+          <h4><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h4>
+        </div>
+        <!-- /.article__content -->
+      </article>
+      <!-- /.article -->
+
+    </div>
+    <!-- /.articles articles--medium -->
+  </footer>
+  <!-- /.section__foot -->
+</section>
+<!-- /.section-default section-slider -->
+
+<section class="section-widgets">
+  <div class="cols">
+    <div class="col col--size-7" *ngIf="videoArticles">
+      <div class="section__content">
+        <div class="widget widget--videos">
+          <div class="widget__head">
+            <h3 class="widget__title">
+              <a routerLink="/Videos" class="btn btn-plus"><i class="fa fa-plus" aria-hidden="true"></i></a> الفيديوهات
+            </h3>
+            <!-- /.widget__title -->
+          </div>
+          <!-- /.widget__head -->
+
+          <div class="widget__body">
+            <div class="slider slider-videos js-slider-single">
+              <div class="slider__clip swiper-container">
+                <div class="articles articles--small articles--small-second swiper-wrapper">
+
+                  <article class="article article--video swiper-slide template_141_84" *ngFor="let item of videoArticles">
+                    <div class="article__image article__video article-bg-image">
+                      <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                          <span class="btn btn-play btn-play--small"></span>
+    
+                          <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/142x85xo/{{item?.image}}" height="85" width="142" alt="">
+                        </a>
+                    </div>
+                    <!-- /.article__image -->
+
+                    <div class="article__content">
+                      <h6><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h6>
+                    </div>
+                    <!-- /.article__content -->
+                  </article>
+                  <!-- /.article -->
+
+                </div>
+                <!-- /.articles -->
+              </div>
+              <!-- /.slider__clip -->
+
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
+            </div>
+            <!-- /.slider -->
+
+            <div class="articles articles--small articles--small-second">
+
+              <article class="article article--video template_141_84" *ngFor="let item of videoArticles">
+                <div class="article__image article__video article-bg-image">
+                  <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                      <span class="btn btn-play btn-play--small"></span>
+
+                      <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/142x85xo/{{item?.image}}" height="85" width="142" alt="">
+                    </a>
+                </div>
+                <!-- /.article__image -->
+
+                <div class="article__content">
+                  <h6><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h6>
+                </div>
+                <!-- /.article__content -->
+              </article>
+              <!-- /.article -->
+
+            </div>
+            <!-- /.articles -->
+          </div>
+          <!-- /.widget__body -->
+        </div>
+        <!-- /.widget -->
+      </div>
+      <!-- /.section__content -->
+    </div>
+    <!-- /.col col--size-7 -->
+
+    <div class="col col--size-8">
+      <div class="section__content">
+        <div class="widget widget--range visible-lg-block">
+          <div class="widget__head">
+            <h3 class="widget__title">
+              <a routerLink="/Polls" class="btn btn-plus"><i class="fa fa-plus" aria-hidden="true"></i></a> استطلاع المدى
+            </h3>
+            <!-- /.widget__title -->
+          </div>
+          <!-- /.widget__head -->
+          <app-active-poll></app-active-poll>
+        </div>
+        <!-- /.widget -->
+      </div>
+      <!-- /.section__content -->
+    </div>
+    <!-- /.col col--size-8 -->
+  </div>
+  <!-- /.cols -->
+</section>
+<!-- /.section-widgets -->
