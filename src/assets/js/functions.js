@@ -461,11 +461,11 @@ module.exports.myFunctions = {
 		setTimeout(function(){
 			$('.js-slider-single').each(function() {
 				var $slider = $(this).find('.swiper-container');
-				// var $prev = $(this).hasClass('slider-brochure') ? $(this).find('.swiper-button-next') : $(this).find('.swiper-button-prev');
-				// var $next = $(this).hasClass('slider-brochure') ? $(this).find('.swiper-button-prev') : $(this).find('.swiper-button-next');
+				var $prev = $(this).hasClass('slider-brochure') ? $(this).find('.swiper-button-next') : $(this).find('.swiper-button-prev');
+				var $next = $(this).hasClass('slider-brochure') ? $(this).find('.swiper-button-prev') : $(this).find('.swiper-button-next');
 	
-				var $prev = $(this).find('.swiper-button-prev');
-				var $next = $(this).find('.swiper-button-next');
+				//var $prev = $(this).find('.swiper-button-prev');
+				//var $next = $(this).find('.swiper-button-next');
 
 				if ($slider.find('.swiper-slide').length > 1) {
 					$(this).addClass('slider-initialized');
