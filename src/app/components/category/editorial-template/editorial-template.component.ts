@@ -5,8 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '../../../services/shared.service';
 import { FunctionsService } from '../../../services/functions.service';
 
-import { _globals } from '../../../../includes/globals';
-import { GlobalModel, CategoryModel } from '../../../../includes/Models';
+ import { GlobalService } from '../../../services/global.service';
+import { GlobalModel, CategoryModel, SharedModel } from '../../../../includes/Models';
 
 @Component({
   selector: 'app-editorial-template',
@@ -28,13 +28,17 @@ export class EditorialTemplateComponent implements OnInit {
   @Input() globalModel:GlobalModel;
 
   isLoading:boolean = false;
+
+  sharedModel:SharedModel;
   
-  constructor(private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { 
+  constructor(private globalService: GlobalService, private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { 
   }
 
   ngOnInit() {
-    this.CONTENT_PATH = _globals.CONTENT_PATH;
-    this.RESIZED_CONTENT_PATH = _globals.RESIZED_CONTENT_PATH;
+    this.CONTENT_PATH = this.globalService.globalLinks.CONTENT_PATH;
+    this.RESIZED_CONTENT_PATH = this.globalService.globalLinks.RESIZED_CONTENT_PATH;
+
+    this.sharedService.sharedModel.subscribe((sharedModel:any) => this.sharedModel = sharedModel);
 
     this.myFunctions.ImageAsBgJs();
   }
@@ -43,7 +47,7 @@ export class EditorialTemplateComponent implements OnInit {
 
     if(!this.isLoading){
       this.isLoading = true;
-      this.http.get(_globals.API_URL + "Data/GetCategoryListing?categoryId=" + this.categoryId 
+      this.http.get(this.globalService.globalLinks.API_URL + "Data/GetCategoryListing?categoryId=" + this.categoryId 
       + "&page="+ (this.pageNumber-1) +"&skip=30&pageSize=16").subscribe((data:any) =>{        
         this.CategoryModel.secondTabOfArticles = this.CategoryModel.secondTabOfArticles.concat(data.articles);
         

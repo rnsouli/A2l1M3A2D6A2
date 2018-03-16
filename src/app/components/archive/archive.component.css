@@ -1,0 +1,24 @@
+.archiveContainer{
+    max-width:640px;margin:auto;text-align:center;margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.archiveTitle{
+    font-size:26px;
+    font-weight:normal;
+    position: relative;
+    display: block;
+    margin: 15px 0px 5px;
+}
+
+a{
+    color:Black;font-size:30px;padding:5px;text-decoration:underline;
+}
+
+a:hover{
+    color: #ed1c24; 
+}
+
+iframe{
+    margin-bottom: 30px;
+}

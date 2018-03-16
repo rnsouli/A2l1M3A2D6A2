@@ -1,93 +1,68 @@
 <div class="widget__body">
     <div class="form-range">
-      <form action="?" method="post">
+      <form id="poll_{{item.id}}" (submit)="SaveVote($event, poll.value, item.id)" #poll="ngForm" ngNativeValidate>
+        <input type="hidden" required name="questionId" [(ngModel)]="questionFormModel.questionId" />
         <div class="form__head">
-          <h4>هل تواجه صعوبة في الدخول <br>على موقع بوابة المدى؟</h4>
+          <h4>{{item.question}}</h4>
         </div><!-- /.form__head -->
         
         <div class="form__body">
-          <ul class="list-radios">
-            <li>
+          <ul class="list-radios" *ngIf="!item.votedByCurrentUser && !values">
+
+            <li *ngFor="let subItem of item.Answers">
               <div class="radio">
-                <input type="radio" name="radios2" id="radio-5#">
+                <input type="radio" id="radio-{{item.id}}-{{subItem.id}}" name="answerId" 
+                [value]="subItem.id" required [(ngModel)]="questionFormModel.answerId" 
+                (ngModelChange)="choose($event)" />
                 
-                <label for="radio-5#">الموقع يفتح بشكل عادي</label>
+                <label for="radio-{{item.id}}-{{subItem.id}}">{{subItem.answer}}</label>
               </div><!-- /.radio -->
-            </li>
+            </li>            
             
-            <li>
-              <div class="radio">
-                <input type="radio" name="radios2" id="radio-6#">
-                
-                <label for="radio-6#">الموقع لا يفتح بالمتصفح «كروم»</label>
-              </div><!-- /.radio -->
-            </li>
-            
-            <li>
-              <div class="radio">
-                <input type="radio" name="radios2" id="radio-7#">
-                
-                <label for="radio-7#">الموقع لا يفتح بالمتصفح «فاير فوكس»</label>
-              </div><!-- /.radio -->
-            </li>
-            
-            <li>
-              <div class="radio">
-                <input type="radio" name="radios2" id="radio-8#">
-                
-                <label for="radio-8#">الموقع لا يفتح أحيانا</label>
-              </div><!-- /.radio -->
-            </li>
           </ul><!-- /.list-radios -->
 
 
 
-          <!-- <ul class="list-progress-items">
-              <li>
-                <p>
-                  <strong>مقبول %28</strong>
-                  
-                  <span>(115 صوت)</span>
-                </p>
+          <ul class="list-progress-items" *ngIf="item.votedByCurrentUser">
+              
+            <li *ngFor="let subItem of item.Answers">
+              <p>
+                <strong>{{subItem.answer}} %{{Math.round(subItem.counterAnswer * 100 / item.nbOfVotes)}}</strong>
+                
+                <span>({{subItem.counterAnswer}} صوت)</span>
+              </p>
 
-                <div class="progress-bar" data-percent="28%">
-                  <span></span>
-                </div> /.progress-bar
-              </li>
+              <div class="progress-bar" [attr.data-percent]="Math.round(subItem.counterAnswer * 100 / item.nbOfVotes) + '%'">
+                <span></span>
+              </div><!--  /.progress-bar -->
+            </li>
 
-              <li>
-                <p>
-                  <strong>جيد %32</strong>
-                  
-                  <span>(120 صوت)</span>
-                </p>
+          </ul> <!-- /.list-progress-items -->
 
-                <div class="progress-bar" data-percent="32%">
-                  <span></span>
-                </div> /.progress-bar
-              </li>
+          <ul class="list-progress-items" *ngIf="values">
+              
+            <li *ngFor="let subItem of values">
+              <p>
+                <strong>{{subItem.answer}} %{{subItem.percentage}}</strong>
+                
+                <span>({{subItem.counterAnswer}} صوت)</span>
+              </p>
 
-              <li>
-                <p>
-                  <strong>ممتاز %42</strong>
-                  
-                  <span>(60 صوت)</span>
-                </p>
+              <div class="progress-bar" [attr.data-percent]="subItem.percentage + '%'">
+                <span></span>
+              </div><!--  /.progress-bar -->
+            </li>
 
-                <div class="progress-bar" data-percent="42%">
-                  <span></span>
-                </div> /.progress-bar
-              </li>
-            </ul>/.list-progress-items -->
+          </ul> <!-- /.list-progress-items -->
 
 
 
         </div><!-- /.form__body -->
         
-        <div class="form__actions">
-          <input type="submit" value="تصويت" class="form__btn btn btn-default btn-default--alt btn-default--small">
+        <div class="form__actions" *ngIf="!item.votedByCurrentUser && !values">
+          <button type="submit" class="form__btn btn btn-default btn-default--alt btn-default--small">تصويت</button>
        
-          <a href="#" class="btn btn-default btn-default--small btn--white"> نتيجة التصويت</a>
+          <!-- <a href="#" class="btn btn-default btn-default--small btn--white"> نتيجة التصويت</a> -->
         
         </div><!-- /.form__actions -->
       </form>

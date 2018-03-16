@@ -4,8 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { SharedService } from '../../../services/shared.service';
 import { FunctionsService } from '../../../services/functions.service';
+import { GlobalService } from '../../../services/global.service';
 
-import { _globals } from '../../../../includes/globals';
 import { GlobalModel, SharedModel, ArticleModel } from '../../../../includes/Models';
 
 import { MomentModule } from 'angular2-moment';
@@ -23,12 +23,12 @@ export class RelatedArticlesComponent implements OnInit {
   CONTENT_PATH:string;
   RESIZED_CONTENT_PATH:string;
 
-  constructor(private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { }
+  constructor(private globalService: GlobalService, private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { }
 
   ngOnInit() {
 
-    this.CONTENT_PATH = _globals.CONTENT_PATH;
-    this.RESIZED_CONTENT_PATH = _globals.RESIZED_CONTENT_PATH;
+    this.CONTENT_PATH = this.globalService.globalLinks.CONTENT_PATH;
+    this.RESIZED_CONTENT_PATH = this.globalService.globalLinks.RESIZED_CONTENT_PATH;
   }
 
 }

@@ -28,9 +28,9 @@
               <div class="section__body">
                 <div class="cols">
 
-                  <div class="col col--1of2">
+                  <div class="col col--1of2" *ngFor="let item of entries">
                     <div class="widget widget--range">
-                        <app-active-poll></app-active-poll>
+                        <app-active-poll [item]="item"></app-active-poll>
                     </div><!-- /.widget -->
                   </div><!-- /.col col--1of2 -->
 
@@ -40,7 +40,7 @@
               </div><!-- /.section__body -->
             </section><!-- /.section-default -->
 
-            <section class="section-default section-default--alt section-default--poll">
+            <section class="section-default section-default--alt section-default--poll" *ngIf="oldEntries && oldEntries.length > 0">
               <header class="section__head">
                 <h3 class="section__title">
                   إستطلاعات سابقة
@@ -50,9 +50,9 @@
               <div class="section__body">
                 <div class="polls">
                   
-                  <div class="poll">
+                  <div class="poll" *ngFor="let item of oldEntries">
                     <div class="poll__inner">
-                      <h4>هل تواجه صعوبة في الدخول على موقع بوابة المدى؟</h4>
+                      <h4>{{item?.question}}</h4>
 
                       <ul class="list-meta">
                         <li>
@@ -65,41 +65,19 @@
                       </ul><!-- /.list-meta -->
 
                       <ul class="list-progress-items">
-                        <li>
+
+                        <li *ngFor="let subItem of item?.Answers">
                           <p>
-                            <strong>مقبول %28</strong>
+                            <strong>{{subItem.answer}} %{{item.nbOfVotes == 0 ? 0 : Math.round(subItem.counterAnswer * 100 / item.nbOfVotes)}}</strong>
                             
-                            <span>(115 صوت)</span>
+                            <span>({{subItem.counterAnswer}} صوت)</span>
                           </p>
 
-                          <div class="progress-bar" data-percent="28%">
+                          <div class="progress-bar" [attr.data-percent]="item.nbOfVotes == 0 ? 0 : Math.round(subItem.counterAnswer * 100 / item.nbOfVotes) + '%'">
                             <span></span>
-                          </div><!-- /.progress-bar -->
+                          </div><!--  /.progress-bar -->
                         </li>
-
-                        <li>
-                          <p>
-                            <strong>جيد %32</strong>
-                            
-                            <span>(120 صوت)</span>
-                          </p>
-
-                          <div class="progress-bar" data-percent="32%">
-                            <span></span>
-                          </div><!-- /.progress-bar -->
-                        </li>
-
-                        <li>
-                          <p>
-                            <strong>ممتاز %42</strong>
-                            
-                            <span>(60 صوت)</span>
-                          </p>
-
-                          <div class="progress-bar" data-percent="42%">
-                            <span></span>
-                          </div><!-- /.progress-bar -->
-                        </li>
+                        
                       </ul><!-- /.list-progress-items -->
                     </div><!-- /.poll__inner -->
                   </div><!-- /.poll -->   
@@ -109,12 +87,14 @@
             </section><!-- /.section-default -->
           </div><!-- /.content__body -->
 
-          <div class="content__actions">
+          <!-- <div class="content__actions">
             <a href="#" class="btn btn-default btn-default--large">المزيد <i class="fa fa-plus" aria-hidden="true"></i></a>
-          </div><!-- /.content__actions -->
+          </div> -->
+          <!-- /.content__actions -->
+
         </div><!-- /.content -->
       
-        <app-sidebar></app-sidebar>
+        <app-sidebar [globalModel]="globalModel"></app-sidebar>
       </div><!-- /.main__body -->
     </div><!-- /.shell -->
   </div><!-- /.main -->

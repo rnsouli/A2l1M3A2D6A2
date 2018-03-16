@@ -6,7 +6,7 @@
       <ul class="list-meta">
         <li>
           <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
-            <span>4 تشرين الأول 2016</span>
+            <span>{{item?.date | date: 'dd/MM/yyyy' }}</span>
             
             <i class="fa fa-clock-o" aria-hidden="true"></i>
           </a>

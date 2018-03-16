@@ -35,6 +35,24 @@
 
             <div class="article__content">
               <h4><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h4>
+              <ul class="list-meta">
+                <li>
+                  <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                      <span class="text-en">{{item?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
+                      
+                      <i class="fa fa-clock-o" aria-hidden="true"></i>
+                    </a>
+                </li>
+
+                <li>
+                  <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                      <span class="text-en">500</span>
+                      
+                      <i class="fa fa-comment-o" aria-hidden="true"></i>
+                    </a>
+                </li>
+              </ul>
+              <!-- /.list-meta -->
             </div>
             <!-- /.article__content -->
           </article>
@@ -124,8 +142,7 @@
 
               <div class="brochure__body-bar">
                 <a routerLink="/Issues">
-                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-              
+                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>              
                     تصفح عدد اليوم
                   </a>
               </div>
@@ -135,26 +152,26 @@
 
             <div class="brochure__body-content">
               <div class="search search--small">
-                <form action="?" method="get">
+                <form (submit)="onSearchByIssueNumber()" method="POST">
                   <div class="search__body">
-                    <label for="q2" class="hidden">Search</label>
-
-                    <div class="search__field">
-                      <input type="search" name="q5" id="q5" value="" placeholder="البحث حسب ...">
-                    </div>
+                      <label for="q5" class="hidden">Search</label>
+                      
+                      <div class="search__field">
+                        <input type="date" name="q5" id="q5" value="" placeholder="البحث حسب ...">
+                      </div><!-- /.search__field -->
                     <!-- /.search__field -->
 
                     <div class="search__select">
-                      <select name="search-select-5#" id="search-select-5#">
+                        <select name="search-select-5#" id="search-select-5#" (change)="SearchByIssue($event.target.value)">
+                          <option value="2">التاريخ</option>
                           <option value="1">رقم العدد </option>
-                          <option value="2">رقم1</option>
                         </select>
                     </div>
                     <!-- /.search__select -->
 
                     <button type="submit" class="search__btn">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                      </button>
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
                   </div>
                   <!-- /.search__body -->
                 </form>
@@ -226,7 +243,7 @@
 </div>
 <!-- /.intro__content -->
 
-<div class="intro__aside">
-  <img src="assets/css/images/temp/rectangle-image1.jpg" height="693" width="150" alt="">
-</div>
+<a class="intro__aside" *ngIf="sharedModel?.leftHomeBanner" target="_blank" [attr.href]="sharedModel.leftHomeBanner?.link">
+  <img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.leftHomeBanner?.image}}" height="693" width="150" alt="">
+</a>
 <!-- /.intro__aside -->

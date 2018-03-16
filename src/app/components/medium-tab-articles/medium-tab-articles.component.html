@@ -20,7 +20,7 @@
             <ul class="list-meta">
               <li>
                 <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
-                    <span class="text-en">{{item?.date | amTimeAgo }}</span>
+                    <span class="text-en">{{item?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
                     
                     <i class="fa fa-clock-o" aria-hidden="true"></i>
                   </a>

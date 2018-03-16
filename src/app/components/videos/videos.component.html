@@ -24,29 +24,29 @@
             
                 <div class="section__body">
                   <div class="widget-banner visible-xs-block">
-                    <div class="widget__image">
-                      <img src="assets/css/images/temp/widget-banner-image4.jpg" height="50" width="300" alt="">
-                    </div><!-- /.widget__image -->
+                    <a class="widget__image" *ngIf="sharedModel?.mobileLeaderboardBanner" target="_blank" [attr.href]="sharedModel.mobileLeaderboardBanner?.link">
+                      <img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt=""><!-- height="50" width="300" -->
+                    </a><!-- /.widget__image -->
                   </div><!-- /.widget-banner -->
   
                   <div class="cols" *ngIf="CategoryModel?.topArticles">
                     
                     <div class="col col--1of2" *ngFor="let item of CategoryModel?.topArticles">
                       <div class="section__content">
-                        <article class="article-alt article-alt--medium">
+                        <article class="article-alt article-alt--medium template_232_140 big-on-mobile">
                           <div class="article__image fullsize-image">
                             <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/492x357xo/{{item?.image}}" height="357" width="492" alt="">
                           </div><!-- /.article__image -->
                 
                           <div class="article__content">
                             <!-- <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}" class="btn btn-play btn-play--large"></a> -->
-                            <h2>{{item?.title}}</h2>
+                            <h2><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h2>
                 
                             <div class="article__content-bar">
                               <ul class="list-meta">
                                 <li>
                                   <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
-                                    <span class="text-en">{{item?.date | amTimeAgo }}</span>
+                                    <span class="text-en">{{item?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
                                     
                                     <i class="fa fa-clock-o" aria-hidden="true"></i>
                                   </a>
@@ -75,9 +75,9 @@
             
                 <footer class="section__foot">
                   <div class="widget-banner visible-xs-block">
-                    <div class="widget__image">
-                      <img src="assets/css/images/temp/widget-banner-image4.jpg" height="50" width="300" alt="">
-                    </div><!-- /.widget__image -->
+                    <a class="widget__image" *ngIf="sharedModel?.mobileLeaderboardBanner" target="_blank" [attr.href]="sharedModel.mobileLeaderboardBanner?.link">
+                      <img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt=""><!-- height="50" width="300" -->
+                    </a><!-- /.widget__image -->
                   </div><!-- /.widget-banner -->
   
                   <div class="articles articles--medium articles--news" app-articles [entries]="CategoryModel?.firstTabOfArticles">
@@ -86,9 +86,9 @@
                 </footer><!-- /.section__foot -->
             
                 <div class="section__bar hidden-xs">
-                  <div class="section__image">
-                    <img src="assets/css/images/temp/banner-image1.jpg" height="92" width="730" alt="">
-                  </div><!-- /.section__image -->
+                  <a class="section__image" *ngIf="sharedModel?.leaderboardBanner" target="_blank" [attr.href]="sharedModel.leaderboardBanner?.link">
+                    <img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.leaderboardBanner?.image}}" height="90" width="728" alt="">
+                  </a><!-- /.section__image -->
                 </div><!-- /.section__bar -->
               </section><!-- /.section-default -->
               
@@ -96,9 +96,9 @@
               <section class="section-default section-articles-alt">
                 <div class="section__body">
                   <div class="widget-banner visible-xs-block">
-                    <div class="widget__image">
-                      <img src="assets/css/images/temp/widget-banner-image3.jpg" height="250" width="300" alt="">
-                    </div><!-- /.widget__image -->
+                    <a class="widget__image" *ngIf="sharedModel?.mobileMpuBanner" target="_blank" [attr.href]="sharedModel.mobileMpuBanner?.link">
+                        <img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileMpuBanner?.image}}" alt=""> <!-- height="250" width="300" -->
+                    </a><!-- /.widget__image -->
                   </div><!-- /.widget-banner -->
   
                   <div class="articles articles--medium articles--news" app-articles [entries]="CategoryModel?.secondTabOfArticles">										
@@ -108,11 +108,11 @@
             </div><!-- /.content__body -->
   
             <div class="content__actions">
-              <a (click)="load_more_articles(idsToRemove)" class="btn btn-default btn-default--large loadMore">المزيد <i class="fa fa-plus" aria-hidden="true"></i></a>
+              <a (click)="load_more_articles(idsToRemove)" class="btn btn-default btn-default--large loadMore {{isLoading ? 'loading' : ''}}">المزيد <i class="fa fa-plus" aria-hidden="true"></i></a>
             </div><!-- /.content__actions -->
           </div><!-- /.content -->
         
-          <app-sidebar></app-sidebar>
+          <app-sidebar [globalModel]="globalModel"></app-sidebar>
       
         </div><!-- /.main__body -->
       </div><!-- /.shell -->

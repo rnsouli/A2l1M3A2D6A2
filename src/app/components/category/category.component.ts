@@ -1,11 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer, Title } from '@angular/platform-browser';
 
 import { SharedService } from '../../services/shared.service';
 import { FunctionsService } from '../../services/functions.service';
 
-import { _globals } from '../../../includes/globals';
+import { GlobalService } from '../../services/global.service';
 import { GlobalModel, SharedModel, CategoryModel } from '../../../includes/Models';
 
 @Component({
@@ -39,28 +40,34 @@ export class CategoryComponent implements OnInit {
   idsToRemove:string;
 
   sharedModel:SharedModel;
+
+  showLoader:boolean = true;
+
+  pillarsType:number;
   
   @Input() globalModel:GlobalModel;
 
-  constructor(private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { 
+  constructor(private globalService: GlobalService, private titleService: Title, private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { 
   }
 
   ngOnInit() {
 
-    this.CONTENT_PATH = _globals.CONTENT_PATH;
-    this.RESIZED_CONTENT_PATH = _globals.RESIZED_CONTENT_PATH;
+    this.CONTENT_PATH = this.globalService.globalLinks.CONTENT_PATH;
+    this.RESIZED_CONTENT_PATH = this.globalService.globalLinks.RESIZED_CONTENT_PATH;
 
-    this.category_template_withsubcategories = _globals.category_template_withsubcategories;
-    this.category_template_subcategories = _globals.category_template_subcategories;
-    this.category_template_editorial = _globals.category_template_editorial;
-    this.category_template_listing = _globals.category_template_listing;
-    this.category_template_caricature = _globals.category_template_caricature;
+    this.category_template_withsubcategories = this.globalService.globalLinks.category_template_withsubcategories;
+    this.category_template_subcategories = this.globalService.globalLinks.category_template_subcategories;
+    this.category_template_editorial = this.globalService.globalLinks.category_template_editorial;
+    this.category_template_listing = this.globalService.globalLinks.category_template_listing;
+    this.category_template_caricature = this.globalService.globalLinks.category_template_caricature;
 
     this.sharedService.sharedModel.subscribe((sharedModel:any) => this.sharedModel = sharedModel);
     this.sharedService.set_currentRoute("category");
 
     this.route.params.subscribe(params => {
       this.categoryId = params['id'];
+
+      this.showLoader = true;
 
       this.sharedService.set_currentCategorySelected(this.categoryId);
 
@@ -69,14 +76,50 @@ export class CategoryComponent implements OnInit {
         this.categoryId = params['subId'];
       }
 
+      if(params["customUrlTitle"] == "اعمدة-اليوم" || params["customUrlTitle"] == "اعمدة-الاسبوع"){
 
+        if(params["customUrlTitle"] == "اعمدة-اليوم"){
+          this.titleService.setTitle('Al mada newspaper - ' + "اعمدة اليوم");
+        }
+        else if(params["customUrlTitle"] == "اعمدة-الاسبوع"){
+          this.titleService.setTitle('Al mada newspaper - ' + "اعمدة الاسبوع");
+        }
+
+        this.pillarsType = params["customUrlTitle"] == "اعمدة-اليوم"  ? 1 : 2;
+
+        this.http.get(this.globalService.globalLinks.API_URL + "Data/GetPillarsInit?type=" + this.pillarsType).subscribe((data:any) =>{
+          this.showLoader = false;
+          this.pageNumber = 0;
+          this.CategoryModel = data;
+          this.templateId = data.templateId;
+          if(data.articles){
+            if(this.templateId == this.category_template_listing){
+              this.CategoryModel.firstTabOfArticles = data.articles.slice(0,8);
+              this.CategoryModel.secondTabOfArticles = data.articles.slice(8);
+            }
+          }
+          setTimeout(() => {
+          this.myFunctions.HideLoadMore();
+          }, 100);
+          
+          this.myFunctions.ArticleAsBgJs();
+          this.myFunctions.ImageAsBgJs();
+        });
+
+      }
+      else
+      {
 
       //Initial category call
-      this.http.get(_globals.API_URL + "Data/GetCategoryInit?categoryId=" + this.categoryId).subscribe((data:any) =>{
+      this.http.get(this.globalService.globalLinks.API_URL + "Data/GetCategoryInit?categoryId=" + this.categoryId).subscribe((data:any) =>{
         
+
+        this.showLoader = false;
         this.pageNumber = 0;
         this.CategoryModel = data;
         this.templateId = data.templateId;
+
+        this.titleService.setTitle('Al mada newspaper - ' + this.CategoryModel.title);
 
         if(data.articles){
 
@@ -92,6 +135,9 @@ export class CategoryComponent implements OnInit {
           if(this.templateId == this.category_template_editorial){
             this.CategoryModel.firstTabOfArticles = data.articles.slice(0,14);
             this.CategoryModel.secondTabOfArticles = data.articles.slice(14);
+
+            this.CategoryModel.editorialName = data.editorialName;
+            this.CategoryModel.editorialImage = data.editorialImage;
           }
           if(this.templateId == this.category_template_subcategories){
             this.CategoryModel.topArticles = data.topArticles;
@@ -115,7 +161,7 @@ export class CategoryComponent implements OnInit {
         }
       });
 
-
+    }
 
     });
 

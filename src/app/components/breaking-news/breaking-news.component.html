@@ -1,6 +1,6 @@
-<div class="widget-antenna">
+<div class="widget-antenna" *ngIf="globalModel?.listenLive && sharedModel?.currentRoute != 'print'">
   <div class="widget__actions">
-    <a href="#" class="btn btn-antenna js-btn-toggle" data-class="expanded" data-target="#bar-news">
+    <a target="_blank" [attr.href]="globalModel?.listenLive?.link" class="btn btn-antenna js-btn-toggle" data-class="expanded" data-target="#bar-news">
       <small>
         <strong>
           <i class="ico-radio"></i>
@@ -14,10 +14,10 @@
   </div><!-- /.widget__actions -->
 </div><!-- /.widget-antenna -->
   
-<div class="bar-news" id="bar-news">
+<div class="bar-news expanded" id="bar-news" *ngIf="Model && sharedModel?.currentRoute != 'print'">
 		<div class="bar__body">
 			<aside class="bar__aside">
-				<a href="07_Articles_details.html">
+				<a routerLink="/Details/{{Model?.id}}/{{Model?.customUrlTitle}}">
 					<small>
 						<i class="ico-breaking-news"></i>
 					
@@ -27,11 +27,15 @@
 			</aside><!-- /.bar__aside -->
 
 			<div class="bar__content hidden-xs">
-				<p> تختبر شبكة التدوين المصغر “تويتر” نظاما جديدا للأخبار العاجلة يقوم بإرسال تنبيهات الأخبار للمستخدمين مباشرة إلى هواتفهم الخليوية على شكل تنبيهات فورية. <br>ورغم أن “تويتر” لم تعلن رسميا عن اختبارها...</p>
+					<p> 
+						<a routerLink="/Details/{{Model?.id}}/{{Model?.customUrlTitle}}">{{Model?.title}}</a>
+					</p>
 			</div><!-- /.bar__content -->
 
 			<div class="bar__content visible-xs-block">
-				<p> تختبر شبكة التدوين المصغر “تويتر” نظاماً جديداً للأخبار</p>
+				<p>
+					<a routerLink="/Details/{{Model?.id}}/{{Model?.customUrlTitle}}">{{Model?.title}}</a>
+				</p>
 			</div><!-- /.bar__content -->
 		</div><!-- /.bar__body -->
 	</div><!-- /.bar-news -->

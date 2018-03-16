@@ -4,9 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 
 import { SharedService } from '../../services/shared.service';
 import { FunctionsService } from '../../services/functions.service';
+import { GlobalService } from '../../services/global.service';
 
-import { _globals } from '../../../includes/globals';
-import { GlobalModel, SharedModel, ArticleModel, Category, whiteBox } from '../../../includes/Models';
+import { GlobalModel, SharedModel, ArticleModel, Category, whiteBox, QuestionModel, Banner } from '../../../includes/Models';
 
 
 @Component({
@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
   part3IsReady: boolean = false;
 
   gotPart4: boolean = false;
+  part4IsReady: boolean = false;
 
 
   //////////////////////////////////////////
@@ -41,10 +42,11 @@ export class HomeComponent implements OnInit {
 
   //////////////////////////////////////////
 
-  todaysPicArticle: ArticleModel;
+  todaysPicArticles: ArticleModel[];
   underTodaysPic: ArticleModel[];
   latestNews: ArticleModel[];
   leftArticles: ArticleModel[];
+  bannerArticle: ArticleModel;
 
   //////////////////////////////////////////
 
@@ -54,6 +56,18 @@ export class HomeComponent implements OnInit {
   politicals: ArticleModel[];
   secondBoxCategory: Category;
   localNews: ArticleModel[];
+  todaysIssues: {
+    id : number;
+    title : string;
+    image : string;
+    pdf : string;
+  }[];
+  todaysSupplementIssues: {
+    id : number;
+    title : string;
+    image : string;
+    pdf : string;
+  }[];
 
   //////////////////////////////////////////
 
@@ -71,20 +85,44 @@ export class HomeComponent implements OnInit {
   bottomSlideshowArticles: ArticleModel[];
   bottomArticles: ArticleModel[];
   videoArticles: ArticleModel[];
-  currentPoll: ArticleModel;
+  currentPoll: QuestionModel;
+
+
+  leaderboardBanner: Banner;
+  aboveMenuBanner: Banner;
+
+  CONTENT_PATH:string;
   
   //////////////////////////////////////////
 
-  constructor(private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { 
+  constructor(private globalService: GlobalService, private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { 
   }
 
   ngOnInit() {
 
+    this.CONTENT_PATH = this.globalService.globalLinks.CONTENT_PATH;
     this.sharedService.sharedModel.subscribe((sharedModel:any) => this.sharedModel = sharedModel);
     this.sharedService.set_currentRoute("home");
     this.myFunctions.ImageAsBgJs();
 
-    this.http.get(_globals.API_URL + "Data/GetHomeInit").subscribe((data:any) =>{
+    console.log('leaderboard')
+    var intervalSharedModel = setInterval(() => {
+      if(this.sharedModel != undefined && this.sharedModel.leaderboardBanner != null){
+        this.leaderboardBanner = this.sharedModel.leaderboardBanner;
+        console.log(this.sharedModel.leaderboardBanner);
+        clearInterval(intervalSharedModel);
+      }
+    }, 1000);
+
+    var intervalSharedModel1 = setInterval(() => {
+      if(this.sharedModel != undefined && this.sharedModel.aboveMenuBanner != null){
+        this.aboveMenuBanner = this.sharedModel.aboveMenuBanner;
+        console.log(this.sharedModel.aboveMenuBanner);
+        clearInterval(intervalSharedModel1);
+      }
+    }, 1000);
+
+    this.http.get(this.globalService.globalLinks.API_URL + "Data/GetHomeInit").subscribe((data:any) =>{
       this.topArticle = data.topArticle;
       this.slideshow = data.slideshow;
       this.sharedService.set_idsToRemove(data.articleIds);
@@ -92,6 +130,7 @@ export class HomeComponent implements OnInit {
         this.myFunctions.SlideshowSwiper();
         this.myFunctions.ImageAsBgJs();
         this.myFunctions.ArticleAsBgJs();
+        this.myFunctions.hide_comments_counter();
         this.startScrollLoading = true;
       },200);
     });
@@ -108,11 +147,12 @@ export class HomeComponent implements OnInit {
 
         if(!this.gotPart1){
           this.gotPart1=true;
-          this.http.get(_globals.API_URL + "Data/GetHomeListingPart1?idsToRemoves=" + this.sharedModel.idsToRemove).subscribe((data:any) =>{
-            this.todaysPicArticle = data.todaysPicArticle;
+          this.http.get(this.globalService.globalLinks.API_URL + "Data/GetHomeListingPart1?idsToRemoves=" + this.sharedModel.idsToRemove).subscribe((data:any) =>{
+            this.todaysPicArticles = data.todaysPicArticles;
             this.underTodaysPic = data.underTodaysPic;
             this.latestNews = data.latestNews;
             this.leftArticles = data.leftArticles;
+            this.bannerArticle = data.bannerArticle;
       
             this.sharedService.set_idsToRemove(data.articleIds);
 
@@ -121,6 +161,7 @@ export class HomeComponent implements OnInit {
             this.myFunctions.ImageAsBgJs();
             this.myFunctions.ArticleAsBgJs();
             this.myFunctions.hide_comments_counter();
+            this.myFunctions.SliderSingleSwiper();
           });
         }
       }
@@ -129,13 +170,15 @@ export class HomeComponent implements OnInit {
 
         if(this.part1IsReady && !this.gotPart2){
           this.gotPart2=true;
-          this.http.get(_globals.API_URL + "Data/GetHomeListingPart2?idsToRemoves=" + this.sharedModel.idsToRemove).subscribe((data:any) =>{
+          this.http.get(this.globalService.globalLinks.API_URL + "Data/GetHomeListingPart2?idsToRemoves=" + this.sharedModel.idsToRemove).subscribe((data:any) =>{
             this.firstBoxCategory = data.firstBoxCategory;
             this.bigPoliticals = data.bigPoliticals;
             this.politicalsSmall = data.politicalsSmall;
             this.politicals = data.politicals;
             this.secondBoxCategory = data.secondBoxCategory;
             this.localNews = data.localNews;
+            this.todaysIssues = data.todaysIssues;
+            this.todaysSupplementIssues = data.todaysSupplementIssues;
       
             this.sharedService.set_idsToRemove(data.articleIds);
 
@@ -144,6 +187,7 @@ export class HomeComponent implements OnInit {
             this.myFunctions.ImageAsBgJs();
             this.myFunctions.ArticleAsBgJs();
             this.myFunctions.hide_comments_counter();
+            this.myFunctions.SliderSingleSwiper();
             
           });
 
@@ -154,7 +198,7 @@ export class HomeComponent implements OnInit {
 
         if(this.part2IsReady && !this.gotPart3){
           this.gotPart3=true;
-          this.http.get(_globals.API_URL + "Data/GetHomeListingPart3?idsToRemoves=" + this.sharedModel.idsToRemove).subscribe((data:any) =>{
+          this.http.get(this.globalService.globalLinks.API_URL + "Data/GetHomeListingPart3?idsToRemoves=" + this.sharedModel.idsToRemove).subscribe((data:any) =>{
             this.tabCategories = data.tabCategories;
       
             this.whiteBox = data.whiteBox;
@@ -173,6 +217,8 @@ export class HomeComponent implements OnInit {
             this.part3IsReady=true;
       
             this.myFunctions.ArticleAsBgJs();
+            this.myFunctions.hide_comments_counter();
+            this.myFunctions.TabsOnMobileSelect();
           });
 
         }
@@ -183,19 +229,26 @@ export class HomeComponent implements OnInit {
         if(this.part3IsReady && !this.gotPart4){
           this.gotPart4=true;
           
-          this.http.get(_globals.API_URL + "Data/GetHomeListingPart4?idsToRemoves=" + this.sharedModel.idsToRemove).subscribe((data:any) =>{
+          this.http.get(this.globalService.globalLinks.API_URL + "Data/GetHomeListingPart4?idsToRemoves=" + this.sharedModel.idsToRemove).subscribe((data:any) =>{
             this.bottomCategory = data.bottomCategory;
             this.bottomSlideshowArticles = data.bottomSlideshowArticles;   
             this.bottomArticles = data.bottomArticles;
             this.videoArticles = data.videoArticles;
             this.currentPoll = data.currentPoll;
       
+            //console.log(this.currentPoll);
+
             this.sharedService.set_idsToRemove(data.articleIds);
+
+            this.part4IsReady=true;
             
             this.myFunctions.SliderSingleSwiper();
       
             this.myFunctions.ArticleAsBgJs();
             this.myFunctions.ImageAsBgJs();
+
+            this.myFunctions.progress_bar();   
+            this.myFunctions.hide_comments_counter();   
           });
 
         }

@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '../../services/shared.service';
 import { FunctionsService } from '../../services/functions.service';
 
-import { _globals } from '../../../includes/globals';
+import { GlobalService } from '../../services/global.service';
 import { SharedModel, ArticleModel } from '../../../includes/Models';
 
 import { MomentModule } from 'angular2-moment';
@@ -22,24 +22,25 @@ export class MiddleHomeComponent implements OnInit {
   CONTENT_PATH:string;
   RESIZED_CONTENT_PATH:string;
 
-  @Input() todaysPicArticle: ArticleModel;
+  @Input() todaysPicArticles: ArticleModel[];
   @Input() underTodaysPic: ArticleModel[];
   @Input() latestNews: ArticleModel[];
   @Input() leftArticles: ArticleModel[];
+  @Input() bannerArticle: ArticleModel;
 
   sharedModel: SharedModel;
 
-  constructor(private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { 
+  constructor(private globalService: GlobalService, private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { 
   }
 
   ngOnInit() {
 
-    this.CONTENT_PATH = _globals.CONTENT_PATH;
-    this.RESIZED_CONTENT_PATH = _globals.RESIZED_CONTENT_PATH;
+    this.CONTENT_PATH = this.globalService.globalLinks.CONTENT_PATH;
+    this.RESIZED_CONTENT_PATH = this.globalService.globalLinks.RESIZED_CONTENT_PATH;
     this.sharedService.sharedModel.subscribe((sharedModel:any) => this.sharedModel = sharedModel);
 
-    // this.http.get(_globals.API_URL + "Data/GetHomeListingPart1?idsToRemoves=" + this.sharedModel.idsToRemove).subscribe((data:any) =>{
-    //   this.todaysPicArticle = data.todaysPicArticle;
+    // this.http.get(this.globalService.globalLinks.API_URL + "Data/GetHomeListingPart1?idsToRemoves=" + this.sharedModel.idsToRemove).subscribe((data:any) =>{
+    //   this.todaysPicArticles = data.todaysPicArticles;
     //   this.underTodaysPic = data.underTodaysPic;
     //   this.latestNews = data.latestNews;
     //   this.leftArticles = data.leftArticles;
@@ -51,6 +52,20 @@ export class MiddleHomeComponent implements OnInit {
     //   this.myFunctions.hide_comments_counter();
     // });
 
+    setInterval(() => {
+
+      this.http.get(this.globalService.globalLinks.API_URL + "Data/GetLatestNews").subscribe((data:any) =>{
+
+        this.latestNews = data.latestNews;
+  
+        //this.myFunctions.ImageAsBgJs();
+        //this.myFunctions.ArticleAsBgJs();
+        this.myFunctions.hide_comments_counter();
+        //this.myFunctions.SliderSingleSwiper();
+
+      });
+    
+    }, 150000);
   }
 
 }

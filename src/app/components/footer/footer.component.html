@@ -1,5 +1,5 @@
-<footer class="footer">
-		<div class="footer__body">
+<footer *ngIf="sharedModel?.currentRoute != 'print'" class="footer {{sharedModel?.currentRoute == 'notFound' ? 'footer--small' : ''}}">
+		<div class="footer__body" *ngIf="sharedModel?.currentRoute != 'notFound'">
 			<div class="shell">
 				<div class="footer__cols">
 					<div class="footer__col footer__col--1of6">
@@ -8,7 +8,8 @@
 								<ul>
 
 									<li *ngFor="let item of globalModel?.footerCategoriesWithoutSub">
-										<a routerLink="/Category/{{item?.id}}{{item?.customUrlTitle ? '/' + item?.customUrlTitle : ''}}">{{item?.title}}</a>
+										<a *ngIf="item.customUrl == '' || item.customUrl == null" routerLink="/Category/{{item?.id}}{{item?.customUrlTitle ? '/' + item?.customUrlTitle : ''}}">{{item?.title}}</a>
+										<a *ngIf="item.customUrl != '' && item.customUrl != null" [attr.href]="item.customUrl">{{item?.title}}</a>
 									</li>
 									
 								</ul>
@@ -85,7 +86,7 @@
 									</li>
 									
 									<li>
-										<a routerLink="/Voting">استفتاء</a>
+										<a routerLink="/Polls">استفتاء</a>
 									</li>
 									
 									<li>
@@ -102,14 +103,14 @@
 						
 							<div class="socials socials--large">
 								<ul>
-									<!-- <li>
-										<a href="#">
+									<li>
+										<a target="_blank" href="{{BASE_URL + 'Rss'}}">
 											<i class="fa fa-rss" aria-hidden="true"></i>
 										</a>
-									</li> -->
+									</li>
 									
 									<li *ngFor="let item of globalModel?.socialMedia">
-										<a href="{{item?.link}}">
+										<a target="_blank" href="{{item?.link}}">
 											<i class="fa {{'fa-' + item?.className}}" aria-hidden="true"></i>
 										</a>
 									</li>
@@ -120,7 +121,7 @@
 							<h5>تحميل التطبيق</h5>
 						
 							<div class="footer__actions">
-								<a target="_blank" href="https://play.google.com/store/apps/details?id=com.knowledgeview.almada.tablet" class="btn btn-default btn-default--app btn-default--googleplay">
+								<a target="_blank" *ngIf="globalModel?.googlePlay" [attr.href]="globalModel?.googlePlay?.link" class="btn btn-default btn-default--app btn-default--googleplay">
 									<span>
 										<i class="ico-googleplay"></i>
 						
@@ -130,7 +131,7 @@
 									Google Play
 								</a>
 						
-								<a target="_blank" href="https://itunes.apple.com/us/app/al-mada-for-ipad/id579675564?mt=8" class="btn btn-default btn-default--app btn-default--appstore">
+								<a target="_blank" *ngIf="globalModel?.appStore" [attr.href]="globalModel?.appStore?.link" class="btn btn-default btn-default--app btn-default--appstore">
 									<i class="fa fa-apple" aria-hidden="true"></i>
 						
 									App Store

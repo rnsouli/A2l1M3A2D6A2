@@ -1,0 +1,135 @@
+<!-- <header _ngcontent-c1="" class="header header--large">
+  <div _ngcontent-c1="" class="shell">
+    <div _ngcontent-c1="" class="header__body">
+      
+
+      <a _ngcontent-c1="" class="logo logo--default" routerlink="/" ng-reflect-router-link="/" href="/" style="background-image: url(&quot;http://kms.almadapaper.net/content/uploads/CorporatePage/180116012853582~logo-small-white@2x.png&quot;);"></a>
+
+      
+    </div>
+  </div>
+</header> -->
+
+
+<div class="container container--secondary">
+  <div class="main main--full">
+    <div class="shell">
+      <div class="main__body">
+        <div class="content">
+          <div class="content__body">
+            <section class="section-article-single {{isVideo ? 'article-single--alt' : ''}}">
+              <div class="section__body">
+                <article class="article-single">
+                  <header class="article__head">
+                    <nav class="breadcrumbs">
+                      <ul>
+                        <li>
+                          <a routerLink="/">الصفحة الرئيسية</a>
+                        </li>
+                        
+                        <li *ngIf="entry?.categoryId && entry?.categoryId != 0">
+                          <a routerLink="/Category/{{entry?.categoryId}}/{{entry?.categoryCustomUrlTitle}}">{{entry?.categoryTitle}}</a>
+                        </li>
+                        
+                        <li *ngIf="entry?.subcategoryId && entry?.subcategoryId != 0">
+                          <a routerLink="/Category/{{entry?.subcategoryId}}/{{entry?.subcategoryCustomUrlTitle}}">{{entry?.subcategoryTitle}}</a>
+                        </li>
+                      </ul>
+                    </nav><!-- /.breadcrumbs -->                    
+
+                    <h1>{{entry?.title}}</h1>
+
+                    <a class="subHeading" *ngIf="entry?.writer != null" routerLink="/Writer/{{entry?.writer?.id}}/{{entry?.writer?.customUrlTitle}}">												
+                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                      <span>اسم الكاتب: {{entry?.writer?.name}}</span>			
+                    </a>
+                    <a class="subHeading" *ngIf="entry?.issueNumber != null">												
+                      <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                      <span>رقم العدد: {{entry?.issueNumber}}</span>			
+                    </a>
+                    <a class="subHeading" *ngIf="entry?.versionType != null">
+                      <i class="fa fa-code-branch" aria-hidden="true"></i>
+                      <span>نوع النسخة: {{entry?.versionType}}</span>			
+                    </a>
+                    <a class="subHeading">
+                      <i class="fa fa-clock-o" aria-hidden="true"></i>
+                      <span class="text-en">تاريخ اخر تعديل: </span>
+                      <span class="dateModified">{{entry?.dateModified | date: 'dd/MM/yyyy HH:mm' }}</span>
+                    </a>											
+                  </header><!-- /.article__head -->
+
+                  <div class="article__body">
+
+                    <div class="article__iframe" *ngIf="isVideo">
+                      <div class="video_iframe">
+                        <iframe [src]="youtubeLink | safeUrl" frameborder="0" allowfullscreen></iframe>
+                      </div>													
+                    </div><!-- /.article__iframe -->                   
+                    
+                    <div class="article__entry" *ngIf="!isVideo && entry?.descriptionBeforeBanner.length > 0">
+                      <p [innerHTML]="description"></p>
+                    </div><!-- /.article__entry -->
+
+                    <div class="article__inner" *ngIf="!isVideo && entry?.ArticleImages">
+                      <div class="article__inner-body">
+                        <div class="slider slider-article-single js-slider-single">
+                          <div class="slider__clip swiper-container">
+                            <div class="slider__slides swiper-wrapper">
+
+                              <div class="slider__slide swiper-slide" *ngFor="let item of entry?.ArticleImages">
+                                <div class="slider__slide-image">
+                                  <img *ngIf="hasGallery && !entry?.firstImageInGalleryIsSmall" (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/720x520xo/{{item?.image}}" height="520" width="720" alt="{{item?.title}}">
+                                  <img *ngIf="hasGallery && entry?.firstImageInGalleryIsSmall" (error)="sharedService.errorHandler($event)" src="{{CONTENT_PATH}}/Article/{{item?.image}}" alt="{{item?.title}}">
+
+                                  <img *ngIf="!hasGallery && !entry?.isImageSmall" (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/720x520xo/{{item?.image}}" height="520" width="720" alt="{{item?.title}}">
+                                  <img *ngIf="!hasGallery && entry?.isImageSmall" (error)="sharedService.errorHandler($event)" src="{{CONTENT_PATH}}/Article/{{item?.image}}" alt="{{item?.title}}">
+                                </div><!-- /.slider__slide-image -->
+                              </div><!-- /.slider__slide -->
+
+                            </div><!-- /.slider__slides -->
+
+                            <div *ngIf="entry?.ArticleImages && entry?.ArticleImages.length > 1" class="swiper-button-next swiper-button-next-circle"></div>
+                                      
+                              <div *ngIf="entry?.ArticleImages && entry?.ArticleImages.length > 1" class="swiper-button-prev swiper-button-prev-circle"></div>
+                          </div><!-- /.slider__clip -->                          
+                          
+                        </div><!-- /.slider -->
+                      </div><!-- /.article__inner-body -->
+
+                      <div class="article__inner-foot">
+                        <!-- <p>الموصليّون الذين يقطنون ضفتي نهر دجلة بعضهم البعض</p> -->
+                      </div><!-- /.article__inner-foot -->
+                    </div><!-- /.article__inner -->
+
+                    <a class="subHeading" *ngIf="entry?.sourceDesc != ''">
+                      <i class="fa fa-code-branch" aria-hidden="true"></i>
+                      <span>المصدر: {{entry?.sourceDesc}}</span>			
+                    </a>
+
+                    <div class="article__entry">
+
+                      <p *ngIf="entry?.descriptionBeforeBanner.length == 0" [innerHTML]="description"></p>
+
+                      <p [innerHTML]="entry?.descriptionBeforeBanner"></p>
+
+                      <p *ngIf="entry?.bannerInDescription"  [innerHTML]="entry?.bannerInDescription" class="alignleft"></p>
+
+                      <p [innerHTML]="entry?.descriptionAfterBanner"></p>
+
+                    </div><!-- /.article__entry -->
+                  </div><!-- /.article__body -->
+
+                  <div class="article__actions" *ngIf="entry?.tags && entry?.tags.length">
+                    <a *ngFor="let item of entry?.tags" routerLink="/Search?keyword={{item?.title}}" class="btn btn-default btn-default--xsmall btn--beige">{{item?.title}}</a>
+                  </div><!-- /.article__actions -->
+
+                </article><!-- /.article-single -->
+              </div><!-- /.section__body -->
+
+            </section><!-- /.section-article-single -->
+          </div><!-- /.content__body -->
+        </div><!-- /.content -->
+      </div><!-- /.main__body -->
+    </div><!-- /.shell -->
+  </div><!-- /.main -->
+</div><!-- /.container -->

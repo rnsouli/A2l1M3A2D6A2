@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '../../services/shared.service';
 import { FunctionsService } from '../../services/functions.service';
 
-import { _globals } from '../../../includes/globals';
+import { GlobalService } from '../../services/global.service';
 import { GlobalModel, SharedModel } from '../../../includes/Models';
 import { Router } from '@angular/router';
 
@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
 
   CONTENT_PATH:string;
   RESIZED_CONTENT_PATH:string;
+  BASE_URL:string;
 
   //routeId:number;
   //customUrlTitle:string;
@@ -27,14 +28,29 @@ export class HeaderComponent implements OnInit {
   
   @Input() globalModel:GlobalModel;
 
-  constructor(private route: ActivatedRoute, private router:Router, private sharedService:SharedService, private http:HttpClient) { }
+  constructor(private globalService: GlobalService, private route: ActivatedRoute, private router:Router, private sharedService:SharedService, private http:HttpClient) { }
 
   ngOnInit() {
 
-    this.CONTENT_PATH = _globals.CONTENT_PATH;
-    this.RESIZED_CONTENT_PATH = _globals.RESIZED_CONTENT_PATH;
-    this.sharedService.sharedModel.subscribe((sharedModel:any) => this.sharedModel = sharedModel);
+    var intervalToClear = setInterval(() => {
+      //console.log('global in header');
+      //console.log(this.globalService.globalLinks); 
+      if(this.globalService.globalLinks != undefined){
+        this.CONTENT_PATH = this.globalService.globalLinks.CONTENT_PATH;
+        this.RESIZED_CONTENT_PATH = this.globalService.globalLinks.RESIZED_CONTENT_PATH;
+        this.BASE_URL = this.globalService.globalLinks.BASE_URL;
+      }
+      //console.log(this.globalService.globalLinks); 
+      if(this.CONTENT_PATH != '' && this.CONTENT_PATH != undefined){
+        clearInterval(intervalToClear);
+        //console.log('cleared');
+      }
+    },100);
 
+    // this.CONTENT_PATH = this.globalService.globalLinks.CONTENT_PATH;
+    // this.RESIZED_CONTENT_PATH = this.globalService.globalLinks.RESIZED_CONTENT_PATH;
+
+    this.sharedService.sharedModel.subscribe((sharedModel:any) => this.sharedModel = sharedModel);
   }
 
   onSearch(){

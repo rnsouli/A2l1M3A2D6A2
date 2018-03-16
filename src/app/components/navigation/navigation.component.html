@@ -3,9 +3,10 @@
 </li>
 
 <li *ngFor="let item of sharedModel?.headerCategories; let catIndex = index" class="{{sharedModel.currentCategoryId == item.id ? 'current' : ''}}"
-  (mouseover)='load_submenu(item.id, catIndex)'>
-  <a title="{{item?.title}}" routerLink="Category/{{item?.id}}{{item?.customUrlTitle ? '/' + item?.customUrlTitle : ''}}">{{item?.title}}</a>
-
+  (mouseover)='load_submenu(item?.id, catIndex)'>
+  <a title="{{item?.title}}" *ngIf="item.customUrl == '' || item.customUrl == null" routerLink="Category/{{item?.id}}{{item?.customUrlTitle ? '/' + item?.customUrlTitle : ''}}">{{item?.title}}</a>
+  <a title="{{item?.title}}" *ngIf="item.customUrl != '' && item.customUrl != null" [attr.href]="item.customUrl">{{item?.title}}</a>
+  
   <div class="nav__dropdown nav__template" *ngIf="(item?.SubCategories && item?.SubCategories?.length > 0)">
     <div class="shell">
       <div class="nav__dropdown-head">
@@ -17,7 +18,7 @@
       <div class="nav__dropdown-body">
         <div class="nav__dropdown-aside">
           <ul>
-            <li *ngFor="let subitem of item.SubCategories">
+            <li *ngFor="let subitem of item.SubCategories" (mouseenter)='load_submenu_by_subcategory(subitem?.id, catIndex, (subitem?.customUrlTitle == "اعمدة-اليوم" ? 1 : (subitem?.customUrlTitle == "اعمدة-الاسبوع" ? 2 : "" ) ))'>
               <a title="{{subitem?.title}}" routerLink="Category/{{subitem?.id}}{{subitem?.customUrlTitle ? '/' + subitem?.customUrlTitle : ''}}">{{subitem?.title}}</a>
             </li>
           </ul>
@@ -29,7 +30,7 @@
         </div>
         <!-- /.nav__dropdown-aside -->
 
-        <div class="nav__dropdown-content" *ngIf="(item?.articles && item?.articles?.length > 0)">
+        <div class="nav__dropdown-content" *ngIf="!item?.isPillat && (item?.articles && item?.articles?.length > 0)">
 
           <article class="article-alt article-alt--medium template_523_272">
             <a class="article__image fullsize-image" routerLink="/Details/{{item?.articles[0]?.id}}/{{item?.articles[0]?.customUrlTitle}}">
@@ -44,7 +45,7 @@
                 <ul class="list-meta">
                   <li>
                     <a routerLink="/Details/{{item?.articles[0]?.id}}/{{item?.articles[0]?.customUrlTitle}}">
-                        <span class="text-en">{{item?.articles[0]?.date | amTimeAgo }}</span>
+                        <span class="text-en">{{item?.articles[0]?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
                         
                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                       </a>
@@ -72,9 +73,9 @@
         </div>
         <!-- /.nav__dropdown-content -->
 
-        <div class="nav__dropdown-inner">
+        <div class="nav__dropdown-inner {{item?.isPillat ? 'pillatClass' : ''}}">
           <div class="articles articles--small articles--small-third">
-            <article class="article template_142_85" *ngFor="let article of item.articles.slice(1)">
+            <article class="article template_142_85" *ngFor="let article of item.articles.slice(item?.isPillat ? 0 : 1)">
               <div class="article__image article-bg-image">
                 <a routerLink="/Details/{{article?.id}}/{{article?.customUrlTitle}}">
                     <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/142x85xo/{{article?.image}}" alt="{{article?.title}}">
@@ -97,4 +98,9 @@
     <!-- /.shell -->
   </div>
   <!-- /.nav__dropdown -->
+</li>
+
+
+<li class="visible-xs-block {{sharedModel?.currentRoute == 'videos' ? 'current' : ''}}">
+    <a routerLink="/Videos">الفيديوهات</a>
 </li>

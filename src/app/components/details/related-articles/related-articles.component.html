@@ -2,7 +2,7 @@
   <div class="widgets">
     <div class="widget widget--related">
       <header class="widget__head">
-        <h3>أخبار ذات صلى</h3>
+        <h3>أخبار ذات صلة</h3>
       </header><!-- /.widget__head -->
 
       <div class="widget__body">
@@ -17,6 +17,23 @@
 
             <div class="article__content">
               <h6><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h6>
+              <ul class="list-meta">
+                <li>
+                  <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                      <span class="text-en">{{item?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
+                      
+                      <i class="fa fa-clock-o" aria-hidden="true"></i>
+                    </a>
+                </li>
+
+                <li>
+                  <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                      <span class="text-en">500</span>
+                      
+                      <i class="fa fa-comment-o" aria-hidden="true"></i>
+                    </a>
+                </li>
+              </ul>
             </div><!-- /.article__content -->
           </article><!-- /.article -->
 

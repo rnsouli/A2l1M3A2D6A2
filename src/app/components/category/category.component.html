@@ -1,4 +1,5 @@
-<div [ngSwitch]="templateId">
+<div [ngSwitch]="templateId" id="categoryPage">
+    <div class="cssload-spin-box" *ngIf="showLoader"></div>
     <app-caricature-template *ngSwitchCase="category_template_caricature" [CategoryModel]="CategoryModel" 
     [categoryId]="categoryId" [pageNumber]="pageNumber"></app-caricature-template>
     
@@ -9,7 +10,7 @@
     [categoryId]="categoryId"></app-hassubcategories-template>
     
     <app-listing-template *ngSwitchCase="category_template_listing" [CategoryModel]="CategoryModel" 
-    [categoryId]="categoryId" [pageNumber]="pageNumber"></app-listing-template>
+    [categoryId]="categoryId" [pageNumber]="pageNumber" [pillarsType]="pillarsType"></app-listing-template>
     
     <app-subcategory-template *ngSwitchCase="category_template_subcategories" [idsToRemove]="idsToRemove" 
     [CategoryModel]="CategoryModel" [categoryId]="categoryId" [pageNumber]="pageNumber"></app-subcategory-template>

@@ -1,0 +1,83 @@
+<!-- <div class="books" (click)="FlipBook()">
+  <div class="thumbnail" data-book-id="book1">
+      Book 1
+  </div>
+</div> -->
+
+<div class="container container--alt">
+  <div class="main main--primary main--alt">
+    <div class="shell">
+      <div class="main__body">
+        <div class="content">
+          <div class="content__body">
+            <section class="section-breadcrumbs">
+              <div class="section__body">
+                <nav class="breadcrumbs">
+                  <ul>
+                    <li>
+                      <a routerLink="/">الصفحة الرئيسية</a>
+                    </li>
+                    
+                    <li>
+                      <a>الأعداد</a>
+                    </li>
+                  </ul>
+                </nav><!-- /.breadcrumbs -->
+              </div><!-- /.section__body -->
+            </section><!-- /.section-breadcrumbs -->
+
+            <section class="section-caricatures section-caricatures--second" *ngIf="Model">
+              <div class="section__body">
+                <div class="widget-banner visible-xs-block">
+                  <div class="widget__image" *ngIf="sharedModel?.mobileLeaderboardBanner">
+                    <img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt=""><!-- height="50" width="300" -->
+                  </div><!-- /.widget__image -->
+                </div><!-- /.widget-banner -->
+                
+                <div class="cols">
+                  <div class="col col--size-9" *ngIf="Model?.image && Model?.image != null">
+                    <div class="section__image">
+                      <img src="{{CONTENT_PATH + '/Issue/' + Model?.image}}" height="483" width="313" alt="">
+                    </div><!-- /.section__image -->
+                  </div><!-- /.col col--size-9 -->
+                  
+                  <div class="col col--size-10">
+                    <div class="section__content">
+                      <!-- <a target="_blank" [attr.href]="CONTENT_PATH + '/Issue/'+ Model?.pdf + '/arabic.html'" class="btn btn-default btn-default--xlarge">عدد اليوم </a> -->
+
+                      <h2>العدد رقم {{Model?.title}}</h2>
+
+                      <ul class="list-meta">
+                        <li>
+                          <a href="#">
+                            <span class="text-en">{{Model?.date | amDateFormat:'LL' }}</span>
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                      </ul><!-- /.list-meta -->
+
+                      <ul class="list-squares list-squares--medium" *ngIf="Model.pages">
+
+                        <li *ngFor="let page of Model.pages">
+                            <a *ngIf="!(Model.year == 2012 && Model.id < 4000)  && !(Model?.id > 1454 && Model?.id <= 3176)" target="_blank" [attr.href]="BASE_URL + 'sub/' + Model?.month + '-' + Model?.title + '/' + page?.title + '.pdf'">الصفحة {{page?.title}}</a>
+                            <a *ngIf="(Model.year == 2012 && Model.id < 4000) || (Model?.id > 1454 && Model?.id <= 3176)" target="_blank" [attr.href]="CONTENT_PATH + '/IssuePage/'+ page?.pdf">{{page?.title}}</a>
+                            
+                            <a *ngIf="Model.year == 2012 && Model.id > 4000" target="_blank" [attr.href]="BASE_URL + 'Missing2012/' + Model.title + '/' + page?.pdf">الصفحة {{page?.title}}</a>
+                            <a *ngIf="Model.year == 2007 || Model.year == 2008 || Model.year == 2009" target="_blank" [attr.href]="BASE_URL + 'MediaStorage/PDF/820-1610/' + Model.title + '/' + page?.pdf">الصفحة {{page?.title}}</a>
+                        </li>
+                        
+                      </ul><!-- /.list-squares -->
+                      
+                    </div><!-- /.section__content -->
+                  </div><!-- /.col col--size-10 -->
+                </div><!-- /.cols -->
+              </div><!-- /.section__body -->
+            </section><!-- /.section-caricatures -->
+          </div><!-- /.content__body -->
+        </div><!-- /.content -->
+      
+        <app-sidebar [globalModel]="globalModel"></app-sidebar>
+      </div><!-- /.main__body -->
+    </div><!-- /.shell -->
+  </div><!-- /.main -->
+</div><!-- /.container -->

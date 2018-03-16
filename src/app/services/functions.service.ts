@@ -15,6 +15,10 @@ export class FunctionsService {
   hide_comments_counter(){
     myFunctions.hide_comments_counter();
   }
+
+  TabsOnMobileSelect(){
+    myFunctions.TabsOnMobileSelect();
+  }
   
   CustomSelect() {
     myFunctions.CustomSelect();
@@ -90,6 +94,38 @@ export class FunctionsService {
 
   is_dom_in_view(id:string, offset:number){
     return myFunctions.is_dom_in_view(id, offset);
+  }
+
+  progress_bar(){
+    myFunctions.progress_bar();
+  }
+
+  SearchByIssue(value){
+    myFunctions.SearchByIssue(value);
+  }
+
+  changeLogoOnScreen(logoDesktop, logoMobile){
+    myFunctions.changeLogoOnScreen(logoDesktop, logoMobile);
+  }
+
+  changeLogoOnHeaderFixed(logoDesktop, logoMobile){
+    myFunctions.changeLogoOnHeaderFixed(logoDesktop, logoMobile);
+  }
+
+  facebookShare(linkUrl, title){
+    myFunctions.facebookShare(linkUrl, title);
+  }
+  
+  tweetPopup(linkUrl, title, text, imageUrl){
+    myFunctions.tweetPopup(linkUrl, title, text, imageUrl);
+  }
+  
+  googlePlusShare(linkUrl){
+    myFunctions.googlePlusShare(linkUrl);
+  }
+  
+  pinterestShare(linkUrl, title, text, imageUrl){
+    myFunctions.pinterestShare(linkUrl, title, text, imageUrl);
   }
 
 }

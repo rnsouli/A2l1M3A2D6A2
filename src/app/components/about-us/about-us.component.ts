@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '../../services/shared.service';
 import { FunctionsService } from '../../services/functions.service';
 
-import { _globals } from '../../../includes/globals';
+import { GlobalService } from '../../services/global.service';
 import { GlobalModel, SharedModel, CorporatePageTreeModel } from '../../../includes/Models';
 
 @Component({
@@ -25,18 +25,30 @@ export class AboutUsComponent implements OnInit {
     
     @Input() globalModel:GlobalModel;
   
-    constructor(private route: ActivatedRoute, private sharedService:SharedService, private http:HttpClient) { }
+    constructor(private globalService: GlobalService, private route: ActivatedRoute, private sharedService:SharedService, private http:HttpClient) { }
     
     ngOnInit() {
       this.sharedService.sharedModel.subscribe((sharedModel:any) => this.sharedModel = sharedModel);
 
       this.sharedService.set_currentRoute("aboutus");
+
+      var intervalToClear = setInterval(() => {
+        if(this.globalService.globalLinks != undefined){
+          this.CONTENT_PATH = this.globalService.globalLinks.CONTENT_PATH;
+          this.RESIZED_CONTENT_PATH = this.globalService.globalLinks.RESIZED_CONTENT_PATH;
+        }
+        if(this.CONTENT_PATH != '' && this.CONTENT_PATH != undefined){
+          clearInterval(intervalToClear);
+          this.http.get(this.globalService.globalLinks.API_URL + 'Data/GetAboutUsData').subscribe((data:any) => {
+            this.Model = data.entry;
+            //console.log(this.model);
+            
+          });
+        }
+      },100);
+
   
-      this.http.get(_globals.API_URL + 'Data/GetAboutUsData').subscribe((data:any) => {
-        this.Model = data.entry;
-        //console.log(this.model);
-        
-      });
+      
     }
   
   }

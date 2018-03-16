@@ -31,6 +31,24 @@
     height: 100%;
 }
 
-.btn-social--share, .widget-socials{
+/* .btn-social--share, .widget-socials{
     display: none;
+} */
+
+/* .widget-socials{
+    display: none;
+}  */
+
+.addthis_inline_share_toolbox {
+    display: block;
+    position: absolute;
+    top: 0;
+}
+
+.btn-social--share{
+    position: relative;
+}
+
+.main__body{
+    min-height:300px;
 }

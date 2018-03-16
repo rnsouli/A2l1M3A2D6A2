@@ -1,4 +1,24 @@
-<header class="header {{sharedModel?.currentRoute == 'home' ? 'header--default' : 'header--large'}}">
+<header class="header header--small" *ngIf="sharedModel?.currentRoute == 'notFound'">
+	<div class="shell">
+		<div class="header__body">
+			<a routerLink="/" class="logo logo--default" [style.background-image]="'url(' + sharedModel?.logoDesktop + ')'"></a>
+		</div><!-- /.header__body -->
+	</div><!-- /.shell -->
+</header><!-- /.header -->
+
+
+<header class="headerPrint header--large fixed print" *ngIf="sharedModel?.currentRoute == 'print'">
+	<div class="shell">
+	  <div class="header__body">		  
+		<a class="logo logo--default" routerlink="/">
+			<img src="../assets/images/redLogo.png" alt="logo">
+		</a>
+	  </div>
+	</div>
+</header>
+
+
+<header *ngIf="sharedModel?.currentRoute != 'notFound' && sharedModel?.currentRoute != 'print'" class="header {{sharedModel?.currentRoute == 'home' ? 'header--default' : 'header--large'}}">
 		<div class="shell">
 			<div class="header__body">
 				<a href="#" class="btn btn-search">
@@ -12,9 +32,9 @@
 						<div class="header__bar">
 							<nav class="nav-utilities">
 								<ul>
-									<li>
+									<!-- <li>
 										<a routerLink="/">العدد 3750 - الثلاثاء, 4 تشرين الأول 2016 <i class="fa fa-clock-o" aria-hidden="true"></i></a>
-									</li>
+									</li> -->
 									
 									<li>
 										<a routerLink="/AboutUs">من نحن</a>
@@ -28,6 +48,11 @@
 					
 							<div class="socials socials--medium" *ngIf="globalModel?.socialMedia && globalModel?.socialMedia?.length > 0">
 								<ul>  
+									<li>
+										<a target="_blank" href="{{BASE_URL + 'Rss'}}">
+											<i class="fa fa-rss" aria-hidden="true"></i>
+										</a>
+									</li>
 
                   					<li *ngFor="let item of globalModel?.socialMedia">
 										<a target="_blank" href="{{item.link}}">
@@ -46,15 +71,16 @@
 										<label for="q" class="hidden">Search</label>
 					
 										<div class="search__field">
-											<input type="search" name="keyword" id="q" value="" placeholder="البحث بحسب ...">
+											<input type="search" name="keyword" id="q" value="" placeholder="البحث عن كلمة ...">
 										</div><!-- /.search__field -->
 										
-										<div class="search__select">
+										<!-- <div class="search__select">
 											<select name="search-select-1#" id="search-select-1#">
 												<option value="1">كلمة المفتاح</option>
 												<option value="2">كلمة</option>
 											</select>
-										</div><!-- /.search__select -->
+										</div> -->
+										<!-- /.search__select -->
 					
 										<button type="submit" class="search__btn">
 											<i class="fa fa-search" aria-hidden="true"></i>
@@ -84,6 +110,78 @@
 						</div><!-- /.header__content-body -->
 
 						<div class="header__content-foot">
+
+							<nav class="footer-nav js-footer-nav">
+								<ul>
+									<li>
+										<a routerLink="/AboutUs">من نحن</a>
+									</li>
+									
+									<li>
+										<a routerLink="/ContactUs">اتصل بنا</a>
+									</li>
+									
+									<li>
+										<a routerLink="/Advertise">أعلن معنا</a>
+									</li>
+									
+									<li>
+										<a routerLink="/Polls">استفتاء</a>
+									</li>
+									
+									<li>
+										<a routerLink="/PrivacyPolicy">سياسة الخصوصية</a>
+									</li>
+								</ul>
+							</nav><!-- /.footer-nav -->
+
+
+							<div class="footer__content js-footer-content">
+
+								<!-- <h5><a routerLink="/Videos">الفيديوهات</a></h5>
+								<br/> -->
+
+								<h5>تواصل معنا</h5>
+							
+								<div class="socials socials--large">
+									<ul>
+										<li>
+											<a target="_blank" href="{{BASE_URL + 'Rss'}}">
+												<i class="fa fa-rss" aria-hidden="true"></i>
+											</a>
+										</li>
+										
+										<li *ngFor="let item of globalModel?.socialMedia">
+											<a target="_blank" href="{{item?.link}}">
+												<i class="fa {{'fa-' + item?.className}}" aria-hidden="true"></i>
+											</a>
+										</li>
+	
+									</ul>
+								</div><!-- /.socials socials--large -->
+							
+								<h5>تحميل التطبيق</h5>
+							
+								<div class="footer__actions">
+									<a target="_blank" *ngIf="globalModel?.googlePlay" [attr.href]="globalModel?.googlePlay?.link" class="btn btn-default btn-default--app btn-default--googleplay">
+										<span>
+											<i class="ico-googleplay"></i>
+							
+											<i class="ico-googleplay-dark"></i>
+										</span>
+							
+										Google Play
+									</a>
+							
+									<a target="_blank" *ngIf="globalModel?.appStore" [attr.href]="globalModel?.appStore?.link" class="btn btn-default btn-default--app btn-default--appstore">
+										<i class="fa fa-apple" aria-hidden="true"></i>
+							
+										App Store
+									</a>
+								</div><!-- /.footer__actions -->
+							</div><!-- /.footer__content -->
+
+
 							<div class="header__content-inner">
 								<a routerLink="/" class="logo-medium"></a>
 							</div><!-- /.header__content-inner -->

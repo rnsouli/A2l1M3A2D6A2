@@ -1,7 +1,10 @@
 <div class="container container--secondary">
-		<div class="main {{isVideo || (entry?.relatedArticles) || (entry?.relatedArticles.length == 0)  ? 'main--full' : 'main--secondary'}}">
+		<div class="main {{isVideo || (!entry?.relatedArticles) || (entry?.relatedArticles.length == 0)  ? 'main--full' : 'main--secondary'}}">
 			<div class="shell">
-				<div class="main__body">
+				<div class="main__body" *ngIf="showLoader">
+					<div class="cssload-spin-box"></div>
+				</div>
+				<div class="main__body" *ngIf="!showLoader">
 					<div class="content">
 						<div class="content__body">
 							<section class="section-article-single {{isVideo ? 'article-single--alt' : ''}}">
@@ -25,9 +28,9 @@
 											</nav><!-- /.breadcrumbs -->
 
 											<div class="widget-banner visible-xs-block" *ngIf="!isVideo">
-												<div class="widget__image">
-													<img src="assets/css/images/temp/widget-banner-image4.jpg" height="50" width="300" alt="">
-												</div><!-- /.widget__image -->
+												<a class="widget__image" *ngIf="sharedModel?.mobileLeaderboardBanner" target="_blank" [attr.href]="sharedModel.mobileLeaderboardBanner?.link">
+													<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt=""> <!-- height="50" width="300" -->
+												</a><!-- /.widget__image -->
 											</div><!-- /.widget-banner -->
 
 											<a *ngIf="entry?.subcategoryId && entry?.subcategoryId != 0" routerLink="/Category/{{entry?.subcategoryId}}/{{entry?.subcategoryCustomUrlTitle}}" class="btn btn-plus js-btn-back">
@@ -40,15 +43,32 @@
 
 											<h1>{{entry?.title}}</h1>
 
-											<span *ngIf="entry?.writer"><a routerLink="/Writer/{{entry.writer?.customUrlTitle}}">{{entry.writer?.title}}</a></span>
+											<a class="subHeading" *ngIf="entry?.writer != null" routerLink="/Writer/{{entry?.writer?.id}}/{{entry?.writer?.customUrlTitle}}">												
+												<i class="fa fa-pencil" aria-hidden="true"></i>
+												<span>اسم الكاتب: {{entry?.writer?.name}}</span>			
+											</a>
+											<a class="subHeading" *ngIf="entry?.issueNumber != null">												
+												<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+												<span>رقم العدد: {{entry?.issueNumber}}</span>			
+											</a>
+											<a class="subHeading" *ngIf="entry?.versionType != null">
+												<i class="fa fa-code-branch" aria-hidden="true"></i>
+												<span>نوع النسخة: {{entry?.versionType}}</span>			
+											</a>
+											<a class="subHeading">
+												<i class="fa fa-clock-o" aria-hidden="true"></i>
+												<span class="text-en">تاريخ اخر تعديل: </span>
+												<span class="dateModified">{{entry?.dateModified | date: 'dd/MM/yyyy HH:mm' }}</span>
+											</a>											
 										</header><!-- /.article__head -->
 
 										<div class="article__bar">
 											<div class="article__bar-actions text-en">
-												<a href="#" class="btn btn-social btn-social--alt btn-social--share">
+												<div class="btn btn-social btn-social--alt btn-social--share">
 													<i class="fa fa-share" aria-hidden="true"></i>
 													<span>Share</span>
-												</a>
+													<div class="addthis_inline_share_toolbox"></div>
+												</div>
 												<!-- <a href="#" class="btn btn-social btn-social--alt btn-social--twitter">
 													<i class="fa fa-twitter" aria-hidden="true"></i>
 													<span>Tweet</span>
@@ -73,14 +93,24 @@
 
 											<div class="article__bar-aside">
 												<ul class="list-meta list-meta--dark">
-													<li>
-														<a href="#">
-															<i class="fa fa-clock-o" aria-hidden="true"></i>
-															<span class="text-en">{{entry?.date | amTimeAgo }}</span>
+													<li class="fa_1" (click)="decreaseFont()">
+														<a>	
+															<i class="fa fa-font" aria-hidden="true"></i> -	
+														</a>
+													</li>
+													<li class="fa_4" (click)="increaseFont()">
+														<a>											
+															<i class="fa fa-font" aria-hidden="true"></i> +	
 														</a>
 													</li>
 													<li>
-														<a href="#">
+														<a>
+															<i class="fa fa-clock-o" aria-hidden="true"></i>
+															<span class="text-en">{{entry?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
+														</a>
+													</li>
+													<li>
+														<a>
 															<i class="fa fa-eye" aria-hidden="true"></i>
 															<span class="text-en">{{entry?.viewCounter}}</span>
 														</a>
@@ -89,6 +119,22 @@
 														<a id="commentCounter">
 															<i class="fa fa-comment-o" aria-hidden="true"></i>
 															<span class="text-en">0</span>
+														</a>
+													</li>
+													<li (click)="print(entry?.id)">
+														<a>											
+															<i class="fa fa-print" aria-hidden="true"></i>	
+															<span>إطبع</span>
+														</a>
+													</li>
+													<li>
+														<!-- <a [attr.href]="'mailto:someone@example.com?Subject=' + entry?.title + '&body=' + entry?.urlBrowser">											
+															<i class="fa fa-envelope" aria-hidden="true"></i>	
+															<span>أرسل إلى صديق</span>
+														</a> -->
+														<a target="_blank" [attr.href]="sendEmailUrl">											
+															<i class="fa fa-envelope" aria-hidden="true"></i>	
+															<span>أرسل إلى صديق</span>
 														</a>
 													</li>
 												</ul><!-- /.list-meta -->
@@ -103,12 +149,12 @@
 												</div>													
 											</div><!-- /.article__iframe -->
 
-											<div class="article__banner" *ngIf="isVideo">
-												<img src="assets/css/images/temp/banner-image1.jpg" height="92" width="730" alt="">
-											</div><!-- /.article__banner -->
+											<a class="article__banner" *ngIf="isVideo && sharedModel?.leaderboardBanner" target="_blank" [attr.href]="sharedModel.leaderboardBanner?.link">
+												<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.leaderboardBanner?.image}}" height="90" width="728" alt="">
+											</a><!-- /.article__banner -->
                       
                      						<div class="article__entry" *ngIf="!isVideo && entry?.descriptionBeforeBanner.length > 0">
-												<p [innerHTML]="entry?.description"></p>
+												<p [innerHTML]="description"></p>
 											</div><!-- /.article__entry -->
 
 											<div class="article__inner" *ngIf="!isVideo && entry?.ArticleImages">
@@ -119,7 +165,12 @@
 
 																<div class="slider__slide swiper-slide" *ngFor="let item of entry?.ArticleImages">
 																	<div class="slider__slide-image">
-																		<img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/720x520xo/{{item}}" height="520" width="720" alt="">
+																		
+																		<img *ngIf="hasGallery && !entry?.firstImageInGalleryIsSmall" (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/720x520xo/{{item?.image}}" height="520" width="720" alt="{{item?.title}}">
+																		<img *ngIf="hasGallery && entry?.firstImageInGalleryIsSmall" (error)="sharedService.errorHandler($event)" src="{{CONTENT_PATH}}/Article/{{item?.image}}" alt="{{item?.title}}">
+
+																		<img *ngIf="!hasGallery && !entry?.isImageSmall" (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/720x520xo/{{item?.image}}" height="520" width="720" alt="{{item?.title}}">
+																		<img *ngIf="!hasGallery && entry?.isImageSmall" (error)="sharedService.errorHandler($event)" src="{{CONTENT_PATH}}/Article/{{item?.image}}" alt="{{item?.title}}">
 																	</div><!-- /.slider__slide-image -->
 																</div><!-- /.slider__slide -->
 
@@ -130,7 +181,7 @@
 							    							<div *ngIf="entry?.ArticleImages && entry?.ArticleImages.length > 1" class="swiper-button-prev swiper-button-prev-circle"></div>
 														</div><!-- /.slider__clip -->
 
-														<!--<div class="slider__foot">
+														<!-- <div class="slider__foot">
 															<ul class="list-icons-actions">
 																<li>
 																	<a href="#">
@@ -152,24 +203,29 @@
 																		{{entry?.ArticleImages.length}}
 																	</a>
 																</li>
-															</ul><!-- /.list-icons-actions -->
-														<!--</div><!-- /.slider__foot -->
+															</ul>
+														</div> -->
 														
 													</div><!-- /.slider -->
 												</div><!-- /.article__inner-body -->
 
 												<div class="article__inner-foot">
-													<!-- <p>الموصليّون الذين يقطنون ضفتي نهر دجلة بعضهم البعض</p> -->
+													<p>{{ entry?.ArticleImages.length > 0 ? entry?.ArticleImages[0].title : entry?.caption }}</p>
 												</div><!-- /.article__inner-foot -->
 											</div><!-- /.article__inner -->
 
-											<div class="article__entry" *ngIf="!isVideo">
+											<a class="subHeading" *ngIf="entry?.sourceDesc != ''">
+												<i class="fa fa-code-branch" aria-hidden="true"></i>
+												<span>المصدر: {{entry?.sourceDesc}}</span>			
+											</a>
 
-												<p *ngIf="entry?.descriptionBeforeBanner.length == 0" [innerHTML]="entry?.description"></p>
+											<div class="article__entry">
+
+												<p *ngIf="entry?.descriptionBeforeBanner.length == 0" [innerHTML]="description"></p>
 
 												<p [innerHTML]="entry?.descriptionBeforeBanner"></p>
 
-												<img *ngIf="entry?.bannerInDescription" src="assets/css/images/temp/widget-banner-image3.jpg" height="250" width="300" alt="" class="alignleft">
+												<p *ngIf="entry?.bannerInDescription"  [innerHTML]="entry?.bannerInDescription" class="alignleft"></p>
 
 												<p [innerHTML]="entry?.descriptionAfterBanner"></p>
 
@@ -191,14 +247,14 @@
 								<aside class="section__aside hidden-xs hidden-sm">
 
 									<div class="widget-banner widget-banner--alt">
-										<div class="widget__image">
-											<img src="/assets/css/images/temp/widget-banner-image2.jpg" height="600" width="300" alt="">
-										</div><!-- /.widget__image -->
+										<a class="widget__image" *ngIf="sharedModel?.detailsRightMpuBanner" target="_blank" [attr.href]="sharedModel.detailsRightMpuBanner?.link">
+											<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.detailsRightMpuBanner?.image}}" height="600" width="300" alt="">
+										</a><!-- /.widget__image -->
 									</div><!-- /.widget-banner widget-banner--alt -->
 
 									<div class="widget-default widget-last-news">
 										<header class="widget__head">
-											<h3 class="widget__title">أحدث الأخبار</h3><!-- /.widget__title -->
+											<h3 class="widget__title">الأكثر قراءة</h3><!-- /.widget__title --> <!-- أحدث الأخبار -->
 										</header><!-- /.widget__head -->
 
 										<div class="widget__body" *ngIf="entry?.latestNews && entry?.latestNews.length">
@@ -211,7 +267,7 @@
 														<ul class="list-meta">
 														<li>
 															<a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
-																<span class="text-en">{{item?.date | amTimeAgo }}</span>
+																<span class="text-en">{{item?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
 																
 																<i class="fa fa-clock-o" aria-hidden="true"></i>
 															</a>
@@ -243,43 +299,43 @@
 					</div><!-- /.content -->
 				
 					<aside class="sidebar" app-related-articles [entries]="entry?.relatedArticles" *ngIf="!isVideo && entry?.relatedArticles && entry?.relatedArticles.length">						
-          </aside><!-- /.sidebar -->
+          			</aside><!-- /.sidebar -->
           
 				</div><!-- /.main__body -->
 			</div><!-- /.shell -->
 		</div><!-- /.main -->
 	</div><!-- /.container -->
 
-	<div class="widget-socials" *ngIf="!isVideo">
+	<div class="widget-socials" *ngIf="!isVideo && !showLoader">
 		<div class="widget__body">
 			<div class="socials-circles">
 				<ul>
-					<li>
+					<!-- <li>
 						<a href="#" class="link-share">
 							<i class="fa fa-share-alt" aria-hidden="true"></i>
 						</a>
-					</li>
+					</li> -->
 					
 					<li>
-						<a href="#" class="link-whatsapp">
+						<a [attr.href]="whatsappLink" data-action="share/whatsapp/share" class="link-whatsapp">
 							<i class="fa fa-whatsapp" aria-hidden="true"></i>
 						</a>
 					</li>
 					
 					<li>
-						<a href="#" class="link-googleplus">
+						<a (click)="googlePlusShare(entry?.urlBrowser)" class="link-googleplus">
 							<i class="fa fa-google-plus" aria-hidden="true"></i>
 						</a>
 					</li>
 					
 					<li>
-						<a href="#" class="link-twitter">
+						<a (click)="tweetPopup(entry?.urlBrowser)" class="link-twitter">
 							<i class="fa fa-twitter" aria-hidden="true"></i>
 						</a>
 					</li>
 					
 					<li>
-						<a href="#" class="link-facebook">
+						<a (click)="facebookShare(entry?.urlBrowser)" class="link-facebook">
 							<i class="fa fa-facebook" aria-hidden="true"></i>
 						</a>
 					</li>

@@ -9,9 +9,9 @@
 
 			<div class="section__body">
 				<div class="widget-banner visible-xs-block">
-					<div class="widget__image">
-						<img src="assets/css/images/temp/widget-banner-image4.jpg" height="50" width="300" alt="">
-					</div>
+					<a class="widget__image" *ngIf="sharedModel?.mobileLeaderboardBanner" target="_blank" [attr.href]="sharedModel.mobileLeaderboardBanner?.link">
+						<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt=""><!-- height="50" width="300" -->
+					</a>
 					<!-- /.widget__image -->
 				</div>
 				<!-- /.widget-banner -->
@@ -22,7 +22,7 @@
 						<div class="section__content">
 							<article class="article-alt article-alt--medium">
 								<div class="article__image fullsize-image">
-									<img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/694x378xo/{{item?.image}}" height="378" width="694"
+									<img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/693x378xo/{{item?.image}}" height="378" width="693"
 									 alt="">
 								</div>
 								<!-- /.article__image -->
@@ -36,7 +36,7 @@
 										<ul class="list-meta">
 											<li>
 												<a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
-														<span class="text-en">{{item?.date | amTimeAgo }}</span>
+														<span class="text-en">{{item?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
 														
 														<i class="fa fa-clock-o" aria-hidden="true"></i>
 													</a>
@@ -70,9 +70,9 @@
 				<!-- /.cols -->
 
 				<div class="widget-banner visible-xs-block">
-					<div class="widget__image">
-						<img src="assets/css/images/temp/widget-banner-image4.jpg" height="50" width="300" alt="">
-					</div>
+					<a class="widget__image" *ngIf="sharedModel?.mobileLeaderboardBanner" target="_blank" [attr.href]="sharedModel.mobileLeaderboardBanner?.link">
+						<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt=""><!-- height="50" width="300" -->
+					</a>
 					<!-- /.widget__image -->
 				</div>
 				<!-- /.widget-banner -->
@@ -105,7 +105,7 @@
 				</div>
 				<!-- /.content -->
 
-				<app-sidebar></app-sidebar>
+				<app-sidebar [globalModel]="globalModel"></app-sidebar>
 
 			</div>
 			<!-- /.main__body -->

@@ -1,4 +1,4 @@
-<section class="section-default section-slider">
+<section class="section-default section-slider" *ngIf="bottomCategory">
   <header class="section__head">
     <h3 class="section__title">
       <a routerLink="/Category/{{bottomCategory?.id}}/{{bottomCategory?.customUrlTitle}}" class="btn btn-plus"><i class="fa fa-plus" aria-hidden="true"></i></a>      {{bottomCategory?.title}}
@@ -50,7 +50,7 @@
           <ul class="list-meta">
             <li>
               <a routerLink="/Details/{{bottomSlideshowArticles[0]?.id}}/{{bottomSlideshowArticles[0]?.customUrlTitle}}">
-                <span class="text-en">{{bottomSlideshowArticles[0]?.date | amTimeAgo }}</span>
+                <span class="text-en">{{bottomSlideshowArticles[0]?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
                 <i class="fa fa-clock-o" aria-hidden="true"></i>
                 </a>
             </li>
@@ -90,6 +90,24 @@
 
         <div class="article__content">
           <h4><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h4>
+          <ul class="list-meta">
+            <li>
+              <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                  <span class="text-en">{{item?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
+                  
+                  <i class="fa fa-clock-o" aria-hidden="true"></i>
+                </a>
+            </li>
+
+            <li>
+              <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                  <span class="text-en">500</span>
+                  
+                  <i class="fa fa-comment-o" aria-hidden="true"></i>
+                </a>
+            </li>
+          </ul>
+          <!-- /.list-meta -->
         </div>
         <!-- /.article__content -->
       </article>
@@ -132,6 +150,24 @@
 
                     <div class="article__content">
                       <h6><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h6>
+                      <ul class="list-meta">
+                        <li>
+                          <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                              <span class="text-en">{{item?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
+                              
+                              <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            </a>
+                        </li>
+        
+                        <li>
+                          <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                              <span class="text-en">500</span>
+                              
+                              <i class="fa fa-comment-o" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                      </ul>
+                      <!-- /.list-meta -->
                     </div>
                     <!-- /.article__content -->
                   </article>
@@ -161,6 +197,24 @@
 
                 <div class="article__content">
                   <h6><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h6>
+                  <ul class="list-meta">
+                    <li>
+                      <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                          <span class="text-en">{{item?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
+                          
+                          <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        </a>
+                    </li>
+    
+                    <li>
+                      <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                          <span class="text-en">500</span>
+                          
+                          <i class="fa fa-comment-o" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                  </ul>
+                  <!-- /.list-meta -->
                 </div>
                 <!-- /.article__content -->
               </article>
@@ -177,9 +231,9 @@
     </div>
     <!-- /.col col--size-7 -->
 
-    <div class="col col--size-8">
+    <div class="col col--size-8" *ngIf="currentPoll">
       <div class="section__content">
-        <div class="widget widget--range visible-lg-block">
+        <div class="widget widget--range"> <!-- visible-lg-block -->
           <div class="widget__head">
             <h3 class="widget__title">
               <a routerLink="/Polls" class="btn btn-plus"><i class="fa fa-plus" aria-hidden="true"></i></a> استطلاع المدى
@@ -187,7 +241,7 @@
             <!-- /.widget__title -->
           </div>
           <!-- /.widget__head -->
-          <app-active-poll></app-active-poll>
+          <app-active-poll [item]="currentPoll"></app-active-poll>
         </div>
         <!-- /.widget -->
       </div>

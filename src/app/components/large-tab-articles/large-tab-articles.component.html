@@ -14,6 +14,24 @@
         
               <div class="article__content">
                 <h4><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h4>
+                <ul class="list-meta">
+                  <li>
+                    <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                        <span class="text-en">{{item?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
+                        
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                      </a>
+                  </li>
+
+                  <li>
+                    <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                        <span class="text-en">500</span>
+                        
+                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                      </a>
+                  </li>
+                </ul>
+                <!-- /.list-meta -->
               </div><!-- /.article__content -->
             </article><!-- /.article -->  
             
@@ -25,6 +43,24 @@
 
             <li *ngFor="let item of whiteBox.smallWhiteBoxArticles">
               <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a>
+              <ul class="list-meta">
+                <li>
+                  <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                      <span class="text-en">{{item?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
+                      
+                      <i class="fa fa-clock-o" aria-hidden="true"></i>
+                    </a>
+                </li>
+
+                <li>
+                  <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                      <span class="text-en">500</span>
+                      
+                      <i class="fa fa-comment-o" aria-hidden="true"></i>
+                    </a>
+                </li>
+              </ul>
+              <!-- /.list-meta -->
             </li>
             
           </ul><!-- /.list-squares -->

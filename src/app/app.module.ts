@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //import { HttpModule } from '@angular/http';
-import { HttpClientModule }   from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS }   from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 
 import { RouterModule } from '@angular/router';
 
@@ -11,8 +12,14 @@ import { RouterModule } from '@angular/router';
 //import { TwitterService } from 'ng2-twitter';
 import { MomentModule } from 'angular2-moment';
 
+
+import { RecaptchaModule } from 'ng-recaptcha';
+
 // Services
 import { SharedService } from './services/shared.service';
+import { GlobalService } from './services/global.service';
+import { EnvironmentSpecificResolver } from './services/EnvironmentSpecificResolver';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -52,26 +59,84 @@ import { PollsComponent } from './components/polls/polls.component';
 import { SafeUrlPipe } from './pipes/safe-url.pipe';
 import { ActivePollComponent } from './components/active-poll/active-poll.component';
 
+import { PerfectScrollbarModule } from 'angular2-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'angular2-perfect-scrollbar';
+import { WriterComponent } from './components/writer/writer.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ArchiveComponent } from './components/archive/archive.component';
+import { IssueDetailsComponent } from './components/issues/issuedetails/issuedetails.component';
+import { PrintComponent } from './components/details/print/print.component';
+
+const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  //suppressScrollX: true
+};
+
 
 let routes = [
-  { path: '', component: HomeComponent, pathMatch: 'full'  },
-  { path: 'Home', component: HomeComponent  },
-  { path: 'AboutUs', component: AboutUsComponent  },
-  { path: 'ContactUs', component: ContactUsComponent  },
-  { path: 'Advertise', component: AdvertiseComponent  },
-  { path: 'PrivacyPolicy', component: PrivacyPolicyComponent  },
-  { path: 'Category/:id', component: CategoryComponent  },
-  { path: 'Category/:id/:customUrlTitle', component: CategoryComponent  },
-  { path: 'Category/:id/:subId', component: CategoryComponent  },
-  { path: 'Category/:id/:subId/:customUrlTitle', component: CategoryComponent  },
-  { path: 'Videos', component: VideosComponent  },
-  { path: 'Search', component: SearchComponent  },
-  { path: 'Details/:id', component: DetailsComponent  },
-  { path: 'Details/:id/:customUrlTitle', component: DetailsComponent  },
-  { path: 'Issues', component: IssuesComponent  },
-  { path: 'Polls', component: PollsComponent  },
-  { path: '**', redirectTo:''  }
+  { path: '', component: HomeComponent, pathMatch: 'full', resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'Ar', name: 'Ar', component: HomeComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'ar', name: 'ar', component: HomeComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'Home', name: 'Home', component: HomeComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'home', name: 'min_Home', component: HomeComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  
+  { path: 'AboutUs', component: AboutUsComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'aboutus', component: AboutUsComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  
+  { path: 'ContactUs', component: ContactUsComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'contactus', component: ContactUsComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  
+  { path: 'Advertise', component: AdvertiseComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'advertise', component: AdvertiseComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  
+  { path: 'PrivacyPolicy', component: PrivacyPolicyComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'privacypolicy', component: PrivacyPolicyComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  
+  { path: 'Category/:id', component: CategoryComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'Category/:id/:customUrlTitle', component: CategoryComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'Category/:id/:subId', component: CategoryComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'Category/:id/:subId/:customUrlTitle', component: CategoryComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  
+  { path: 'category/:id', component: CategoryComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'category/:id/:customUrlTitle', component: CategoryComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'category/:id/:subId', component: CategoryComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'category/:id/:subId/:customUrlTitle', component: CategoryComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  
+  { path: 'Videos', component: VideosComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'videos', component: VideosComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  
+  { path: 'Search', component: SearchComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'search', component: SearchComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  
+  { path: 'Details/:id', component: DetailsComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'Details/:id/:customUrlTitle', component: DetailsComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'Print/:id', component: PrintComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  
+  { path: 'details/:id', component: DetailsComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'details/:id/:customUrlTitle', component: DetailsComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'print/:id', component: PrintComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  
+  { path: 'Writer/:id', component: WriterComponent  },
+  { path: 'Writer/:id/:customUrlTitle', component: WriterComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  
+  { path: 'writer/:id', component: WriterComponent  },
+  { path: 'writer/:id/:customUrlTitle', component: WriterComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  
+  { path: 'Issues', component: IssuesComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'Issues/Details/:id', component: IssueDetailsComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  
+  { path: 'issues', component: IssuesComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'issues/details/:id', component: IssueDetailsComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  
+  { path: 'Polls', component: PollsComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'polls', component: PollsComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  
+  { path: 'ArchiveViewer', component: ArchiveComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  { path: 'archiveviewer', component: ArchiveComponent, resolve: { envSpecific: EnvironmentSpecificResolver }  },
+  
+  { path: '404', name: 'NotFound', component: NotFoundComponent, resolve: { envSpecific: EnvironmentSpecificResolver }}, 
+  { path: '**', redirectTo: '/404', resolve: { envSpecific: EnvironmentSpecificResolver }}
 ];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -110,18 +175,33 @@ let routes = [
     SafeUrlPipe,
     PollsComponent,
     ActivePollComponent,
+    WriterComponent,
+    NotFoundComponent,
+    ArchiveComponent,
+    IssueDetailsComponent,
+    PrintComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({appId: 'al-mada'}),
     RouterModule.forRoot(routes),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MomentModule
+    MomentModule,
+    HttpModule,
+    PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG),
+    RecaptchaModule.forRoot(), // Keep in mind the "forRoot"-magic nuances!
   ],
   providers: [
     SharedService, 
-    FunctionsService
+    FunctionsService,
+    GlobalService,
+    EnvironmentSpecificResolver,
+    {
+      provide: HTTP_INTERCEPTORS, 
+      useClass:AuthInterceptorService, 
+      multi:true 
+    }
   ],
   bootstrap: [AppComponent]
 })

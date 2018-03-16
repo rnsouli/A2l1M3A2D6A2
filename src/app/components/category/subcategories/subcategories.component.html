@@ -4,9 +4,9 @@
   <!-- in third sub category -->
   <div class="section__widget" *ngIf="index == 2">
     <div class="widget-banner visible-xs-block">
-      <div class="widget__image">
-        <img src="assets/css/images/temp/widget-banner-image4.jpg" height="50" width="300" alt="">
-      </div>
+      <a class="widget__image" *ngIf="sharedModel?.mobileLeaderboardBanner" target="_blank" [attr.href]="sharedModel.mobileLeaderboardBanner?.link">
+        <img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt=""><!-- height="50" width="300" -->
+      </a>
       <!-- /.widget__image -->
     </div>
     <!-- /.widget-banner -->
@@ -57,17 +57,16 @@
 
               <div class="article__content-bar">
                 <ul class="list-meta">
-                  <li>
-                    <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
-                    <span>بسام فرج</span>
-                    
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                  </a>
+                  <li *ngIf="item?.writer != null">
+                      <a routerLink="/Writer/{{item.writer?.id}}/{{item.writer?.customUrlTitle}}">
+                        <span>{{item.writer?.name}}</span>                    
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                      </a>
                   </li>
 
                   <li>
                     <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
-                    <span class="text-en">{{item?.date | amTimeAgo }}</span>
+                    <span class="text-en">{{item?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
                     
                     <i class="fa fa-clock-o" aria-hidden="true"></i>
                   </a>
@@ -91,7 +90,7 @@
       <div class="col col--1of2">
         <div class="section__content">
           <ol class="news-items news-items--small">
-            <li class="news-item template__listing template_142_85" *ngFor="let item of subCategory?.middleSmallArticles.slice(0,3)">
+            <li class="news-item template__listing template_142_85 template_without_padding" *ngFor="let item of subCategory?.middleSmallArticles.slice(0,3)">
               <div class="news__image__wrapper">
                 <div class="news__image article-bg-image">
                   <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
@@ -107,7 +106,7 @@
                 <ul class="list-meta">
                   <li>
                     <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
-                      <span class="text-en">{{item?.date | amTimeAgo }}</span>
+                      <span class="text-en">{{item?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
                       
                       <i class="fa fa-clock-o" aria-hidden="true"></i>
                     </a>
@@ -136,7 +135,7 @@
       <div class="col col--1of2">
         <div class="section__content">
           <ol class="news-items news-items--small">
-            <li class="news-item template__listing template_142_85" *ngFor="let item of subCategory?.middleSmallArticles.slice(3)">
+            <li class="news-item template__listing template_142_85 template_without_padding" *ngFor="let item of subCategory?.middleSmallArticles.slice(3)">
               <div class="news__image__wrapper">
                 <div class="news__image article-bg-image">
                   <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
@@ -152,7 +151,7 @@
                 <ul class="list-meta">
                   <li>
                     <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
-                      <span class="text-en">{{item?.date | amTimeAgo }}</span>
+                      <span class="text-en">{{item?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
                       
                       <i class="fa fa-clock-o" aria-hidden="true"></i>
                     </a>
@@ -202,7 +201,7 @@
                 <ul class="list-meta">
                   <li>
                     <a routerLink="/Details/{{subCategory.bottomBigArticle?.id}}/{{subCategory.bottomBigArticle?.customUrlTitle}}">
-                      <span class="text-en">{{subCategory.bottomBigArticle?.date | amTimeAgo }}</span>
+                      <span class="text-en">{{subCategory.bottomBigArticle?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
                       
                       <i class="fa fa-clock-o" aria-hidden="true"></i>
                     </a>
@@ -251,7 +250,7 @@
                 <ul class="list-meta">
                   <li>
                     <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
-                      <span class="text-en">{{item?.date | amTimeAgo }}</span>
+                      <span class="text-en">{{item?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
                       
                       <i class="fa fa-clock-o" aria-hidden="true"></i>
                     </a>
@@ -301,14 +300,13 @@
 
   <!-- after first subcategory -->
   <div class="section__bar" *ngIf="index == 0">
-    <div class="section__image hidden-xs">
-      <img src="assets/css/images/temp/banner-image1.jpg" height="92" width="730" alt="">
-    </div>
-    <!-- /.section__image -->
+    <a class="section__image hidden-xs" *ngIf="sharedModel?.leaderboardBanner" target="_blank" [attr.href]="sharedModel.leaderboardBanner?.link">
+      <img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.leaderboardBanner?.image}}" height="90" width="728" alt="">
+    </a><!-- /.section__image -->
 
-    <div class="section__image visible-xs-block">
-      <img src="assets/css/images/temp/widget-banner-image3.jpg" height="250" width="300" alt="">
-    </div>
+    <a class="section__image visible-xs-block" *ngIf="sharedModel?.mobileMpuBanner" target="_blank" [attr.href]="sharedModel.mobileMpuBanner?.link">
+        <img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileMpuBanner?.image}}" alt=""> <!-- height="250" width="300" -->
+    </a>
     <!-- /.section__image -->
   </div>
   <!-- /.section__bar -->

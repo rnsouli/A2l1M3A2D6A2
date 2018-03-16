@@ -1,29 +1,53 @@
+<section class="section-articles" *ngIf="bannerArticle && bannerArticle != null">
+  <div class="shell">
+    <div class="section__body">
+      <div class="banner_article">
+        <div class="article__content">
+          <h4><a routerLink="/Details/{{bannerArticle?.id}}/{{bannerArticle?.customUrlTitle}}">{{bannerArticle?.title}}</a></h4>
+        </div><!-- /.article__content -->
+      </div>
+    </div>
+  </div>
+</section>
 <section class="section-articles">
   <div class="shell">
     <div class="section__body">
       <div class="cols cols--large">
         <div class="col col--size-1">
 
-          <article class="article-alt article-alt--large template_793_574" *ngIf="todaysPicArticle">
-            <div class="article__image fullsize-image">
-              <a routerLink="/Details/{{todaysPicArticle?.id}}/{{todaysPicArticle?.customUrlTitle}}">
-                  <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/795x576xo/{{todaysPicArticle?.image}}" height="576" width="795" alt="">
-                </a>
+
+          <div class="slider slider-brochure js-slider-single" *ngIf="todaysPicArticles && todaysPicArticles.length > 0">
+            <div class="slider__clip swiper-container">
+              <div class="slider__slides swiper-wrapper">
+                
+                <div class="slider__slide swiper-slide" *ngFor="let item of todaysPicArticles">
+
+                  <article class="article-alt article-alt--large template_793_574">
+                    <div class="article__image fullsize-image">
+                      <a routerLink="/Category/47/صورة-اليوم">
+                          <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/795x576xo/{{item?.image}}" height="576" width="795" alt="">
+                        </a>
+                    </div>
+                    <!-- /.article__image -->
+
+                    <div class="article__content">
+                      <a routerLink="/Category/47/صورة-اليوم" class="btn btn-default btn-default--mobile btn-red">صورة اليوم <i class="fa fa-plus" aria-hidden="true"></i></a>
+
+                      <h2>{{item?.caption}}</h2>
+
+                      <a routerLink="/Category/47/صورة-اليوم" class="link link-more">
+                          <i class="fa fa-long-arrow-left" aria-hidden="true"></i> صور سابقة
+                        </a>
+                    </div>
+                    <!-- /.article__content -->
+                  </article> <!-- /.article -->
+
+                </div>
+
+
+              </div>
             </div>
-            <!-- /.article__image -->
-
-            <div class="article__content">
-              <a routerLink="/Details/{{todaysPicArticle?.id}}/{{todaysPicArticle?.customUrlTitle}}" class="btn btn-default btn-default--mobile btn-red">صورة اليوم <i class="fa fa-plus" aria-hidden="true"></i></a>
-
-              <h2>{{todaysPicArticle?.title}}</h2>
-
-              <a routerLink="/Details/{{todaysPicArticle?.id}}/{{todaysPicArticle?.customUrlTitle}}" class="link link-more">
-                  <i class="fa fa-long-arrow-left" aria-hidden="true"></i> صور سابقة
-                </a>
-            </div>
-            <!-- /.article__content -->
-          </article>
-          <!-- /.article -->
+          </div>
 
           <div class="articles articles--default" *ngIf="underTodaysPic">
 
@@ -37,6 +61,24 @@
 
               <div class="article__content">
                 <h4><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h4>
+                <ul class="list-meta">
+                  <li>
+                    <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                        <span class="text-en">{{item?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
+                        
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                      </a>
+                  </li>
+
+                  <li>
+                    <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                        <span class="text-en">500</span>
+                        
+                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                      </a>
+                  </li>
+                </ul>
+                <!-- /.list-meta -->
               </div>
               <!-- /.article__content -->
             </article>
@@ -46,8 +88,8 @@
           <!-- /.articles -->
 
           <div class="widget-banner visible-xs-block">
-            <div class="widget__image">
-              <img src="assets/css/images/temp/widget-banner-image4.jpg" height="50" width="300" alt="">
+            <div class="widget__image" *ngIf="sharedModel?.mobileLeaderboardBanner" target="_blank" [attr.href]="sharedModel.mobileLeaderboardBanner?.link">
+              <img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt=""><!-- height="50" width="300" -->
             </div>
             <!-- /.widget__image -->
           </div>
@@ -73,7 +115,7 @@
                     <ul class="list-meta">
                       <li>
                         <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
-                            <span class="text-en">{{item?.date | amTimeAgo }}</span>
+                            <span class="text-en">{{item?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
                             
                             <i class="fa fa-clock-o" aria-hidden="true"></i>
                           </a>
@@ -109,9 +151,9 @@
           <!-- /.widget-default widget-last-news -->
 
           <div class="widget-banner visible-xs-block">
-            <div class="widget__image">
-              <img src="assets/css/images/temp/widget-banner-image3.jpg" height="250" width="300" alt="">
-            </div>
+            <a class="widget__image" *ngIf="sharedModel?.mobileMpuBanner" target="_blank" [attr.href]="sharedModel.mobileMpuBanner?.link">
+                <img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileMpuBanner?.image}}" alt=""><!-- height="250" width="300" -->
+            </a>
             <!-- /.widget__image -->
           </div>
           <!-- /.widget-banner -->
@@ -133,6 +175,24 @@
 
                   <div class="article__content">
                     <h4><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h4>
+                    <ul class="list-meta">
+                      <li>
+                        <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                            <span class="text-en">{{item?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
+                            
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                          </a>
+                      </li>
+
+                      <li>
+                        <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                            <span class="text-en">500</span>
+                            
+                            <i class="fa fa-comment-o" aria-hidden="true"></i>
+                          </a>
+                      </li>
+                    </ul>
+                    <!-- /.list-meta -->
                   </div>
                   <!-- /.article__content -->
                 </article>

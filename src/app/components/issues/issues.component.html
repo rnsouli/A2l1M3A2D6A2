@@ -29,29 +29,31 @@
 							<section class="section-caricatures section-caricatures--second" *ngIf="Model?.latestEntry">
 								<div class="section__body">
 									<div class="widget-banner visible-xs-block">
-										<div class="widget__image">
-											<img src="css/images/temp/widget-banner-image4.jpg" height="50" width="300" alt="">
-										</div><!-- /.widget__image -->
+										<a class="widget__image" *ngIf="sharedModel?.mobileLeaderboardBanner" target="_blank" [attr.href]="sharedModel.mobileLeaderboardBanner?.link">
+											<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt=""><!-- height="50" width="300" -->
+										</a><!-- /.widget__image -->
 									</div><!-- /.widget-banner -->
 									
 									<div class="cols">
-										<div class="col col--size-9">
+										<div class="col col--size-9" *ngIf="Model?.latestEntry?.image && Model?.latestEntry?.image != null">
 											<div class="section__image">
-												<img src="/assets/css/images/temp/caricature-image2.jpg" height="483" width="313" alt="">
+												<img src="{{CONTENT_PATH + '/Issue/' + Model?.latestEntry?.image}}" height="483" width="313" alt="">
 											</div><!-- /.section__image -->
 										</div><!-- /.col col--size-9 -->
 										
 										<div class="col col--size-10">
 											<div class="section__content">
-												<a href="#" class="btn btn-default btn-default--xlarge">عدد اليوم </a>
+												<!-- <a target="_blank" [attr.href]="CONTENT_PATH + '/Issue/'+ Model?.latestEntry?.pdf + '/arabic.html'" class="btn btn-default btn-default--xlarge">عدد اليوم </a> -->
+												
+												<a *ngIf="!(item?.id > 1454 && item?.id <= 3176)" target="_blank" [attr.href]="Model?.latestEntry?.link" class="btn btn-default btn-default--xlarge">عدد اليوم </a>
+												<a *ngIf="(item?.id > 1454 && item?.id <= 3176)" target="_blank" routerLink="/Issues/Details/{{item?.id}}" class="btn btn-default btn-default--xlarge">عدد اليوم </a>
 
 												<h2>العدد رقم {{Model?.latestEntry?.title}}</h2>
 
 												<ul class="list-meta">
 													<li>
 														<a href="#">
-															<span>{{Model?.latestEntry?.date | amDateFormat:'LL' }}</span>
-															
+															<span class="text-en">{{Model?.latestEntry?.date | amDateFormat:'LL' }}</span>
 															<i class="fa fa-clock-o" aria-hidden="true"></i>
 														</a>
 													</li>
@@ -59,9 +61,12 @@
 
 												<ul class="list-squares list-squares--medium" *ngIf="Model.latestEntry?.pages">
 
-                          <li *ngFor="let page of Model.latestEntry?.pages"><a href="#">{{page?.title}}</a></li>
-                          
-                        </ul><!-- /.list-squares -->
+													<li *ngFor="let page of Model.latestEntry?.pages">
+														<a *ngIf="page?.pdf == null">{{page?.title}}</a>
+														<a *ngIf="page?.pdf != null" target="_blank" [attr.href]="CONTENT_PATH + '/IssuePage/'+ page?.pdf">{{page?.title}}</a>
+													</li>
+												
+												</ul><!-- /.list-squares -->
                         
 											</div><!-- /.section__content -->
 										</div><!-- /.col col--size-10 -->
@@ -74,58 +79,93 @@
 									<span>إختر</span>
 									
 									<div class="select select-custom" data-label="الشهر">
-										<select name="select-1#" id="select-1#">
-                        <option *ngFor="let month of months" value="{{month?.id}}">{{month?.name}}</option>
+										<select name="select-1#" id="select-1#" (change)="FilterBy($event.target.value, selectedYear, selectedIssueNb)">
+											<option value="0">إختر الشهر</option>
+											<option [selected]="selectedMonth == month?.id" *ngFor="let month of months" value="{{month?.id}}">{{month?.name}}</option>
 										</select>
 									</div><!-- /.select -->
 
 									<div class="select select-custom" data-label="السنة">
-										<select name="select-2#" id="select-2#">
-											<option *ngFor="let group of Model?.entries" value="{{group?.year}}">{{group?.year}}</option>
+										<select name="select-2#" id="select-2#" (change)="FilterBy(selectedMonth, $event.target.value, selectedIssueNb)">
+											<option value="0">إختر السنة</option>
+											<option [selected]="selectedYear == group" *ngFor="let group of yearsDropdown" value="{{group}}">{{group}}</option>
 										</select>
 									</div><!-- /.select -->
+
+									<div class="search select ">
+										<div class="search__body">
+											<div class="search__field">
+												<input id="issueNbField" name="issueNb" placeholder="البحث بحسب رقم العدد ..." type="search" value="{{selectedIssueNb}}">
+											</div>
+											<div class="search__btn" (click)="FilterBy(selectedMonth, selectedYear, 'issue')">
+												<i class="fa fa-search" aria-hidden="true"></i>
+											</div>
+										</div>
+									</div>
+
+
+									<a class="btn btn-default btn-default--xsmall" (click)="FilterBy(0, 0, '0')">إلغاء البحث</a>
+									<a class="btn btn-default btn-default--xsmall" target="_blank" routerLink="/ArchiveViewer">تصفح الارشيف</a>
+
+
 								</div><!-- /.section__bar -->
 
-								<div class="section__body" *ngIf="Model?.entries">
-                  
-                  <div *ngFor="let group of Model?.entries">
-                      <h2>{{group?.year}}</h2>
-                      
-                      <div class="issues">
+								<div class="section__body" *ngIf="yearslist">
+									
+									<div *ngFor="let group of yearslist">
+										<div *ngIf="group?.issues.length">
+												<h2>{{group.year}}</h2>
+												
+												<div class="issues">
 
-                        <div class="issue" *ngFor="let item of group?.entries">
-                          <div class="issue__inner">
-                            <h4>العدد {{item?.title}}</h4>
-                          
-                            <ul class="list-meta">
-                              <li>
-                                <a href="#">
-                                  <span>{{item?.date | amDateFormat:'LL' }}</span>
-                                  
-                                  <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                </a>
-                              </li>
-                            </ul><!-- /.list-meta -->
-                          
-                            <a href="#" class="btn btn-plus">
-                              <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                            </a>
-                          </div><!-- /.issue__inner -->
-                        </div><!-- /.issue -->
+													<div class="issue" *ngFor="let item of group.issues">
+														<div class="issue__inner">
+															<h4>العدد {{item?.title}}</h4>
+														
+															<ul class="list-meta">
+																<li>
+																	<a target="_blank" [attr.href]="CONTENT_PATH + '/Issue/'+ item?.pdf + '/arabic.html'">
+																		<span class="text-en">{{item?.date | amDateFormat:'LL' }}</span>                                  
+																		<i class="fa fa-clock-o" aria-hidden="true"></i>
+																	</a>
+																</li>
+															</ul><!-- /.list-meta -->
+														
+															<!-- <a *ngIf="item?.year > 2009 && !(item?.id > 1454 && item?.id <= 3176)" target="_blank" [attr.href]="CONTENT_PATH + '/Issue/'+ item?.pdf + '/arabic.html'" class="btn btn-plus btn-eye">
+																<i class="fa fa-eye" aria-hidden="true"></i>
+															</a> -->
+															<!-- <a *ngIf="item?.year > 2009" target="_blank" [attr.href]="CONTENT_PATH + '/Issue/'+ item?.pdf + '.pdf'" download class="btn btn-plus">
+																<i class="fa fa-arrow-down" aria-hidden="true"></i>
+															</a> -->
+															<a *ngIf="item?.year > 2009 && item?.year != 2012 && !(item?.id > 1454 && item?.id <= 3176)" target="_blank" [attr.href]="item?.link" download class="btn btn-plus">
+																<i class="fa fa-arrow-down" aria-hidden="true"></i>
+															</a>
 
-                      </div><!-- /.issues -->
-                  </div>
+															<a *ngIf="item?.year <= 2009 || item?.year == 2012" target="_blank" routerLink="/Issues/Details/{{item?.id}}" class="btn btn-plus btn-eye">
+																<i class="fa fa-eye" aria-hidden="true"></i>
+															</a>
+
+															<a *ngIf="item?.id > 1454 && item?.id <= 3176" target="_blank" routerLink="/Issues/Details/{{item?.id}}" class="btn btn-plus btn-eye">
+																<i class="fa fa-eye" aria-hidden="true"></i>
+															</a>
+
+														</div><!-- /.issue__inner -->
+													</div><!-- /.issue -->
+
+												</div><!-- /.issues -->
+										</div>
+									</div>
 									
 								</div><!-- /.section__body -->
 							</section><!-- /.section-issues -->
 						</div><!-- /.content__body -->
 
 						<div class="content__actions">
-							<a href="#" class="btn btn-default btn-default--large">المزيد <i class="fa fa-plus" aria-hidden="true"></i></a>
+							<a (click)="load_more_issues()" class="btn btn-default btn-default--large loadMore">المزيد <i class="fa fa-plus" aria-hidden="true"></i></a>
 						</div><!-- /.content__actions -->
 					</div><!-- /.content -->
 				
-					<app-sidebar></app-sidebar>
+					<app-sidebar [globalModel]="globalModel"></app-sidebar>
 				</div><!-- /.main__body -->
 			</div><!-- /.shell -->
 		</div><!-- /.main -->

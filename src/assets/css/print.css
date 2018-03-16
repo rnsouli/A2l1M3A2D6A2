@@ -1,0 +1,11 @@
+body,html{
+	height:auto !important;
+	min-height:200px;
+}
+div:last-child{
+	page-break-after: auto !important;
+}
+* {
+	font-size: 1em !important;
+	line-height: 1 !important;
+}

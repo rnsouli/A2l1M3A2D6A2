@@ -5,8 +5,11 @@ import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '../../../services/shared.service';
 import { FunctionsService } from '../../../services/functions.service';
 
-import { _globals } from '../../../../includes/globals';
+import { GlobalService } from '../../../services/global.service';
 import { GlobalModel, ArticleModel } from '../../../../includes/Models';
+
+import * as moment from 'moment';;
+import * as locales from 'moment/locale/ar-sa';
 
 @Component({
   selector: '[app-articles-text]',
@@ -22,12 +25,15 @@ export class ArticlesTextComponent implements OnInit {
 
   @Input() globalModel:GlobalModel;
   
-  constructor(private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { 
+  constructor(private globalService: GlobalService, private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { 
   }
 
   ngOnInit() {
-    this.CONTENT_PATH = _globals.CONTENT_PATH;
-    this.RESIZED_CONTENT_PATH = _globals.RESIZED_CONTENT_PATH;
+
+    //moment.locale('ar-sa');
+
+    this.CONTENT_PATH = this.globalService.globalLinks.CONTENT_PATH;
+    this.RESIZED_CONTENT_PATH = this.globalService.globalLinks.RESIZED_CONTENT_PATH;
   }
 
 }

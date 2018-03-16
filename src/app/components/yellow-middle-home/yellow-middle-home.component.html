@@ -1,4 +1,4 @@
-<section class="section-news section-beige">
+<section class="section-news section-beige" *ngIf="firstBoxCategory">
     <div class="shell">
       <div class="section__body">
         <div class="cols">
@@ -25,7 +25,7 @@
                       <ul class="list-meta">
                         <li>
                           <a routerLink="/Details/{{bigPoliticals?.id}}/{{bigPoliticals?.customUrlTitle}}">
-                            <span class="text-en">{{bigPoliticals?.date | amTimeAgo }}</span>
+                            <span class="text-en">{{bigPoliticals?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
                             
                             <i class="fa fa-clock-o" aria-hidden="true"></i>
                           </a>
@@ -59,6 +59,24 @@
 
                       <div class="article__content">
                         <h6><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h6>
+                        <ul class="list-meta">
+                          <li>
+                            <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                                <span class="text-en">{{item?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
+                                
+                                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                              </a>
+                          </li>
+    
+                          <li>
+                            <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                                <span class="text-en">500</span>
+                                
+                                <i class="fa fa-comment-o" aria-hidden="true"></i>
+                              </a>
+                          </li>
+                        </ul>
+                        <!-- /.list-meta -->
                       </div><!-- /.article__content -->
                     </article><!-- /.article -->  
 
@@ -70,6 +88,24 @@
 
                     <li *ngFor="let item of politicals">
                       <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a>
+                      <ul class="list-meta">
+                        <li>
+                          <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                              <span class="text-en">{{item?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
+                              
+                              <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            </a>
+                        </li>
+  
+                        <li>
+                          <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+                              <span class="text-en">500</span>
+                              
+                              <i class="fa fa-comment-o" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                      </ul>
+                      <!-- /.list-meta -->
                     </li>
 
                   </ul><!-- /.list-squares -->
@@ -107,7 +143,7 @@
                       <ul class="list-meta">
                         <li>
                           <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
-                            <span class="text-en">{{item?.date | amTimeAgo }}</span>
+                            <span class="text-en">{{item?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
                             
                             <i class="fa fa-clock-o" aria-hidden="true"></i>
                           </a>
@@ -135,11 +171,11 @@
             </div><!-- /.widget-news -->
           </div><!-- /.col col--size-5 -->
 
-          <div class="col col--size-6 hidden-xs">
+          <div class="col col--size-6 hidden-xs" *ngIf="todaysIssues || todaysSupplementIssues">
             <div class="widget-brochures hidden-xs">
               <div class="widget__body">
                 <div class="brochures">
-                  <div class="brochure brochure--red brochure--inline">
+                  <div class="brochure brochure--red brochure--inline" *ngIf="todaysIssues && todaysIssues.length > 0">
                     <div class="brochure__head">
                       <h3>عدد اليوم </h3>
                     </div><!-- /.brochure__head -->
@@ -149,41 +185,20 @@
                         <div class="slider slider-brochure js-slider-single">
                           <div class="slider__clip swiper-container">
                             <div class="slider__slides swiper-wrapper">
-                              <div class="slider__slide swiper-slide">
-                                <a routerLink="/Issues">
+                              
+                              <div class="slider__slide swiper-slide" *ngFor="let item of todaysIssues">
+                                <!-- <a target="_blank" [attr.href]="item.pdf != null ? CONTENT_PATH + '/IssueToday/' + item.pdf.replace('.pdf','') + '/arabic.html' : '#'"> -->
+                                <a target="_blank" [attr.href]="item.link">
                                   <div class="slider__slide-image">
-                                    <img src="assets/css/images/temp/brochure-image1.jpg" height="320" width="276" alt="">
+                                    <img src="{{CONTENT_PATH}}/IssueToday/{{item?.image}}" height="320" width="276" alt="">
                                   </div><!-- /.slider__slide-image -->
                                 
                                   <div class="slider__slide-content">
-                                    <span>العدد  3750  الثلاثاء, 4 تشرين الأول 2016</span>
+                                    <span>{{item?.title}}</span>
                                   </div><!-- /.slider__slide-content -->
                                 </a>
                               </div><!-- /.slider__slide -->
                       
-                              <div class="slider__slide swiper-slide">
-                                <a routerLink="/Issues">
-                                  <div class="slider__slide-image">
-                                    <img src="assets/css/images/temp/brochure-image1.jpg" height="320" width="276" alt="">
-                                  </div><!-- /.slider__slide-image -->
-                                
-                                  <div class="slider__slide-content">
-                                    <span>العدد  3750  الثلاثاء, 4 تشرين الأول 2016</span>
-                                  </div><!-- /.slider__slide-content -->
-                                </a>
-                              </div><!-- /.slider__slide -->
-                      
-                              <div class="slider__slide swiper-slide">
-                                <a routerLink="/Issues">
-                                  <div class="slider__slide-image">
-                                    <img src="assets/css/images/temp/brochure-image1.jpg" height="320" width="276" alt="">
-                                  </div><!-- /.slider__slide-image -->
-                                
-                                  <div class="slider__slide-content">
-                                    <span>العدد  3750  الثلاثاء, 4 تشرين الأول 2016</span>
-                                  </div><!-- /.slider__slide-content -->
-                                </a>
-                              </div><!-- /.slider__slide -->
                             </div><!-- /.slider__slides -->
                           </div><!-- /.slider__clip -->
                           
@@ -193,9 +208,9 @@
                         </div><!-- /.slider -->
                       
                         <div class="brochure__body-bar">
-                          <a routerLink="/Issues">
-                            <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                      
+                            <!-- <a target="_blank" [attr.href]="todaysIssues[0].pdf != null ? CONTENT_PATH + '/IssueToday/' + todaysIssues[0].pdf.replace('.pdf','') + '/arabic.html' : '#'"> -->
+                            <a target="_blank" [attr.href]="todaysIssues[0].link">
+                            <i class="fa fa-file-pdf-o" aria-hidden="true"></i>                      
                             تصفح عدد اليوم
                           </a>
                         </div><!-- /.brochure__body-bar -->
@@ -203,18 +218,18 @@
                       
                       <div class="brochure__body-content">
                         <div class="search search--small">
-                          <form action="?" method="get">
+                          <form (submit)="onSearchByIssueNumber()" method="POST">
                             <div class="search__body">
                               <label for="q2" class="hidden">Search</label>
                     
                               <div class="search__field">
-                                <input type="search" name="q2" id="q2" value="" placeholder="البحث حسب ...">
+                                <input type="date" name="q2" id="q2" value="" placeholder="البحث حسب ...">
                               </div><!-- /.search__field -->
                     
                               <div class="search__select">
-                                <select name="search-select-2#" id="search-select-2#">
+                                <select name="search-select-2#" id="search-select-2#" (change)="SearchByIssue($event.target.value)">
+                                  <option value="2">التاريخ</option>
                                   <option value="1">رقم العدد </option>
-                                  <option value="2">رقم1</option>
                                 </select>
                               </div><!-- /.search__select -->
                     
@@ -228,7 +243,7 @@
                     </div><!-- /.brochure__body -->
                   </div><!-- /.brochure -->
 
-                  <div class="brochure brochure--green">
+                  <div class="brochure brochure--green" *ngIf="todaysSupplementIssues && todaysSupplementIssues.length > 0">
                     <div class="brochure__head">
                       <h3>ملحق اليوم</h3>
                     </div><!-- /.brochure__head -->
@@ -238,17 +253,20 @@
                         <div class="slider slider-brochure js-slider-single">
                           <div class="slider__clip swiper-container">
                             <div class="slider__slides swiper-wrapper">
-                              <div class="slider__slide swiper-slide">
-                                <a routerLink="/Issues">
+                              
+                              <div class="slider__slide swiper-slide" *ngFor="let item of todaysSupplementIssues">
+                                <!-- <a target="_blank" [attr.href]="item.pdf != null ? CONTENT_PATH + '/IssueSupplementToday/' + item.pdf.replace('.pdf','') + '/arabic.html' : '#'"> -->
+                                <a target="_blank" [attr.href]="item.link">
                                   <div class="slider__slide-image">
-                                    <img src="assets/css/images/temp/brochure-image1.jpg" height="320" width="276" alt="">
+                                    <img src="{{CONTENT_PATH}}/IssueSupplementToday/{{item?.image}}" height="320" width="276" alt="">
                                   </div><!-- /.slider__slide-image -->
                                 
                                   <div class="slider__slide-content">
-                                    <span>ملحق يوم الثلاثاء, 4 تشرين الأول 2016</span>
+                                    <span>{{item?.title}}</span>
                                   </div><!-- /.slider__slide-content -->
                                 </a>
                               </div><!-- /.slider__slide -->
+
                             </div><!-- /.slider__slides -->
                           </div><!-- /.slider__clip -->
                           
@@ -258,9 +276,9 @@
                         </div><!-- /.slider -->
                       
                         <div class="brochure__body-bar">
-                          <a routerLink="/Issues">
-                            <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                      
+                          <!-- <a target="_blank" [attr.href]="todaysSupplementIssues[0].pdf != null ? CONTENT_PATH + '/IssueSupplementToday/' + todaysSupplementIssues[0].pdf.replace('.pdf','') + '/arabic.html' : '#'"> -->
+                          <a target="_blank" [attr.href]="todaysSupplementIssues[0].link">
+                            <i class="fa fa-file-pdf-o" aria-hidden="true"></i>                      
                             تصفح ملحق اليوم
                           </a>
                         </div><!-- /.brochure__body-bar -->

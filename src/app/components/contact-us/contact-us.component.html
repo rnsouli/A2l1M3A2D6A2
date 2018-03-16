@@ -25,7 +25,7 @@
 
 								<div class="section__body">
 									<div class="cols">
-										<div class="col col--1of2">
+										<div class="col col--1of2" *ngIf="showMessageUs">
 											<div class="section__content">
 												<div class="widget-form">
 													<div class="form form--contacts js-form-message">
@@ -88,6 +88,57 @@
 																			<textarea class="textarea" name="message" id="field-message-1#" required [(ngModel)]="contactFormModel.message"></textarea>
 																		</div><!-- /.form__controls -->
 																	</div><!-- /.form__row -->
+
+
+
+
+
+
+																	<div class="form__row">
+																		<a class="link-avatar">
+																				<input type="file" class="writer-image-input"  name="image" *ngIf="imageUpload.status == 'empty'" [(ngModel)]="contactFormModel.image" (change)="image_upload($event)"  accept=".pdf, .doc, .docx"/>
+																			
+																				<!-- <span class="plus" *ngIf="imageUpload.status != 'uploading'">
+																				<i class="fa fa-plus" aria-hidden="true" *ngIf="imageUpload.status == 'empty'"></i>
+																				
+																				<i class="fa fa-pencil" aria-hidden="true" *ngIf="imageUpload.status == 'done'"></i>
+																			</span> -->
+																			<span class="image">
+																				<span *ngIf="imageUpload.status == 'empty'">تحميل</span>
+																				<span *ngIf="imageUpload.status == 'done'">{{imageUpload.name}}</span>
+																				
+																				<span class="delete-image" *ngIf="imageUpload.status == 'done'" (click)="delete_image()">
+																					<i class="fa fa-trash" aria-hidden="true"></i>
+																				</span>
+									
+																				<!-- <img src="../assets/images/temp/writer-inner.png" alt="" *ngIf="imageUpload.status == 'empty'"> -->
+																				<span class="writer-image-progress" *ngIf="imageUpload.status == 'uploading'">{{imageUpload.progress}}%</span>
+																				<img src="{{imageUpload.thumbnail}}" alt="" *ngIf="imageUpload.status == 'done'">
+																			</span>
+									
+																			<!-- <span class="text" *ngIf="imageUpload.status == 'empty'">Add Picture</span> -->
+																		</a>
+																	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+																	<div class="form__row">
+																		<re-captcha (resolved)="resolved($event)" siteKey="{{RECAPTCHA_SITE_KEY}}"></re-captcha>
+																	</div>
+
+
 																</div><!-- /.form__body -->
 																
 																<div class="form__actions">
@@ -117,8 +168,8 @@
 														<h5>{{Model[0]?.position}}</h5>
 
 														<p class="text-en">
-															<a href="mailto:{{Model[0]?.email}}">
-                                  {{Model[0]?.email}}
+															<a>
+                                  								<p [innerHTML]="Model[0]?.email"></p>
 
 																<i class="fa fa-envelope" aria-hidden="true"></i>
 															</a>
@@ -132,8 +183,8 @@
 																<h5>{{item?.position}}</h5>
 
 																<p class="text-en">
-																	<a href="mailto:{{item?.email}}">
-                                      {{item?.email}}
+																	<a>
+																		<p [innerHTML]="item?.email"></p>
 
 																		<i class="fa fa-envelope" aria-hidden="true"></i>
 																	</a>
@@ -151,7 +202,7 @@
 						</div><!-- /.content__body -->
 					</div><!-- /.content -->
 				
-          <app-sidebar></app-sidebar>
+          <app-sidebar [globalModel]="globalModel"></app-sidebar>
           
 				</div><!-- /.main__body -->
 			</div><!-- /.shell -->

@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '../../services/shared.service';
 import { FunctionsService } from '../../services/functions.service';
 
-import { _globals } from '../../../includes/globals';
+import { GlobalService } from '../../services/global.service';
 import { GlobalModel, SharedModel } from '../../../includes/Models';
 
 import { MomentModule } from 'angular2-moment';
@@ -23,18 +23,34 @@ export class NavigationComponent implements OnInit {
 
   CONTENT_PATH:string;
   RESIZED_CONTENT_PATH:string;
+  API_URL: string;
 
   //routeId:number;
   //customUrlTitle:string;
 
   sharedModel:SharedModel;
   
-  constructor(private route: ActivatedRoute, private myFunctions:FunctionsService,  private sharedService:SharedService, private http:HttpClient) { }
+  constructor(private globalService: GlobalService, private route: ActivatedRoute, private myFunctions:FunctionsService,  private sharedService:SharedService, private http:HttpClient) { }
 
   ngOnInit() {
 
-    this.CONTENT_PATH = _globals.CONTENT_PATH;
-    this.RESIZED_CONTENT_PATH = _globals.RESIZED_CONTENT_PATH;
+    var intervalToClear = setInterval(() => {
+      //console.log('global in navigation');
+      //console.log(this.globalService.globalLinks); 
+      if(this.globalService.globalLinks != undefined){
+        this.CONTENT_PATH = this.globalService.globalLinks.CONTENT_PATH;
+        this.RESIZED_CONTENT_PATH = this.globalService.globalLinks.RESIZED_CONTENT_PATH;
+        this.API_URL = this.globalService.globalLinks.API_URL;
+      }
+      //console.log(this.globalService.globalLinks); 
+      if(this.CONTENT_PATH != '' && this.CONTENT_PATH != undefined){
+        clearInterval(intervalToClear);
+        //console.log('cleared');
+      }
+    },100);
+
+    // this.CONTENT_PATH = this.globalService.globalLinks.CONTENT_PATH;
+    // this.RESIZED_CONTENT_PATH = this.globalService.globalLinks.RESIZED_CONTENT_PATH;
 
     this.sharedService.sharedModel.subscribe((sharedModel:any) => this.sharedModel = sharedModel);
 
@@ -43,14 +59,29 @@ export class NavigationComponent implements OnInit {
   
   load_submenu(catId:number, catNumber:number){
     if(!(this.sharedModel.headerCategories[catNumber].SubCategories)){
-      this.http.get(_globals.API_URL + "Data/GetHeaderCategoryArticles?catId=" + catId).subscribe((data:any) =>{
+      this.http.get(this.API_URL + "Data/GetHeaderCategoryArticles?catId=" + catId).subscribe((data:any) =>{
           //this.sharedModel.headerCategories[catNumber].SubCategories = data.SubCategories;
           //this.sharedModel.headerCategories[catNumber].articles = data.articles;
+          this.sharedModel.headerCategories[catNumber].indexForHeader = catId;
           this.sharedService.set_RollOverCategories(data, catNumber)
           this.myFunctions.ImageAsBgJs();
           this.myFunctions.ArticleAsBgJs();
           //console.log(this.headerCategoryArticles);
           //console.log(this.headerCategoryArticles[catId]);        
+      });
+    }
+  }
+
+  load_submenu_by_subcategory(catId:number, catNumber:number, type:number){
+  if(true){
+      //document.getElementsByClassName("nav__dropdown-inner")[catNumber].setAttribute('style','visibility:hidden');
+      this.http.get(this.API_URL + "Data/GetHeaderCategoryArticles?catId=" + catId + '&type=' + type).subscribe((data:any) =>{
+          this.sharedModel.headerCategories[catNumber].indexForHeader = catId;
+          this.sharedService.set_RollOverSubCategories(data, catNumber)
+          this.myFunctions.ImageAsBgJs();
+          this.myFunctions.ArticleAsBgJs();  
+          //document.getElementsByClassName("nav__dropdown-inner")[catNumber].removeAttribute('style');
+
       });
     }
   }

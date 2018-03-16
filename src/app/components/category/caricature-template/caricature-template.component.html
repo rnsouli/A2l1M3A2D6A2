@@ -23,9 +23,9 @@
 							<section class="section-caricatures section-caricatures--first" *ngIf="CategoryModel?.articles && CategoryModel?.articles.length">
 								<div class="section__body">
 									<div class="widget-banner visible-xs-block">
-										<div class="widget__image">
-											<img src="assets/css/images/temp/widget-banner-image4.jpg" height="50" width="300" alt="">
-										</div><!-- /.widget__image -->
+										<a class="widget__image" *ngIf="sharedModel?.mobileLeaderboardBanner" target="_blank" [attr.href]="sharedModel.mobileLeaderboardBanner?.link">
+											<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt=""><!-- height="50" width="300" -->
+										</a><!-- /.widget__image -->
 									</div><!-- /.widget-banner -->
 									
 									<div class="cols">
@@ -37,22 +37,21 @@
 										
 										<div class="col col--1of2">
 											<div class="section__content">
-												<a routerLink="/Details/{{CategoryModel.firstArticle?.id}}/{{CategoryModel.firstArticle?.customUrlTitle}}" class="btn btn-default btn-default--xlarge">كاريكاتير اليوم</a>
+												<a routerLink="/Details/{{CategoryModel.firstArticle?.id}}/{{CategoryModel.firstArticle?.customUrlTitle}}" class="btn btn-default btn-default--xlarge">{{CategoryModel?.title.replace('اليوم', '') }} اليوم</a>
 
 												<h2>{{CategoryModel.firstArticle?.title}}</h2>
 
 												<ul class="list-meta">
-													<li>
-														<a routerLink="/Details/{{CategoryModel.firstArticle?.id}}/{{CategoryModel.firstArticle?.customUrlTitle}}">
-															<span>بسام فرج</span>
-															
+													<li *ngIf="CategoryModel.firstArticle?.writer != null">
+														<a routerLink="/Writer/{{CategoryModel.firstArticle?.writer?.id}}/{{CategoryModel.firstArticle?.writer?.customUrlTitle}}">
+															<span>{{CategoryModel.firstArticle?.writer?.name}}</span>															
 															<i class="fa fa-pencil" aria-hidden="true"></i>
 														</a>
 													</li>
 								
 													<li>
 														<a routerLink="/Details/{{CategoryModel.firstArticle?.id}}/{{CategoryModel.firstArticle?.customUrlTitle}}">
-															<span>4 تشرين الأول 2016</span>
+															<span>{{CategoryModel.firstArticle?.date | date: 'dd/MM/yyyy'}}</span>
 															
 															<i class="fa fa-clock-o" aria-hidden="true"></i>
 														</a>
@@ -70,15 +69,15 @@
 
 									</div><!-- /.articles articles--medium -->																		
 									<div class="section__bar hidden-xs">
-										<div class="section__image">
-											<img src="assets/css/images/temp/banner-image1.jpg" height="92" width="730" alt="">
-										</div><!-- /.section__image -->
+										<a class="section__image" *ngIf="sharedModel?.leaderboardBanner" target="_blank" [attr.href]="sharedModel.leaderboardBanner?.link">
+											<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.leaderboardBanner?.image}}" height="90" width="728" alt="">
+										</a><!-- /.section__image -->
 									</div><!-- /.section__bar -->
 
 									<div class="widget-banner visible-xs-block">
-										<div class="widget__image">
-											<img src="assets/css/images/temp/widget-banner-image4.jpg" height="50" width="300" alt="">
-										</div><!-- /.widget__image -->
+										<a class="widget__image" *ngIf="sharedModel?.mobileLeaderboardBanner" target="_blank" [attr.href]="sharedModel.mobileLeaderboardBanner?.link">
+											<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt=""><!-- height="50" width="300" -->
+										</a><!-- /.widget__image -->
 									</div><!-- /.widget-banner -->
 								</div><!-- /.section__body -->
 							</section><!-- /.section-default -->
@@ -94,11 +93,11 @@
 						</div><!-- /.content__body -->
 
 						<div class="content__actions">
-							<a (click)="load_more_articles()" class="btn btn-default btn-default--large loadMore">المزيد <i class="fa fa-plus" aria-hidden="true"></i></a>
+							<a (click)="load_more_articles()" class="btn btn-default btn-default--large loadMore {{isLoading ? 'loading' : ''}}">المزيد <i class="fa fa-plus" aria-hidden="true"></i></a>
 						</div><!-- /.content__actions -->
 					</div><!-- /.content -->
 				
-					<app-sidebar></app-sidebar>
+					<app-sidebar [globalModel]="globalModel"></app-sidebar>
 				</div><!-- /.main__body -->
 			</div><!-- /.shell -->
 		</div><!-- /.main -->

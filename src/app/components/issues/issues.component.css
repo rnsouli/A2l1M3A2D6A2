@@ -9,3 +9,7 @@
 .fullscreen {
     background-color: #333;
 }
+
+a.btn.btn-plus.btn-eye {
+    left: 36px;
+}

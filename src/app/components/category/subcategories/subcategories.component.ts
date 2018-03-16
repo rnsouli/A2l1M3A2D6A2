@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '../../../services/shared.service';
 import { FunctionsService } from '../../../services/functions.service';
 
-import { _globals } from '../../../../includes/globals';
+ import { GlobalService } from '../../../services/global.service';
 import { GlobalModel, CategoryModel, SubCategoryModel, SharedModel } from '../../../../includes/Models';
 
 import { MomentModule } from 'angular2-moment';
@@ -29,18 +29,18 @@ export class SubcategoriesComponent implements OnInit {
 
   @Input() SubCategoryModels: SubCategoryModel[];
   
-  constructor(private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { 
+  constructor(private globalService: GlobalService, private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { 
   }
 
   ngOnInit() {
 
-    this.CONTENT_PATH = _globals.CONTENT_PATH;
-    this.RESIZED_CONTENT_PATH = _globals.RESIZED_CONTENT_PATH;
+    this.CONTENT_PATH = this.globalService.globalLinks.CONTENT_PATH;
+    this.RESIZED_CONTENT_PATH = this.globalService.globalLinks.RESIZED_CONTENT_PATH;
     this.sharedService.sharedModel.subscribe((sharedModel:any) => this.sharedModel = sharedModel);
 
-    this.category_template_whiteboxes = _globals.category_template_whiteboxes;
-    this.category_template_2_6 = _globals.category_template_2_6;
-    this.category_template_1_3_8 = _globals.category_template_1_3_8;
+    this.category_template_whiteboxes = this.globalService.globalLinks.category_template_whiteboxes;
+    this.category_template_2_6 = this.globalService.globalLinks.category_template_2_6;
+    this.category_template_1_3_8 = this.globalService.globalLinks.category_template_1_3_8;
     this.myFunctions.hide_comments_counter();
 
   }

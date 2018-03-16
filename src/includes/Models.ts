@@ -4,6 +4,15 @@ export interface GlobalModel{
     footerCategoriesWithSub:Category[];
     footerCategoriesWithoutSub:Category[];
     socialMedia:SocialMedia[];
+    listenLive: {
+      link: string
+    };
+    googlePlay: {
+      link: string
+    };
+    appStore: {
+      link: string
+    };
 }
 export interface SocialMedia{
     id:number;
@@ -11,20 +20,32 @@ export interface SocialMedia{
     link:string;
     className:string;
 }
+
+export interface ArticleImageModel{
+  title:string;
+  image:string;
+  description:string;
+}
+
 export interface ArticleModel{
   id:number;
   customUrlTitle:string;
   title:string;
   image:string;
+  isImageSmall:boolean;
+  firstImageInGalleryIsSmall:boolean;
+  caption:string;
   smallDescription:string;
   date:Date;
+  dateModified:Date;
   youtubeLink:string;
   galleryCount:number;
   writer:{
     id:number;
     name:string;
+    customUrlTitle:string;
   }
-  ArticleImages: string[];
+  ArticleImages: ArticleImageModel[];
   tags: TagModel[];
   urlBrowser:string;
   
@@ -44,15 +65,21 @@ export interface ArticleModel{
   categoryTitle: string;
   subcategoryTitle: string;
 
+  issueNumber:string;
+  versionType:string;
+  sourceDesc: string;
 
 }
 export interface Category{
-  id:number,
-  title:string,
-  isOnMenu:boolean,
-  customUrlTitle:string
-  SubCategories: Category[],
-  articles: ArticleModel[]
+  id:number;
+  title:string;
+  isOnMenu:boolean;
+  customUrlTitle:string;
+  SubCategories: Category[];
+  articles: ArticleModel[];
+  indexForHeader:number;
+  customUrl:string;
+  isPillat: boolean;
 }
 
 export interface CategoryModel{
@@ -72,6 +99,9 @@ export interface CategoryModel{
   parentId:number;
   //////////////////////////////////////////
   SubCategoryModels: SubCategoryModel[];
+
+  editorialImage:string;
+  editorialName:string
 }
 
 export interface SubCategoryModel{
@@ -87,6 +117,8 @@ export interface SubCategoryModel{
   bottomSmallArticles: ArticleModel[];
   bottomArticles: ArticleModel[];
 }
+
+
 
 export interface whiteBox{
   whiteBoxArticles:ArticleModel[];
@@ -110,20 +142,47 @@ export interface SocialMediaModel{
     headerCategories:Category[],
     idsToRemove: string;
     currentCategoryId:number;
+    banners:Banner[];
+    leftHomeBanner:Banner;
+    leftMpuBanner:Banner;
+    aboveMenuBanner:Banner;
+    leaderboardBanner:Banner;
+    secondLeaderboardBanner:Banner;
+    mobileLeaderboardBanner:Banner;
+    mobileMpuBanner:Banner;
+    detailsRightMpuBanner:Banner;
+    logoDesktop:string;
+    logoMobile:string;
+    FACEBOOK_PAGE_LINK:string;
+    TWITTER_PAGE_LINK:string;
+    editorialName:string;
+    editorialImage:string;
+}
+
+export interface Banner{
+  title:string;
+  link:string;
+  image:string;
+  pdf:string;
+  isPublished:boolean;
 }
 
 export interface IssueModel{
   latestEntry: issueModel;
-  entries:{
-    year:number;
-    entries: issueModel[];
-  };
+  entries: issueModel[];
+  // entries:{
+  //   year:number;
+  //   entries: issueModel[];
+  // };
 }
 
 export interface issueModel{
   id:number;
   title:string;
   date:string;
+  image: string;
+  pdf: string;
+  year: number;
 }
 
 export interface ContactInfoModel{
@@ -139,6 +198,7 @@ export interface ContactFormModel{
   email:string;
   phone:string;
   message:string;
+  image:string;
 }
 export interface AdvertiseFormModel{
   fullName:string;
@@ -176,9 +236,18 @@ export interface WriterModel{
   id:number;
   name:string;
   title:string;// same as name - to eliminate confusion
+  email:string;
+  facebook:string;
+  twitter:string;
+  linkedin:string;
   image:string;
   articleCount:number;
   socialMedia:SocialMediaModel;
+
+  
+  firstTabOfArticles: ArticleModel[];
+  secondTabOfArticles: ArticleModel[];
+  
 }
 export interface FormsData{
   countries:IntStringModel[];
@@ -211,4 +280,37 @@ export interface CategoryWithArticles{
   title:string;
   customUrlTitle:string;
   articles:ArticleModel[];
+}
+
+export interface QuestionModel{
+  categoryUrlTitle: string,
+  category: string,
+  urlTitle: string,
+  templateId: number,
+  urlBrowser: string,
+  question: string,
+  img_src: string,
+  Answers: AnswerModel[],
+  votedByCurrentUser: boolean,
+  id: number,
+  nbOfVotes: number,
+  likeCounter: number,
+  commentCounter: number,
+  likeNumber: number
+}
+
+export interface AnswerModel{
+  answer: string,
+  FakeCounter: number,
+  RealCounter: number,
+  img_src: string,
+  userVote: boolean,
+  id: number,
+  isWinner: boolean,
+  counterAnswer: number
+}
+
+export interface QuestionFormModel{
+  questionId:number;
+  answerId:number;
 }

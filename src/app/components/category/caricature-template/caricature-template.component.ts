@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '../../../services/shared.service';
 import { FunctionsService } from '../../../services/functions.service';
 
-import { _globals } from '../../../../includes/globals';
+ import { GlobalService } from '../../../services/global.service';
 import { GlobalModel, CategoryModel } from '../../../../includes/Models';
 
 @Component({
@@ -30,20 +30,20 @@ export class CaricatureTemplateComponent implements OnInit {
 
   isLoading:boolean = false;
   
-  constructor(private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { 
+  constructor(private globalService: GlobalService, private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { 
   }
 
   ngOnInit() {
-    this.CONTENT_PATH = _globals.CONTENT_PATH;
-    this.RESIZED_CONTENT_PATH = _globals.RESIZED_CONTENT_PATH;
-    this.pageSize = _globals.pageSize;
+    this.CONTENT_PATH = this.globalService.globalLinks.CONTENT_PATH;
+    this.RESIZED_CONTENT_PATH = this.globalService.globalLinks.RESIZED_CONTENT_PATH;
+    this.pageSize = this.globalService.globalLinks.pageSize;
   }
 
   load_more_articles(){
 
     if(!this.isLoading){
       this.isLoading = true;
-      this.http.get(_globals.API_URL + "Data/GetCategoryListing?categoryId=" + this.categoryId 
+      this.http.get(this.globalService.globalLinks.API_URL + "Data/GetCategoryListing?categoryId=" + this.categoryId 
       + "&page="+ (this.pageNumber-1) +"&skip=17&pageSize=" + this.pageSize).subscribe((data:any) =>{        
         this.CategoryModel.secondTabOfArticles = this.CategoryModel.secondTabOfArticles.concat(data.articles);
 

@@ -5,11 +5,13 @@ import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '../../services/shared.service';
 import { FunctionsService } from '../../services/functions.service';
 
-import { _globals } from '../../../includes/globals';
+import { GlobalService } from '../../services/global.service';
 import { SharedModel, ArticleModel, Category } from '../../../includes/Models';
 
 import { MomentModule } from 'angular2-moment';
 //import 'moment/locale/ar-sa';
+
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-yellow-middle-home',
@@ -28,18 +30,33 @@ export class YellowMiddleHomeComponent implements OnInit {
   @Input() secondBoxCategory: Category;
   @Input() localNews: ArticleModel[];
 
+  @Input() todaysIssues: {
+    id : number;
+    title : string;
+    image : string;
+    pdf : string;
+  }[];
+
+  @Input() todaysSupplementIssues: {
+    id : number;
+    title : string;
+    image : string;
+    pdf : string;
+  }[];
+  
+
   sharedModel: SharedModel;
 
-  constructor(private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { 
+  constructor(private globalService: GlobalService, private route: ActivatedRoute, private router:Router, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { 
   }
 
   ngOnInit() {
     
-    this.CONTENT_PATH = _globals.CONTENT_PATH;
-    this.RESIZED_CONTENT_PATH = _globals.RESIZED_CONTENT_PATH;
+    this.CONTENT_PATH = this.globalService.globalLinks.CONTENT_PATH;
+    this.RESIZED_CONTENT_PATH = this.globalService.globalLinks.RESIZED_CONTENT_PATH;
     this.sharedService.sharedModel.subscribe((sharedModel:any) => this.sharedModel = sharedModel);
 
-    // this.http.get(_globals.API_URL + "Data/GetHomeListingPart2?idsToRemoves=" + this.sharedModel.idsToRemove).subscribe((data:any) =>{
+    // this.http.get(this.globalService.globalLinks.API_URL + "Data/GetHomeListingPart2?idsToRemoves=" + this.sharedModel.idsToRemove).subscribe((data:any) =>{
     //   this.firstBoxCategory = data.firstBoxCategory;
     //   this.bigPoliticals = data.bigPoliticals;
     //   this.politicalsSmall = data.politicalsSmall;
@@ -55,6 +72,20 @@ export class YellowMiddleHomeComponent implements OnInit {
       
     // });
 
+  }
+
+  onSearchByIssueNumber(){
+      var type = (<HTMLInputElement>document.getElementById('q2')).getAttribute('type');
+      if(type == 'date'){
+        this.router.navigateByUrl('/Issues?date=' + (<HTMLInputElement>document.getElementById('q2')).value);  
+      }
+      else{
+        this.router.navigateByUrl('/Issues?issueNumber=' + (<HTMLInputElement>document.getElementById('q2')).value);  
+      }
+  }
+
+  SearchByIssue(value){
+    this.myFunctions.SearchByIssue(value);
   }
 
 }

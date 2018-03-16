@@ -4,8 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { SharedService } from '../../services/shared.service';
 import { FunctionsService } from '../../services/functions.service';
+import { GlobalService } from '../../services/global.service';
 
-import { _globals } from '../../../includes/globals';
 import { GlobalModel, SharedModel, AdvertiseFormModel, Country } from '../../../includes/Models';
 
 import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
@@ -36,7 +36,8 @@ export class AdvertiseComponent implements OnInit {
     
     @Input() globalModel:GlobalModel;
   
-    constructor(private route: ActivatedRoute, 
+    constructor(private globalService: GlobalService,
+      private route: ActivatedRoute, 
       private myFunctions:FunctionsService, 
       private sharedService:SharedService, 
       private http:HttpClient) { 
@@ -55,25 +56,41 @@ export class AdvertiseComponent implements OnInit {
       }
     }
     ngOnInit() {
+
       this.sharedService.sharedModel.subscribe((sharedModel:any) => this.sharedModel = sharedModel);
 
       this.sharedService.set_currentRoute("advertise");
+      
+      this.CONTENT_PATH = this.globalService.globalLinks.CONTENT_PATH;
   
-      this.http.get(_globals.API_URL + 'Data/GetAdvertiseUsData').subscribe((data:any) => {
-        //this.countries = data.countries;    
-        this.budgets = data.budgets;
-        this.advertiseTimes = data.advertiseTimes;
-        this.advertiseGenders = data.advertiseGenders;
-        this.targetAges = data.targetAges; 
-        this.myFunctions.CustomSelect(); 
-      });
+      
+
+      var intervalToClear = setInterval(() => {
+        if(this.globalService.globalLinks != undefined){
+          this.CONTENT_PATH = this.globalService.globalLinks.CONTENT_PATH;
+          this.RESIZED_CONTENT_PATH = this.globalService.globalLinks.RESIZED_CONTENT_PATH;
+        }
+        if(this.CONTENT_PATH != '' && this.CONTENT_PATH != undefined){
+          clearInterval(intervalToClear);
+          
+          this.http.get(this.globalService.globalLinks.API_URL + 'Data/GetAdvertiseUsData').subscribe((data:any) => {
+            //this.countries = data.countries;    
+            this.budgets = data.budgets;
+            this.advertiseTimes = data.advertiseTimes;
+            this.advertiseGenders = data.advertiseGenders;
+            this.targetAges = data.targetAges; 
+            //this.myFunctions.CustomSelect(); 
+          });
+        }
+      },100);
+
     }
     
     SubmitAdvertise(e, form:AdvertiseFormModel) {
       this.isSubmitted = true;
       this.formErrors = [];
       const headers = new HttpHeaders().set('Content-Type', 'application/json');
-      this.http.post(_globals.API_URL + 'Data/SubmitAdvertise', JSON.stringify(form), {
+      this.http.post(this.globalService.globalLinks.API_URL + 'Data/SubmitAdvertise', JSON.stringify(form), {
         headers: headers
       }).subscribe((data:any) => {
         this.myFunctions.OnFormSubmit('contactForm');

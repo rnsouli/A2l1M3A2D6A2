@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '../../services/shared.service';
 import { FunctionsService } from '../../services/functions.service';
 
-import { _globals } from '../../../includes/globals';
+import { GlobalService } from '../../services/global.service';
 import { GlobalModel, SharedModel, CategoryModel } from '../../../includes/Models';
 
 import { MomentModule } from 'angular2-moment';
@@ -35,19 +35,19 @@ export class VideosComponent implements OnInit {
   
   @Input() globalModel:GlobalModel;
 
-  constructor(private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { 
+  constructor(private globalService: GlobalService, private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { 
   }
 
   ngOnInit() {
 
-    this.CONTENT_PATH = _globals.CONTENT_PATH;
-    this.RESIZED_CONTENT_PATH = _globals.RESIZED_CONTENT_PATH;
+    this.CONTENT_PATH = this.globalService.globalLinks.CONTENT_PATH;
+    this.RESIZED_CONTENT_PATH = this.globalService.globalLinks.RESIZED_CONTENT_PATH;
 
     this.sharedService.sharedModel.subscribe((sharedModel:any) => this.sharedModel = sharedModel);
     this.sharedService.set_currentRoute("videos");
 
     //Initial category call
-    this.http.get(_globals.API_URL + "Data/GetDisplayInInit?typeId=" + _globals.displayin_videos).subscribe((data:any) =>{
+    this.http.get(this.globalService.globalLinks.API_URL + "Data/GetDisplayInInit?typeId=" + this.globalService.globalLinks.displayin_videos).subscribe((data:any) =>{
       
       this.pageNumber = 0;
       this.CategoryModel = data;
@@ -82,7 +82,7 @@ export class VideosComponent implements OnInit {
     
       if(!this.isLoading){
         this.isLoading = true;
-        this.http.get(_globals.API_URL + "Data/GetCategoryListing?typeId=" + _globals.displayin_videos
+        this.http.get(this.globalService.globalLinks.API_URL + "Data/GetCategoryListing?typeId=" + this.globalService.globalLinks.displayin_videos
         + "&page="+ (this.pageNumber) +"&skip=0&pageSize=16" + "&idsToRemove=" + idsToRemove).subscribe((data:any) =>{        
           this.CategoryModel.secondTabOfArticles = this.CategoryModel.secondTabOfArticles.concat(data.articles);
           
