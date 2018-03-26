@@ -20,6 +20,8 @@ export class RelatedArticlesComponent implements OnInit {
 
   @Input() entries: ArticleModel[];
 
+  @Input() relatedArticleTitle:string;
+
   CONTENT_PATH:string;
   RESIZED_CONTENT_PATH:string;
 

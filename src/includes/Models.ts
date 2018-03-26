@@ -7,6 +7,9 @@ export interface GlobalModel{
     listenLive: {
       link: string
     };
+    listenLiveFix:{
+      link: string
+    }
     googlePlay: {
       link: string
     };

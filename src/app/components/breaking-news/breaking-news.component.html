@@ -1,6 +1,6 @@
-<div class="widget-antenna" *ngIf="globalModel?.listenLive && sharedModel?.currentRoute != 'print'">
+<div class="widget-antenna" *ngIf="globalModel?.listenLiveFix && sharedModel?.currentRoute != 'print'">
   <div class="widget__actions">
-    <a target="_blank" [attr.href]="globalModel?.listenLive?.link" class="btn btn-antenna js-btn-toggle" data-class="expanded" data-target="#bar-news">
+    <a target="_blank" [attr.href]="globalModel?.listenLiveFix?.link" class="btn btn-antenna js-btn-toggle" data-class="expanded" data-target="#bar-news">
       <small>
         <strong>
           <i class="ico-radio"></i>

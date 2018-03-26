@@ -8,6 +8,8 @@ import { FunctionsService } from '../../services/functions.service';
 import { GlobalService } from '../../services/global.service';
 import { SharedModel, GlobalModel, IssueModel, issueModel } from '../../../includes/Models';
 
+import { Router } from '@angular/router';
+
 import { MomentModule } from 'angular2-moment';
 //import * as locales from 'moment/min/locales'
 import * as moment from 'moment';;
@@ -64,9 +66,9 @@ export class IssuesComponent implements OnInit {
   selectedIssueNb:string = '';
   selectedDate:Date = null;
 
-  yearsDropdown:number[];
+  yearsDropdown:number[] = [];
 
-  constructor(private globalService: GlobalService, private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { }
+  constructor(private globalService: GlobalService, private router:Router, private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { }
   
   ngOnInit() {
     
@@ -109,7 +111,7 @@ export class IssuesComponent implements OnInit {
         //   return rObj;
         // })
 
-        this.yearsDropdown = data.yearsDropdown;
+        this.yearsDropdown = (data.yearsDropdown);
 
         this.years = data.years;
         this.years.forEach(element => {
@@ -158,6 +160,11 @@ export class IssuesComponent implements OnInit {
   }
 
   FilterBy(month:number, year:number, issueNb:string){
+
+    if(year == 2003 || year == 2004 || year == 2005 || year == 2006){
+      this.router.navigateByUrl('/ArchiveViewer');
+    }
+
     if(issueNb == '0'){
       issueNb = '';
       this.selectedIssueNb = '';

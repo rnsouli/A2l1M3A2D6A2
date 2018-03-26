@@ -575,7 +575,7 @@ h6 { margin-bottom: 0.65em; font-weight: normal; }
 h1,
 h2 { font-size: 40px; line-height: 1; }
 h3 { font-size: 26px; }
-h4 { font-size: 22px; line-height: 1.2; }
+h4 { /*font-size: 22px;*/font-size: 21px; line-height: 1.2; }
 h5 { font-size: 18px; }
 h6 { font-size: 16px; line-height: 1.45; }
 p,
@@ -3825,4 +3825,8 @@ input:-webkit-autofill { -webkit-text-fill-color: inherit; -webkit-box-shadow: 0
 
 .wrapper--print div:last-child{
 	page-break-after: auto !important;
+}
+
+.list-meta a:not([href]) {
+    cursor: default;
 }

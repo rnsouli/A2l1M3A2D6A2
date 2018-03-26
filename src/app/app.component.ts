@@ -29,6 +29,7 @@ export class AppComponent {
     footerCategoriesWithoutSub:null,
     socialMedia: null,
     listenLive: null,
+    listenLiveFix: null,
     googlePlay: null,
     appStore: null,
   };
@@ -97,6 +98,7 @@ export class AppComponent {
   
                 
           this.globalModel.listenLive = data.listenLive;
+          this.globalModel.listenLiveFix = data.listenLiveFix;
           this.globalModel.googlePlay = data.googlePlay;
           this.globalModel.appStore = data.appStore;
           this.globalModel.socialMedia = data.socialMedia;

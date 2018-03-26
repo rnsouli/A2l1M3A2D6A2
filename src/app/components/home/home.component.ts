@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer, Title } from '@angular/platform-browser';
 
 import { SharedService } from '../../services/shared.service';
 import { FunctionsService } from '../../services/functions.service';
@@ -95,7 +96,7 @@ export class HomeComponent implements OnInit {
   
   //////////////////////////////////////////
 
-  constructor(private globalService: GlobalService, private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { 
+  constructor(private globalService: GlobalService, private titleService: Title, private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { 
   }
 
   ngOnInit() {
@@ -104,6 +105,8 @@ export class HomeComponent implements OnInit {
     this.sharedService.sharedModel.subscribe((sharedModel:any) => this.sharedModel = sharedModel);
     this.sharedService.set_currentRoute("home");
     this.myFunctions.ImageAsBgJs();
+
+    this.titleService.setTitle('جريدة المدى | www.almadapaper.net');
 
     console.log('leaderboard')
     var intervalSharedModel = setInterval(() => {

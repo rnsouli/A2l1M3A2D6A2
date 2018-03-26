@@ -44,6 +44,8 @@ export class DetailsComponent implements OnInit {
   hasGallery:boolean = false;
 
   whatsappLink:any = "";
+
+  relatedArticleTitle:string = "";
   
   constructor(private globalService: GlobalService, private titleService: Title, private sanitizer: DomSanitizer, private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { }
 
@@ -123,6 +125,7 @@ export class DetailsComponent implements OnInit {
 
         this.myFunctions.loadScript("http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a4ce5ff163c4827");
 
+        this.relatedArticleTitle = this.entry.categoryId == 2 ? 'مقالات ذات صلة' : 'أخبار ذات صلة';
       });
 
     });

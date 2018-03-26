@@ -48,11 +48,12 @@
 												<a *ngIf="!(item?.id > 1454 && item?.id <= 3176)" target="_blank" [attr.href]="Model?.latestEntry?.link" class="btn btn-default btn-default--xlarge">عدد اليوم </a>
 												<a *ngIf="(item?.id > 1454 && item?.id <= 3176)" target="_blank" routerLink="/Issues/Details/{{item?.id}}" class="btn btn-default btn-default--xlarge">عدد اليوم </a>
 
-												<h2>العدد رقم {{Model?.latestEntry?.title}}</h2>
+												<h2 *ngIf="!(item?.id > 1454 && item?.id <= 3176)"><a target="_blank" [attr.href]="Model?.latestEntry?.link">العدد رقم {{Model?.latestEntry?.title}}</a></h2>
+												<h2 *ngIf="(item?.id > 1454 && item?.id <= 3176)"><a target="_blank" routerLink="/Issues/Details/{{item?.id}}">العدد رقم {{Model?.latestEntry?.title}}</a></h2>
 
 												<ul class="list-meta">
 													<li>
-														<a href="#">
+														<a>
 															<span class="text-en">{{Model?.latestEntry?.date | amDateFormat:'LL' }}</span>
 															<i class="fa fa-clock-o" aria-hidden="true"></i>
 														</a>
@@ -124,7 +125,7 @@
 														
 															<ul class="list-meta">
 																<li>
-																	<a target="_blank" [attr.href]="CONTENT_PATH + '/Issue/'+ item?.pdf + '/arabic.html'">
+																	<a>
 																		<span class="text-en">{{item?.date | amDateFormat:'LL' }}</span>                                  
 																		<i class="fa fa-clock-o" aria-hidden="true"></i>
 																	</a>
