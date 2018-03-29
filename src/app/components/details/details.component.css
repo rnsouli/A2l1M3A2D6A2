@@ -52,3 +52,7 @@
 .main__body{
     min-height:300px;
 }
+
+.subHeading[href]:hover{
+    text-decoration: underline;
+}
