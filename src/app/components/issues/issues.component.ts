@@ -162,7 +162,7 @@ export class IssuesComponent implements OnInit {
   FilterBy(month:number, year:number, issueNb:string){
 
     if(year == 2003 || year == 2004 || year == 2005 || year == 2006){
-      this.router.navigateByUrl('/ArchiveViewer');
+      this.router.navigateByUrl('/ArchiveViewer?year=' + year);
     }
 
     if(issueNb == '0'){

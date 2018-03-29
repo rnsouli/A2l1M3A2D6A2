@@ -69,6 +69,8 @@ export interface ArticleModel{
   subcategoryTitle: string;
 
   issueNumber:string;
+  issueId:number;
+  issueLink:string;
   versionType:string;
   sourceDesc: string;
 

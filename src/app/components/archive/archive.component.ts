@@ -22,6 +22,8 @@ export class ArchiveComponent implements OnInit {
     sharedModel:SharedModel;
     
     @Input() globalModel:GlobalModel;
+
+    year:number = 0;
   
     constructor(private globalService: GlobalService, private route: ActivatedRoute, private sharedService:SharedService, private http:HttpClient) { }
     
@@ -29,6 +31,12 @@ export class ArchiveComponent implements OnInit {
       this.sharedService.sharedModel.subscribe((sharedModel:any) => this.sharedModel = sharedModel);
 
       this.sharedService.set_currentRoute("archiveviewer");
+
+      this.route.queryParams.subscribe(params => {
+
+        this.year = Number(params["year"] != null ? params["year"] : 0);
+        console.log(this.year)
+      });
     }
   
   }

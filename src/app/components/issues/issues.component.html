@@ -37,7 +37,7 @@
 									<div class="cols">
 										<div class="col col--size-9" *ngIf="Model?.latestEntry?.image && Model?.latestEntry?.image != null">
 											<div class="section__image">
-												<img src="{{CONTENT_PATH + '/Issue/' + Model?.latestEntry?.image}}" height="483" width="313" alt="">
+												<a target="_blank" [attr.href]="Model?.latestEntry?.link"><img src="{{CONTENT_PATH + '/Issue/' + Model?.latestEntry?.image}}" height="483" width="313" alt=""></a>
 											</div><!-- /.section__image -->
 										</div><!-- /.col col--size-9 -->
 										
@@ -45,11 +45,9 @@
 											<div class="section__content">
 												<!-- <a target="_blank" [attr.href]="CONTENT_PATH + '/Issue/'+ Model?.latestEntry?.pdf + '/arabic.html'" class="btn btn-default btn-default--xlarge">عدد اليوم </a> -->
 												
-												<a *ngIf="!(item?.id > 1454 && item?.id <= 3176)" target="_blank" [attr.href]="Model?.latestEntry?.link" class="btn btn-default btn-default--xlarge">عدد اليوم </a>
-												<a *ngIf="(item?.id > 1454 && item?.id <= 3176)" target="_blank" routerLink="/Issues/Details/{{item?.id}}" class="btn btn-default btn-default--xlarge">عدد اليوم </a>
+												<a target="_blank" [attr.href]="Model?.latestEntry?.link" class="btn btn-default btn-default--xlarge">عدد اليوم </a>
 
-												<h2 *ngIf="!(item?.id > 1454 && item?.id <= 3176)"><a target="_blank" [attr.href]="Model?.latestEntry?.link">العدد رقم {{Model?.latestEntry?.title}}</a></h2>
-												<h2 *ngIf="(item?.id > 1454 && item?.id <= 3176)"><a target="_blank" routerLink="/Issues/Details/{{item?.id}}">العدد رقم {{Model?.latestEntry?.title}}</a></h2>
+												<h2><a target="_blank" [attr.href]="Model?.latestEntry?.link">العدد رقم {{Model?.latestEntry?.title}}</a></h2>
 
 												<ul class="list-meta">
 													<li>
@@ -106,7 +104,7 @@
 
 
 									<a class="btn btn-default btn-default--xsmall" (click)="FilterBy(0, 0, '0')">إلغاء البحث</a>
-									<a class="btn btn-default btn-default--xsmall" target="_blank" routerLink="/ArchiveViewer">تصفح الارشيف</a>
+									<!-- <a class="btn btn-default btn-default--xsmall" target="_blank" routerLink="/ArchiveViewer">تصفح الارشيف</a> -->
 
 
 								</div><!-- /.section__bar -->
