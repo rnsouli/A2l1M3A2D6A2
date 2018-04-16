@@ -32,6 +32,8 @@ export class IssueDetailsComponent implements OnInit {
 
   issueNumber:string = null;
 
+  issueNb:number = 0;
+
   
   isLoading: boolean = false;
   
@@ -59,7 +61,8 @@ export class IssueDetailsComponent implements OnInit {
           this.issueNumber = (params["id"]);
           
           this.http.get(this.globalService.globalLinks.API_URL + 'Data/GetIssueDetails?id=' + this.issueNumber).subscribe((data:any) => {
-            this.Model = data;      
+            this.Model = data;     
+            this.issueNb = +(this.Model.title); 
           }); 
         }); 
       }

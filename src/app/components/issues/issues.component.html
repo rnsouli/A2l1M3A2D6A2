@@ -136,7 +136,7 @@
 															<!-- <a *ngIf="item?.year > 2009" target="_blank" [attr.href]="CONTENT_PATH + '/Issue/'+ item?.pdf + '.pdf'" download class="btn btn-plus">
 																<i class="fa fa-arrow-down" aria-hidden="true"></i>
 															</a> -->
-															<a *ngIf="item?.year > 2009 && item?.year != 2012 && !(item?.id > 1454 && item?.id <= 3176)" target="_blank" [attr.href]="item?.link" download class="btn btn-plus">
+															<a *ngIf="item?.year > 2009 && item?.year != 2012 && !(item?.id > 1454 && item?.id <= 3176) && !(item?.id >= 3177 && item?.id <= 3899) && !(item?.id >= 3900 && item?.id <= 4162)" target="_blank" [attr.href]="item?.link" download class="btn btn-plus">
 																<i class="fa fa-arrow-down" aria-hidden="true"></i>
 															</a>
 
@@ -145,6 +145,14 @@
 															</a>
 
 															<a *ngIf="item?.id > 1454 && item?.id <= 3176" target="_blank" routerLink="/Issues/Details/{{item?.id}}" class="btn btn-plus btn-eye">
+																<i class="fa fa-eye" aria-hidden="true"></i>
+															</a>
+
+															<a *ngIf="item?.id >= 3177 && item?.id <= 3899" target="_blank" routerLink="/Issues/Details/{{item?.id}}" class="btn btn-plus btn-eye">
+																<i class="fa fa-eye" aria-hidden="true"></i>
+															</a>
+
+															<a *ngIf="item?.id >= 3900 && item?.id <= 4162" target="_blank" routerLink="/Issues/Details/{{item?.id}}" class="btn btn-plus btn-eye">
 																<i class="fa fa-eye" aria-hidden="true"></i>
 															</a>
 

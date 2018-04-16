@@ -155,6 +155,10 @@
 												</div>													
 											</div><!-- /.article__iframe -->
 
+											<div class="article__entry" *ngIf="entry?.smallDescription">
+												<p [innerHTML]="entry?.smallDescription"></p>
+											</div>
+
 											<a class="article__banner" *ngIf="isVideo && sharedModel?.leaderboardBanner" target="_blank" [attr.href]="sharedModel.leaderboardBanner?.link">
 												<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.leaderboardBanner?.image}}" height="90" width="728" alt="">
 											</a><!-- /.article__banner -->

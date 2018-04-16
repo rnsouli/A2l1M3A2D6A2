@@ -138,6 +138,8 @@ export class DetailsComponent implements OnInit {
 
     this.http.post(this.globalService.globalLinks.API_URL + "Data/AddViewCounter?articleId=" + this.articleId, 
       { headers: headers }).subscribe((data:any) =>{
+        
+        this.entry.viewCounter = data.viewCounter;
     
     }, (err:any) => {
       this.formErrors.push(err.error.message);

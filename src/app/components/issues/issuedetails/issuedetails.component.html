@@ -19,7 +19,7 @@
                     </li>
                     
                     <li>
-                      <a>الأعداد</a>
+                      <a routerLink="/Issues">الأعداد</a>
                     </li>
                   </ul>
                 </nav><!-- /.breadcrumbs -->
@@ -59,11 +59,15 @@
                       <ul class="list-squares list-squares--medium" *ngIf="Model.pages">
 
                         <li *ngFor="let page of Model.pages">
-                            <a *ngIf="!(Model.year == 2012 && Model.id < 4000)  && !(Model?.id > 1454 && Model?.id <= 3176)" target="_blank" [attr.href]="BASE_URL + 'sub/' + Model?.month + '-' + Model?.title + '/' + page?.title + '.pdf'">الصفحة {{page?.title}}</a>
+                            <a *ngIf="!(Model.year == 2012 && Model.id < 4000)  && !(Model?.id > 1454 && Model?.id <= 3176) && !(Model.id >= 3177 && Model.id <= 3899) && !((issueNb >= 2350) && (issueNb <= 2615))" target="_blank" [attr.href]="BASE_URL + 'sub/' + Model?.month + '-' + Model?.title + '/' + page?.title + '.pdf'">الصفحة {{page?.title}}</a>
                             <a *ngIf="(Model.year == 2012 && Model.id < 4000) || (Model?.id > 1454 && Model?.id <= 3176)" target="_blank" [attr.href]="CONTENT_PATH + '/IssuePage/'+ page?.pdf">{{page?.title}}</a>
                             
-                            <a *ngIf="Model.year == 2012 && Model.id > 4000" target="_blank" [attr.href]="BASE_URL + 'Missing2012/' + Model.title + '/' + page?.pdf">الصفحة {{page?.title}}</a>
-                            <a *ngIf="Model.year == 2007 || Model.year == 2008 || Model.year == 2009" target="_blank" [attr.href]="BASE_URL + 'MediaStorage/PDF/820-1610/' + Model.title + '/' + page?.pdf">الصفحة {{page?.title}}</a>
+                            <a *ngIf="Model.year == 2012 && Model.id > 4000 && !(Model.id >= 3177 && Model.id <= 3899) && !((issueNb >= 2350) && (issueNb <= 2615))" target="_blank" [attr.href]="BASE_URL + 'Missing2012/' + Model.title + '/' + page?.pdf">الصفحة {{page?.title}}</a>
+                            <a *ngIf="(Model.year == 2007 || Model.year == 2008 || Model.year == 2009) && !(Model.id >= 3177 && Model.id <= 3899) && !((issueNb >= 2350) && (issueNb <= 2615))" target="_blank" [attr.href]="BASE_URL + 'MediaStorage/PDF/820-1610/' + Model.title + '/' + page?.pdf">الصفحة {{page?.title}}</a>
+
+                            <a *ngIf="Model.id >= 3177 && Model.id <= 3899" target="_blank" [attr.href]="BASE_URL + 'Missing700Issue/' + Model.title + '/' + page?.title + '.pdf'">الصفحة {{page?.title}}</a>
+                            <a *ngIf="(issueNb >= 2350) && (issueNb <= 2615)" target="_blank" [attr.href]="BASE_URL + 'Missing2012/' + Model.title + '/' + page?.pdf">الصفحة {{page?.title}}</a>
+                            
                         </li>
                         
                       </ul><!-- /.list-squares -->
