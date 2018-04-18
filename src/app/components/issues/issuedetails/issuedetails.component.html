@@ -71,6 +71,13 @@
                         </li>
                         
                       </ul><!-- /.list-squares -->
+
+                      <ul class="list-squares list-squares--medium" *ngIf="Model.supplement != null">
+                        <li>
+                          <a *ngIf="Model.id >= 3177 && Model.id <= 3899" target="_blank" [attr.href]="BASE_URL + 'Missing700Issue/'+ Model.title +'/sub/' + Model?.supplement">الملحق</a>
+                          <a *ngIf="(issueNb >= 2350) && (issueNb <= 2615)" target="_blank" [attr.href]="BASE_URL + 'Missing2012/'+ Model.title +'/sub/' + Model?.supplement">الملحق</a>
+                        </li>
+                      </ul>
                       
                     </div><!-- /.section__content -->
                   </div><!-- /.col col--size-10 -->

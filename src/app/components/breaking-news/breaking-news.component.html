@@ -11,9 +11,8 @@
 
       <span>إستمع للبث المباشر</span>
     </a>
-  </div><!-- /.widget__actions -->
-</div><!-- /.widget-antenna -->
-  
+  </div>
+</div>
 <div class="bar-news expanded" id="bar-news" *ngIf="Model && sharedModel?.currentRoute != 'print'">
 		<div class="bar__body">
 			<aside class="bar__aside">
@@ -24,18 +23,16 @@
 						<span>خبر عاجل</span>
 					</small>
 				</a>
-			</aside><!-- /.bar__aside -->
-
+			</aside>
 			<div class="bar__content hidden-xs">
 					<p> 
 						<a routerLink="/Details/{{Model?.id}}/{{Model?.customUrlTitle}}">{{Model?.title}}</a>
 					</p>
-			</div><!-- /.bar__content -->
-
+			</div>
 			<div class="bar__content visible-xs-block">
 				<p>
 					<a routerLink="/Details/{{Model?.id}}/{{Model?.customUrlTitle}}">{{Model?.title}}</a>
 				</p>
-			</div><!-- /.bar__content -->
-		</div><!-- /.bar__body -->
-	</div><!-- /.bar-news -->
+			</div>
+		</div>
+	</div>

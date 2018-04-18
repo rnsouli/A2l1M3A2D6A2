@@ -4,67 +4,45 @@
         <input type="hidden" required name="questionId" [(ngModel)]="questionFormModel.questionId" />
         <div class="form__head">
           <h4>{{item.question}}</h4>
-        </div><!-- /.form__head -->
-        
+        </div>
         <div class="form__body">
           <ul class="list-radios" *ngIf="!item.votedByCurrentUser && !values">
-
             <li *ngFor="let subItem of item.Answers">
               <div class="radio">
                 <input type="radio" id="radio-{{item.id}}-{{subItem.id}}" name="answerId" 
                 [value]="subItem.id" required [(ngModel)]="questionFormModel.answerId" 
                 (ngModelChange)="choose($event)" />
-                
                 <label for="radio-{{item.id}}-{{subItem.id}}">{{subItem.answer}}</label>
-              </div><!-- /.radio -->
+              </div>
             </li>            
-            
-          </ul><!-- /.list-radios -->
-
-
-
+          </ul>
           <ul class="list-progress-items" *ngIf="item.votedByCurrentUser">
-              
             <li *ngFor="let subItem of item.Answers">
               <p>
                 <strong>{{subItem.answer}} %{{Math.round(subItem.counterAnswer * 100 / item.nbOfVotes)}}</strong>
-                
                 <span>({{subItem.counterAnswer}} صوت)</span>
               </p>
-
               <div class="progress-bar" [attr.data-percent]="Math.round(subItem.counterAnswer * 100 / item.nbOfVotes) + '%'">
                 <span></span>
-              </div><!--  /.progress-bar -->
+              </div>
             </li>
-
-          </ul> <!-- /.list-progress-items -->
-
+          </ul> 
           <ul class="list-progress-items" *ngIf="values">
-              
             <li *ngFor="let subItem of values">
               <p>
                 <strong>{{subItem.answer}} %{{subItem.percentage}}</strong>
-                
                 <span>({{subItem.counterAnswer}} صوت)</span>
               </p>
-
               <div class="progress-bar" [attr.data-percent]="subItem.percentage + '%'">
                 <span></span>
-              </div><!--  /.progress-bar -->
+              </div>
             </li>
-
-          </ul> <!-- /.list-progress-items -->
-
-
-
-        </div><!-- /.form__body -->
-        
+          </ul> 
+        </div>
         <div class="form__actions" *ngIf="!item.votedByCurrentUser && !values">
           <button type="submit" class="form__btn btn btn-default btn-default--alt btn-default--small">تصويت</button>
-       
           <!-- <a href="#" class="btn btn-default btn-default--small btn--white"> نتيجة التصويت</a> -->
-        
-        </div><!-- /.form__actions -->
+        </div>
       </form>
-    </div><!-- /.form -->
-  </div><!-- /.widget__body -->
+    </div>
+  </div>

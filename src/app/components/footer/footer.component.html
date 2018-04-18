@@ -1,191 +1,158 @@
 <footer *ngIf="sharedModel?.currentRoute != 'print'" class="footer {{sharedModel?.currentRoute == 'notFound' ? 'footer--small' : ''}}">
-		<div class="footer__body" *ngIf="sharedModel?.currentRoute != 'notFound'">
-			<div class="shell">
-				<div class="footer__cols">
-					<div class="footer__col footer__col--1of6">
-						<div class="footer__content">
-							<nav class="footer-nav">
-								<ul>
-
-									<li *ngFor="let item of globalModel?.footerCategoriesWithoutSub">
-										<a *ngIf="item.customUrl == '' || item.customUrl == null" routerLink="/Category/{{item?.id}}{{item?.customUrlTitle ? '/' + item?.customUrlTitle : ''}}">{{item?.title}}</a>
-										<a *ngIf="item.customUrl != '' && item.customUrl != null" [attr.href]="item.customUrl">{{item?.title}}</a>
-									</li>
-									
-								</ul>
-							</nav><!-- /.footer-nav -->
-						</div><!-- /.footer__content -->
-					</div><!-- /.footer__col footer__col--1of6 -->
-
-					<div class="footer__col footer__col--1of6" *ngIf="globalModel?.footerCategoriesWithSub">
-						<div class="footer__content">
-							<h5>{{ globalModel?.footerCategoriesWithSub[0]?.title }}</h5>
-						
-							<nav class="footer-nav-small">
-								<ul>
-									<li *ngFor="let item of globalModel?.footerCategoriesWithSub[0].SubCategories">
-										<a routerLink="/Category/{{item?.id}}{{item?.customUrlTitle ? '/' + item?.customUrlTitle : ''}}">{{item?.title}}</a>
-									</li>
-								</ul>
-							</nav><!-- /.footer-nav-small -->
-						
-							<h5><a routerLink="/Videos">الفيديوهات</a></h5>
-						</div><!-- /.footer__content -->
-					</div><!-- /.footer__col footer__col--1of6 -->
-					
-					<div class="footer__col footer__col--2of6" *ngIf="globalModel?.footerCategoriesWithSub && globalModel?.footerCategoriesWithSub.length > 1">
-						<div class="footer__cols">
-							<div class="footer__col footer__col--1of2">
-
-								<div class="footer__content">
-									<h5>{{ globalModel?.footerCategoriesWithSub[1]?.title }}</h5>
-									
-									<nav class="footer-nav-small">
-										<ul>
-											<li *ngFor="let item of globalModel?.footerCategoriesWithSub[1].SubCategories">
-												<a routerLink="/Category/{{item?.id}}{{item?.customUrlTitle ? '/' + item?.customUrlTitle : ''}}">{{item?.title}}</a>
-											</li>
-										</ul>
-									</nav><!-- /.footer-nav-small -->
-
-								</div><!-- /.footer__content -->
-
-							</div><!-- /.footer__col footer__col--1of2 -->
-
-							<div class="footer__col footer__col--1of2" *ngIf="globalModel?.footerCategoriesWithSub && globalModel?.footerCategoriesWithSub.length > 2">
-								<div class="footer__content">
-									<h5>{{ globalModel?.footerCategoriesWithSub[2]?.title }}</h5>
-									
-									<nav class="footer-nav-small">
-										<ul>
-											<li *ngFor="let item of globalModel?.footerCategoriesWithSub[2].SubCategories">
-												<a routerLink="/Category/{{item?.id}}{{item?.customUrlTitle ? '/' + item?.customUrlTitle : ''}}">{{item?.title}}</a>
-											</li>
-										</ul>
-									</nav><!-- /.footer-nav-small -->
-
-								</div><!-- /.footer__content -->
-							</div><!-- /.footer__col footer__col--1of2 -->
-						</div><!-- /.footer__cols -->
-					</div><!-- /.footer__col footer__col--2of6 -->
-					
-					<div class="footer__col footer__col--1of6">
-						<div class="footer__content">
-							<nav class="footer-nav js-footer-nav">
-								<ul>
-									<li>
-										<a routerLink="/AboutUs">من نحن</a>
-									</li>
-									
-									<li>
-										<a routerLink="/ContactUs">اتصل بنا</a>
-									</li>
-									
-									<li>
-										<a routerLink="/Advertise">أعلن معنا</a>
-									</li>
-									
-									<li>
-										<a routerLink="/Polls">استفتاء</a>
-									</li>
-									
-									<li>
-										<a routerLink="/PrivacyPolicy">سياسة الخصوصية</a>
-									</li>
-								</ul>
-							</nav><!-- /.footer-nav -->
-						</div><!-- /.footer__content -->
-					</div><!-- /.footer__col footer__col--1of6 -->
-					
-					<div class="footer__col footer__col--1of6">
-						<div class="footer__content js-footer-content">
-							<h5>تواصل معنا</h5>
-						
-							<div class="socials socials--large">
-								<ul>
-									<li>
-										<a target="_blank" href="{{BASE_URL + 'Rss'}}">
-											<i class="fa fa-rss" aria-hidden="true"></i>
-										</a>
-									</li>
-									
-									<li *ngFor="let item of globalModel?.socialMedia">
-										<a target="_blank" href="{{item?.link}}">
-											<i class="fa {{'fa-' + item?.className}}" aria-hidden="true"></i>
-										</a>
-									</li>
-
-								</ul>
-							</div><!-- /.socials socials--large -->
-						
-							<h5>تحميل التطبيق</h5>
-						
-							<div class="footer__actions">
-								<a target="_blank" *ngIf="globalModel?.googlePlay" [attr.href]="globalModel?.googlePlay?.link" class="btn btn-default btn-default--app btn-default--googleplay">
-									<span>
-										<i class="ico-googleplay"></i>
-						
-										<i class="ico-googleplay-dark"></i>
-									</span>
-						
-									Google Play
-								</a>
-						
-								<a target="_blank" *ngIf="globalModel?.appStore" [attr.href]="globalModel?.appStore?.link" class="btn btn-default btn-default--app btn-default--appstore">
-									<i class="fa fa-apple" aria-hidden="true"></i>
-						
-									App Store
-								</a>
-							</div><!-- /.footer__actions -->
-						</div><!-- /.footer__content -->
-					</div><!-- /.footer__col footer__col--1of6 -->
-				</div><!-- /.footer__cols -->
-			</div><!-- /.shell -->
-		</div><!-- /.footer__body -->
-
-		<div class="footer__bar">
-			<div class="shell">
-				<div class="footer__bar-body">
-					<ul class="list-logos">
-						<li>
-							<a target="_blank" href="http://www.almadapaper.net/ar/">
-								<img src="assets/css/images/temp/logo-image1.png" height="54" width="60" alt="">
+	<div class="footer__body" *ngIf="sharedModel?.currentRoute != 'notFound'">
+		<div class="shell">
+			<div class="footer__cols">
+				<div class="footer__col footer__col--1of6">
+					<div class="footer__content">
+						<nav class="footer-nav">
+							<ul>
+								<li *ngFor="let item of globalModel?.footerCategoriesWithoutSub">
+									<a *ngIf="item.customUrl == '' || item.customUrl == null" routerLink="/Category/{{item?.id}}{{item?.customUrlTitle ? '/' + item?.customUrlTitle : ''}}">{{item?.title}}</a>
+									<a *ngIf="item.customUrl != '' && item.customUrl != null" [attr.href]="item.customUrl">{{item?.title}}</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				<div class="footer__col footer__col--1of6" *ngIf="globalModel?.footerCategoriesWithSub">
+					<div class="footer__content">
+						<h5>{{ globalModel?.footerCategoriesWithSub[0]?.title }}</h5>
+						<nav class="footer-nav-small">
+							<ul>
+								<li *ngFor="let item of globalModel?.footerCategoriesWithSub[0].SubCategories">
+									<a routerLink="/Category/{{item?.id}}{{item?.customUrlTitle ? '/' + item?.customUrlTitle : ''}}">{{item?.title}}</a>
+								</li>
+							</ul>
+						</nav>
+						<h5>
+							<a routerLink="/Videos">الفيديوهات</a>
+						</h5>
+					</div>
+				</div>
+				<div class="footer__col footer__col--2of6" *ngIf="globalModel?.footerCategoriesWithSub && globalModel?.footerCategoriesWithSub.length > 1">
+					<div class="footer__cols">
+						<div class="footer__col footer__col--1of2">
+							<div class="footer__content">
+								<h5>{{ globalModel?.footerCategoriesWithSub[1]?.title }}</h5>
+								<nav class="footer-nav-small">
+									<ul>
+										<li *ngFor="let item of globalModel?.footerCategoriesWithSub[1].SubCategories">
+											<a routerLink="/Category/{{item?.id}}{{item?.customUrlTitle ? '/' + item?.customUrlTitle : ''}}">{{item?.title}}</a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+						<div class="footer__col footer__col--1of2" *ngIf="globalModel?.footerCategoriesWithSub && globalModel?.footerCategoriesWithSub.length > 2">
+							<div class="footer__content">
+								<h5>{{ globalModel?.footerCategoriesWithSub[2]?.title }}</h5>
+								<nav class="footer-nav-small">
+									<ul>
+										<li *ngFor="let item of globalModel?.footerCategoriesWithSub[2].SubCategories">
+											<a routerLink="/Category/{{item?.id}}{{item?.customUrlTitle ? '/' + item?.customUrlTitle : ''}}">{{item?.title}}</a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="footer__col footer__col--1of6">
+					<div class="footer__content">
+						<nav class="footer-nav js-footer-nav">
+							<ul>
+								<li>
+									<a routerLink="/AboutUs">من نحن</a>
+								</li>
+								<li>
+									<a routerLink="/ContactUs">اتصل بنا</a>
+								</li>
+								<li>
+									<a routerLink="/Advertise">أعلن معنا</a>
+								</li>
+								<li>
+									<a routerLink="/Polls">استفتاء</a>
+								</li>
+								<li>
+									<a routerLink="/PrivacyPolicy">سياسة الخصوصية</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				<div class="footer__col footer__col--1of6">
+					<div class="footer__content js-footer-content">
+						<h5>تواصل معنا</h5>
+						<div class="socials socials--large">
+							<ul>
+								<li>
+									<a target="_blank" href="{{BASE_URL + 'Rss'}}">
+										<i class="fa fa-rss" aria-hidden="true"></i>
+									</a>
+								</li>
+								<li *ngFor="let item of globalModel?.socialMedia">
+									<a target="_blank" href="{{item?.link}}">
+										<i class="fa {{'fa-' + item?.className}}" aria-hidden="true"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<h5>تحميل التطبيق</h5>
+						<div class="footer__actions">
+							<a target="_blank" *ngIf="globalModel?.googlePlay" [attr.href]="globalModel?.googlePlay?.link" class="btn btn-default btn-default--app btn-default--googleplay">
+								<span>
+									<i class="ico-googleplay"></i>
+									<i class="ico-googleplay-dark"></i>
+								</span>
+								Google Play
 							</a>
-						</li>
-						
-						<li>
-							<a target="_blank" href="http://www.almadapress.com/ar/">
-								<img src="assets/css/images/temp/logo-image2.png" alt="" width="60" height="54">
+							<a target="_blank" *ngIf="globalModel?.appStore" [attr.href]="globalModel?.appStore?.link" class="btn btn-default btn-default--app btn-default--appstore">
+								<i class="fa fa-apple" aria-hidden="true"></i>
+								App Store
 							</a>
-						</li>
-						
-						<li>
-							<a target="_blank" href="http://zamwa.org/">
-								<img src="assets/css/images/temp/logo-image3.png" alt="" width="59" height="54">
-							</a>
-						</li>
-						
-						<li>
-							<a target="_blank" href="http://www.tatoopaper.com/">
-								<img src="assets/css/images/temp/logo-image4.png" alt="" width="39" height="50">
-							</a>
-						</li>
-						
-						<li>
-							<a target="_blank" href="http://www.narjesmag.com/">
-								<img src="assets/css/images/temp/logo-image5.png" alt="" width="86" height="40">
-							</a>
-						</li>
-						
-						<li>
-							<a target="_blank" href="http://www.hiwar-sport.com/">
-								<img src="assets/css/images/temp/logo-image6.png" alt="" width="82" height="32">
-							</a>
-						</li>
-					</ul><!-- /.list-logos -->
-
-					<p class="copyright text-en">Copyright &copy; 2017.</p><!-- /.copyright -->
-				</div><!-- /.footer__bar-body -->
-			</div><!-- /.shell -->
-		</div><!-- /.footer__bar -->
-	</footer><!-- /.footer -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer__bar">
+		<div class="shell">
+			<div class="footer__bar-body">
+				<ul class="list-logos">
+					<li>
+						<a target="_blank" href="http://www.almadapaper.net/ar/">
+							<img src="assets/css/images/temp/logo-image1.png" height="54" width="60" alt="">
+						</a>
+					</li>
+					<li>
+						<a target="_blank" href="http://www.almadapress.com/ar/">
+							<img src="assets/css/images/temp/logo-image2.png" alt="" width="60" height="54">
+						</a>
+					</li>
+					<li>
+						<a target="_blank" href="http://zamwa.org/">
+							<img src="assets/css/images/temp/logo-image3.png" alt="" width="59" height="54">
+						</a>
+					</li>
+					<li>
+						<a target="_blank" href="http://www.tatoopaper.com/">
+							<img src="assets/css/images/temp/logo-image4.png" alt="" width="39" height="50">
+						</a>
+					</li>
+					<li>
+						<a target="_blank" href="http://www.narjesmag.com/">
+							<img src="assets/css/images/temp/logo-image5.png" alt="" width="86" height="40">
+						</a>
+					</li>
+					<li>
+						<a target="_blank" href="http://www.hiwar-sport.com/">
+							<img src="assets/css/images/temp/logo-image6.png" alt="" width="82" height="32">
+						</a>
+					</li>
+				</ul>
+				<p class="copyright text-en">Copyright &copy; 2017.</p>
+			</div>
+		</div>
+	</div>
+</footer>

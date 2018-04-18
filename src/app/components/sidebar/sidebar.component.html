@@ -5,26 +5,17 @@
         <a class="widget__image hidden-xs" *ngIf="sharedModel?.leftMpuBanner" target="_blank" [attr.href]="sharedModel.leftMpuBanner?.link">
           <img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.leftMpuBanner?.image}}" height="250" width="300" alt="">
         </a>
-        <!-- /.widget__image -->
-
         <a class="widget__image visible-xs-block" *ngIf="sharedModel?.mobileLeaderboardBanner" target="_blank" [attr.href]="sharedModel.mobileLeaderboardBanner?.link">
           <img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt=""><!-- height="50" width="300" -->
         </a>
-        <!-- /.widget__image -->
       </div>
-      <!-- /.widget-banner -->
-
       <div class="widget widget--editors" *ngIf="editorialArticles && editorialArticles.length">
         <div class="widget__head">
           <h3 class="widget__title">
             <a routerLink="/Category/{{editorialId}}" class="btn btn-plus"><i class="fa fa-plus" aria-hidden="true"></i></a>            مقالات رئيس التحرير
           </h3>
-          <!-- /.widget__title -->
         </div>
-        <!-- /.widget__head -->
-
         <div class="widget__body">
-
           <perfect-scrollbar class="container" [config]="config">
             <div class="articles-block articles-block--editors">              
               <article class="article article--columns article--editors template_142_85" *ngFor="let item of editorialArticles; let articleIndex = index">
@@ -34,7 +25,7 @@
                       <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/142x85xo/{{item?.image}}" height="85" width="142" alt="">
                     </a>
                   </div>
-                  <!-- /.article__image -->
+                  
                 </div>
                 <div class="article__content">
                   <h6><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h6>
@@ -46,44 +37,30 @@
                           <i class="fa fa-clock-o" aria-hidden="true"></i>
                         </a>
                     </li>
-    
                     <li>
                       <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
                           <span class="text-en">500</span>
-                          
                           <i class="fa fa-comment-o" aria-hidden="true"></i>
                         </a>
                     </li>
                   </ul>
-                  <!-- /.list-meta -->
                 </div>
-                <!-- /.article__content -->
               </article>
-              <!-- /.article -->
-            </div> <!-- /.articles-block -->
+            </div> 
           </perfect-scrollbar>
-          
         </div>
-        <!-- /.widget__body -->
-
         <div class="widget__actions">
           <a routerLink="/Category/{{editorialId}}" class="link link--red link-more">
               <i class="fa fa-long-arrow-left" aria-hidden="true"></i>المزيد
             </a>
         </div>
-        <!-- /.widget__actions -->
       </div>
-      <!-- /.widget -->
-
       <div class="widget widget--today" *ngIf="todaysWord">
         <div class="widget__head">
           <h3 class="widget__title">
             <a routerLink="/Category/{{todaysWordId}}" class="btn btn-plus"><i class="fa fa-plus" aria-hidden="true"></i></a>            كلام اليوم
           </h3>
-          <!-- /.widget__title -->
         </div>
-        <!-- /.widget__head -->
-
         <div class="widget__body">
           <div class="articles-block articles-block--editors">
             <article class="article article--columns article--today template_142_85">
@@ -94,43 +71,28 @@
                   </a>
                 </div>
               </div>
-              <!-- /.article__image -->
-
               <div class="article__content">
                 <h6><a routerLink="/Details/{{todaysWord?.id}}/{{todaysWord?.customUrlTitle}}">{{todaysWord?.title}}</a></h6>
-
                 <p><a routerLink="/Details/{{todaysWord?.id}}/{{todaysWord?.customUrlTitle}}">{{todaysWord.writer?.name}}</a></p>
-
                 <ul class="list-meta">
                   <li>
                     <a routerLink="/Details/{{todaysWord?.id}}/{{todaysWord?.customUrlTitle}}">
                         <span class="text-en">{{todaysWord?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
-                        
                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                       </a>
                   </li>
                 </ul>
-                <!-- /.list-meta -->
               </div>
-              <!-- /.article__content -->
             </article>
-            <!-- /.article -->
           </div>
-          <!-- /.articles-block -->
         </div>
-        <!-- /.widget__body -->
       </div>
-      <!-- /.widget -->
-
       <div class="widget widget--person" *ngIf="pillarsOfTheDayArticles && pillarsOfTheDayArticles.length">
         <div class="widget__head">
           <h3 class="widget__title">
             <a routerLink="/Category/{{pillarOfTheDayId}}" class="btn btn-plus"><i class="fa fa-plus" aria-hidden="true"></i></a>            اعمدة اليوم
           </h3>
-          <!-- /.widget__title -->
         </div>
-        <!-- /.widget__head -->
-
         <div class="widget__body">
           <perfect-scrollbar class="container" [config]="config">
             <div class="articles-block articles-block--editors">
@@ -142,7 +104,6 @@
                     </a>
                   </div>
                 </div>
-                <!-- /.article__image -->
                 <div class="article__content">
                   <!-- <h6><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">مقال رئيس التحرير</a></h6> -->
                   <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a>
@@ -154,182 +115,120 @@
                           <i class="fa fa-clock-o" aria-hidden="true"></i>
                         </a>
                     </li>
-    
                     <li>
                       <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
                           <span class="text-en">500</span>
-                          
                           <i class="fa fa-comment-o" aria-hidden="true"></i>
                         </a>
                     </li>
                   </ul>
-                  <!-- /.list-meta -->
                 </div>
-                <!-- /.article__content -->
-              </article><!-- /.article -->
-            </div><!-- /.articles-block -->
+              </article>
+            </div>
           </perfect-scrollbar>
         </div>
-        <!-- /.widget__body -->
       </div>
-      <!-- /.widget -->
-
       <div class="widget widget--comics" *ngIf="todaysCaricatures && todaysCaricatures.length > 0">
         <div class="widget__head">
           <h3 class="widget__title">
             <a routerLink="/Category/{{caricatureId}}" class="btn btn-plus"><i class="fa fa-plus" aria-hidden="true"></i></a>            كاريكاتير اليوم
           </h3>
-          <!-- /.widget__title -->
         </div>
-        <!-- /.widget__head -->
-
         <div class="slider slider-brochure js-slider-single">
           <div class="slider__clip swiper-container">
             <div class="slider__slides swiper-wrapper">
-              
               <div class="slider__slide swiper-slide" *ngFor="let item of todaysCaricatures">
-
                 <div class="widget__body">
                   <div class="widget__image">
                     <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
                         <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/272x189xo/{{item?.image}}" height="189" width="272" alt="">
                       </a>
                   </div>
-                  <!-- /.widget__image -->
-
                   <div class="widget__content">
                     <span>{{item?.title}}</span>
                   </div>
-                  <!-- /.widget__content -->
-                </div><!-- /.widget__body -->
-
+                </div>
               </div>
-
             </div>
           </div>
         </div>
       </div>
-      <!-- /.widget -->
-
       <div class="widget widget--range hidden-lg hidden-xs hidden-sm hidden-md"><!-- it was only hidden-lg -->
         <div class="widget__head">
           <h3 class="widget__title">
             <a routerLink="/Polls" class="btn btn-plus"><i class="fa fa-plus" aria-hidden="true"></i></a> استطلاع المدى
           </h3>
-          <!-- /.widget__title -->
         </div>
-        <!-- /.widget__head -->
-
         <div class="widget__body">
           <div class="form-range">
             <form action="?" method="post">
               <div class="form__head">
                 <h4>هل تواجه صعوبة في الدخول <br>على موقع بوابة المدى؟</h4>
               </div>
-              <!-- /.form__head -->
-
               <div class="form__body">
                 <ul class="list-radios">
                   <li>
                     <div class="radio">
                       <input type="radio" name="radios20" id="radio-21#">
-
                       <label for="radio-21#">الموقع يفتح بشكل عادي</label>
                     </div>
-                    <!-- /.radio -->
                   </li>
-
                   <li>
                     <div class="radio">
                       <input type="radio" name="radios20" id="radio-22#">
-
                       <label for="radio-22#">الموقع لا يفتح بالمتصفح «كروم»</label>
                     </div>
-                    <!-- /.radio -->
                   </li>
-
                   <li>
                     <div class="radio">
                       <input type="radio" name="radios20" id="radio-23#">
-
                       <label for="radio-23#">الموقع لا يفتح بالمتصفح «فاير فوكس»</label>
                     </div>
-                    <!-- /.radio -->
                   </li>
-
                   <li>
                     <div class="radio">
                       <input type="radio" name="radios20" id="radio-24#">
-
                       <label for="radio-24#">الموقع لا يفتح أحيانا</label>
                     </div>
-                    <!-- /.radio -->
                   </li>
                 </ul>
-                <!-- /.list-radios -->
               </div>
-              <!-- /.form__body -->
-
               <div class="form__actions">
                 <input type="submit" value="تصويت" class="form__btn btn btn-default btn-default--alt btn-default--small">
-
                 <a class="btn btn-default btn-default--small btn--white"> نتيجة التصويت</a>
               </div>
-              <!-- /.form__actions -->
             </form>
           </div>
-          <!-- /.form -->
         </div>
-        <!-- /.widget__body -->
       </div>
-      <!-- /.widget -->
-
       <div class="widget-radio" *ngIf="listenLive">
         <div class="widget__bg fullsize-image">
           <img src="assets/css/images/radio-bg.jpg" height="171" width="299" alt="">
         </div>
-        <!-- /.widget__bg -->
-
         <div class="widget__body">
           <div class="widget__bar text-en">
             <span>92.8 FM</span>
           </div>
-          <!-- /.widget__bar -->
-
           <div class="widget__content">
             <a [attr.href]="listenLive?.link" class="logo logo--green"></a>
           </div>
-          <!-- /.widget__content -->
-
           <div class="widget__actions">
             <a [attr.href]="listenLive?.link" class="btn btn-default btn-default--medium"><i class="ico-radio"></i> إستمع للبث المباشر</a>
           </div>
-          <!-- /.widget__actions -->
         </div>
-        <!-- /.widget__body -->
       </div>
-      <!-- /.widget-radio -->
-
       <div id="facebookPage" class="fb-page" [attr.data-href]="FACEBOOK_PAGE_LINK" data-tabs="timeline" data-small-header="true"
         data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true" data-height="300">
         <blockquote [attr.cite]="FACEBOOK_PAGE_LINK" class="fb-xfbml-parse-ignore">
           <a [attr.href]="FACEBOOK_PAGE_LINK">‎مؤسسة المدى‎</a>
         </blockquote>
       </div>
-
       <!-- <a class="twitter-timeline" href="https://twitter.com/madanewspaper" data-width="300" data-height="300">
           Tweets by @madanewspaper
         </a> -->
-
         <a class="twitter-timeline" data-lang="en" data-height="300" [attr.href]="TWITTER_PAGE_LINK">Tweets by Dar_Almada</a> 
         <!-- <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
-      
-        <!-- <ng4-twitter-timeline [dataSrc]="{sourceType: 'profile',screenName: 'Dar_Almada'}" [opts]="{tweetLimit: 2}"></ng4-twitter-timeline>
-         -->
-
+        <!-- <ng4-twitter-timeline [dataSrc]="{sourceType: 'profile',screenName: 'Dar_Almada'}" [opts]="{tweetLimit: 2}"></ng4-twitter-timeline>-->
     </div>
-    <!-- /.widgets -->
   </div>
-  <!-- /.sidebar__inner -->
 </aside>
-<!-- /.sidebar -->

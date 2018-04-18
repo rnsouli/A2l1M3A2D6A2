@@ -1,17 +1,17 @@
 <article class="article article--text" *ngFor="let item of entries">
   <div class="article__content">
-    <h4><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h4>
-
+    <h4>
+      <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a>
+    </h4>
     <div class="article__content-bar">
       <ul class="list-meta">
         <li>
           <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
             <span>{{item?.date | date: 'dd/MM/yyyy' }}</span>
-            
             <i class="fa fa-clock-o" aria-hidden="true"></i>
           </a>
         </li>
-      </ul><!-- /.list-meta -->
-    </div><!-- /.article__content-bar -->
-  </div><!-- /.article__content -->
-</article><!-- /.article -->
+      </ul>
+    </div>
+  </div>
+</article>

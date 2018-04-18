@@ -1,59 +1,55 @@
 <div class="container container--alt">
-		<div class="main main--primary main--alt">
-			<div class="shell">
-				<div class="main__body">
-					<div class="content">
-						<div class="content__body">
-							<section class="section-default section-articles-political section-articles-political--results">
-								<header class="section__head">
-									<h3 class="section__title">
-										تم العثور على <span>{{CategoryModel?.totalCount}}</span> نتيجة لكلمة <span>“{{keyword}}”</span>
-									</h3><!-- /.section__title -->
-
-									<div class="section__head-inner">
-										<nav class="breadcrumbs">
-											<ul>
-                          <li>
-                            <a routerLink="/">الصفحة الرئيسية</a>
-                          </li>
-                          
-                          <li>
-                            <a>البحث</a>
-                          </li>
-											</ul>
-										</nav><!-- /.breadcrumbs -->
-									</div><!-- /.section__head-inner -->
-								</header><!-- /.section__head -->
-
-								<div class="section__body">
-										<div class="cssload-spin-box" *ngIf="!CategoryModel?.firstTabOfArticles"></div>
-                    <div class="articles articles--medium articles--news" app-articles [entries]="CategoryModel?.firstTabOfArticles">
-                    </div><!-- /.articles articles--medium -->
-								</div><!-- /.section__body -->
-
-								<div class="section__bar hidden-xs">
-									<a class="section__image" *ngIf="sharedModel?.leaderboardBanner" target="_blank" [attr.href]="sharedModel.leaderboardBanner?.link">
-										<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.leaderboardBanner?.image}}" height="90" width="728" alt="">
-									</a><!-- /.section__image -->
-								</div><!-- /.section__bar -->
-							</section><!-- /.-->
-
-							<section class="section-default section-articles-political">
-								<div class="section__body">
-                    <div class="articles articles--medium articles--news" app-articles [entries]="CategoryModel?.secondTabOfArticles">
-                      </div><!-- /.articles articles--medium -->
-								</div><!-- /.section__body -->
-							</section><!-- /.section-articles-political -->
-						</div><!-- /.content__body -->
-
-						<div class="content__actions" *ngIf="showLoadMore">
-							<a (click)="load_more_articles()" class="btn btn-default btn-default--large loadMore {{isLoading ? 'loading' : ''}}">المزيد <i class="fa fa-plus" aria-hidden="true"></i></a>
-						</div><!-- /.content__actions -->
-					</div><!-- /.content -->
-				
-          <app-sidebar [globalModel]="globalModel"></app-sidebar>
-          
-				</div><!-- /.main__body -->
-			</div><!-- /.shell -->
-		</div><!-- /.main -->
-	</div><!-- /.container -->
+	<div class="main main--primary main--alt">
+		<div class="shell">
+			<div class="main__body">
+				<div class="content">
+					<div class="content__body">
+						<section class="section-default section-articles-political section-articles-political--results">
+							<header class="section__head">
+								<h3 class="section__title">
+									تم العثور على
+									<span>{{CategoryModel?.totalCount}}</span> نتيجة لكلمة
+									<span>“{{keyword}}”</span>
+								</h3>
+								<div class="section__head-inner">
+									<nav class="breadcrumbs">
+										<ul>
+											<li>
+												<a routerLink="/">الصفحة الرئيسية</a>
+											</li>
+											<li>
+												<a>البحث</a>
+											</li>
+										</ul>
+									</nav>
+								</div>
+							</header>
+							<div class="section__body">
+								<div class="cssload-spin-box" *ngIf="!CategoryModel?.firstTabOfArticles"></div>
+								<div class="articles articles--medium articles--news" app-articles [entries]="CategoryModel?.firstTabOfArticles">
+								</div>
+							</div>
+							<div class="section__bar hidden-xs">
+								<a class="section__image" *ngIf="sharedModel?.leaderboardBanner" target="_blank" [attr.href]="sharedModel.leaderboardBanner?.link">
+									<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.leaderboardBanner?.image}}" height="90" width="728" alt="">
+								</a>
+							</div>
+						</section>
+						<section class="section-default section-articles-political">
+							<div class="section__body">
+								<div class="articles articles--medium articles--news" app-articles [entries]="CategoryModel?.secondTabOfArticles">
+								</div>
+							</div>
+						</section>
+					</div>
+					<div class="content__actions" *ngIf="showLoadMore">
+						<a (click)="load_more_articles()" class="btn btn-default btn-default--large loadMore {{isLoading ? 'loading' : ''}}">المزيد
+							<i class="fa fa-plus" aria-hidden="true"></i>
+						</a>
+					</div>
+				</div>
+				<app-sidebar [globalModel]="globalModel"></app-sidebar>
+			</div>
+		</div>
+	</div>
+</div>

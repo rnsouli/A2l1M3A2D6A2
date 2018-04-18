@@ -1,37 +1,33 @@
 <header class="section__head" *ngIf="entries">
   <h3 class="section__title">
-    <span class="btn btn-plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
-
+    <span class="btn btn-plus">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </span>
     الفيديوهات
-  </h3><!-- /.section__title -->
-</header><!-- /.section__head -->
-
+  </h3>
+</header>
 <div class="section__body">
   <div class="slider slider-articles slider-articles--alt js-slider-articles" data-slides="4" data-slides-tablet="2" data-slides-mobile="1">
     <div class="slider__clip swiper-container">
       <div class="slider__slides swiper-wrapper">
-
         <div class="slider__slide swiper-slide" *ngFor="let item of entries">
           <article class="article article--medium template_232_140">
             <div class="article__image article__video article-bg-image">
               <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
                 <span class="btn btn-play btn-play--small"></span>
-
                 <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/232x140xo/{{item?.image}}" height="140" width="232" alt="">
               </a>
-            </div><!-- /.article__image -->
-
+            </div>
             <div class="article__content">
-              <h4><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h4>
-            </div><!-- /.article__content -->
-          </article><!-- /.article -->
-        </div><!-- /.slider__slide -->        
-
-      </div><!-- /.slider__slides -->
-    </div><!-- /.slider__clip -->
-    
+              <h4>
+                <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a>
+              </h4>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
     <div class="swiper-button-next"></div>
-                
-      <div class="swiper-button-prev"></div>
-  </div><!-- /.slider -->
-</div><!-- /.section__body -->
+    <div class="swiper-button-prev"></div>
+  </div>
+</div>

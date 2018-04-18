@@ -1,93 +1,79 @@
 <section class="section-tabs-large">
-    <div class="section__bar">
-      <div class="widget-banner visible-xs-block">
-        <a class="widget__image" *ngIf="sharedModel?.mobileLeaderboardBanner" target="_blank" [attr.href]="sharedModel.mobileLeaderboardBanner?.link">
-          <img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt=""><!-- height="50" width="300" -->
-        </a><!-- /.widget__image -->
-      </div><!-- /.widget-banner -->
-    </div><!-- /.section__bar -->
-
-    <div class="section__body" *ngIf="tabCategories">
-      <div class="tabs tabs-slide tabs-large">
-        <div class="tabs__bar">
-          <nav class="tabs__nav">
-            <span>{{tabCategories[0]?.title}}</span>
-
-            <ul>
-
-              <li *ngFor="let item of tabCategories; let catIndex = index" [class.current]="catIndex == 0">
-                <a (click)="load_whitebox_articles(item?.id, catIndex)">{{item?.title}}</a>
-              </li>
-              
-            </ul>
-          </nav><!-- /.tabs__nav -->
-        </div><!-- /.tabs__bar -->
-        
-        <app-large-tab-articles [whiteBox]="whiteBox"></app-large-tab-articles>
-
-      </div><!-- /.tabs -->
-    </div><!-- /.section__body -->
-  </section><!-- /.section-tabs-large -->
-
-  <section class="section-tabs-columns">
-    <div class="cols">
-      <div class="col col--1of2" id="specializedBox" *ngIf="firstBoxCategory">
-        <div class="section__body">
-
-          <div class="tabs tabs-slide tabs-medium">
-            <header class="tabs__head">
-              <h3 class="tabs__title">
-                <a routerLink="/Category/{{firstBoxCategory?.id}}/{{firstBoxCategory?.customUrlTitle}}" class="btn btn-plus"><i class="fa fa-plus" aria-hidden="true"></i></a>
-              
-                {{firstBoxCategory?.title}}
-              </h3><!-- /.tabs__title -->
-            </header><!-- /.tabs__head -->
-
-            <div class="tabs__bar">
-              <nav class="tabs__nav">
-                <span>{{firstBoxCategory?.SubCategories[0]?.title}}</span>
-
-                <ul *ngIf="firstBoxCategory?.SubCategories">
-                  <li *ngFor="let item of firstBoxCategory?.SubCategories.slice(0,5); let catIndex = index" [class.current]="catIndex == 0">
-                    <a (click)="load_specialized_articles(item?.id, catIndex, 'specializedBox')">{{item?.title}}</a>
-                  </li>
-                </ul>
-              </nav><!-- /.tabs__nav -->
-            </div><!-- /.tabs__bar -->
-            
-            <app-medium-tab-articles [entries]="specializedArticles"></app-medium-tab-articles>
-
-          </div><!-- /.tabs -->
-        </div><!-- /.section__body -->
-      </div><!-- /.col col--1of2 -->
-
-      <div class="col col--1of2" id="cultureBox" *ngIf="secondBoxCategory">
-        <div class="section__body">
-          <div class="tabs tabs-slide tabs-medium">
-            <header class="tabs__head">
-              <h3 class="tabs__title">
-                <a routerLink="/Category/{{secondBoxCategory?.id}}/{{secondBoxCategory?.customUrlTitle}}" class="btn btn-plus"><i class="fa fa-plus" aria-hidden="true"></i></a>
-              
-                {{secondBoxCategory?.title}}
-              </h3><!-- /.tabs__title -->
-            </header><!-- /.tabs__head -->
-
-            <div class="tabs__bar">
-              <nav class="tabs__nav">
-                <span>عام</span>
-
-                <ul *ngIf="secondBoxCategory?.SubCategories">
-                    <li *ngFor="let item of secondBoxCategory?.SubCategories.slice(0,5); let catIndex = index" [class.current]="catIndex == 0">
-                      <a (click)="load_specialized_articles(item?.id, catIndex, 'cultureBox')">{{item?.title}}</a>
-                    </li>
-                </ul>
-              </nav><!-- /.tabs__nav -->
-            </div><!-- /.tabs__bar -->
-            
-            <app-medium-tab-articles [entries]="middleArticles"></app-medium-tab-articles>
-            
-          </div><!-- /.tabs -->
-        </div><!-- /.section__body -->
-      </div><!-- /.col col--1of2 -->
-    </div><!-- /.cols -->
-  </section><!-- /.section-tabs-columns -->
+  <div class="section__bar">
+    <div class="widget-banner visible-xs-block">
+      <a class="widget__image" *ngIf="sharedModel?.mobileLeaderboardBanner" target="_blank" [attr.href]="sharedModel.mobileLeaderboardBanner?.link">
+        <img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt="">
+        <!-- height="50" width="300" -->
+      </a>
+    </div>
+  </div>
+  <div class="section__body" *ngIf="tabCategories">
+    <div class="tabs tabs-slide tabs-large">
+      <div class="tabs__bar">
+        <nav class="tabs__nav">
+          <span>{{tabCategories[0]?.title}}</span>
+          <ul>
+            <li *ngFor="let item of tabCategories; let catIndex = index" [class.current]="catIndex == 0">
+              <a (click)="load_whitebox_articles(item?.id, catIndex)">{{item?.title}}</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <app-large-tab-articles [whiteBox]="whiteBox"></app-large-tab-articles>
+    </div>
+  </div>
+</section>
+<section class="section-tabs-columns">
+  <div class="cols">
+    <div class="col col--1of2" id="specializedBox" *ngIf="firstBoxCategory">
+      <div class="section__body">
+        <div class="tabs tabs-slide tabs-medium">
+          <header class="tabs__head">
+            <h3 class="tabs__title">
+              <a routerLink="/Category/{{firstBoxCategory?.id}}/{{firstBoxCategory?.customUrlTitle}}" class="btn btn-plus">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </a>
+              {{firstBoxCategory?.title}}
+            </h3>
+          </header>
+          <div class="tabs__bar">
+            <nav class="tabs__nav">
+              <span>{{firstBoxCategory?.SubCategories[0]?.title}}</span>
+              <ul *ngIf="firstBoxCategory?.SubCategories">
+                <li *ngFor="let item of firstBoxCategory?.SubCategories.slice(0,5); let catIndex = index" [class.current]="catIndex == 0">
+                  <a (click)="load_specialized_articles(item?.id, catIndex, 'specializedBox')">{{item?.title}}</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <app-medium-tab-articles [entries]="specializedArticles"></app-medium-tab-articles>
+        </div>
+      </div>
+    </div>
+    <div class="col col--1of2" id="cultureBox" *ngIf="secondBoxCategory">
+      <div class="section__body">
+        <div class="tabs tabs-slide tabs-medium">
+          <header class="tabs__head">
+            <h3 class="tabs__title">
+              <a routerLink="/Category/{{secondBoxCategory?.id}}/{{secondBoxCategory?.customUrlTitle}}" class="btn btn-plus">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </a>
+              {{secondBoxCategory?.title}}
+            </h3>
+          </header>
+          <div class="tabs__bar">
+            <nav class="tabs__nav">
+              <span>عام</span>
+              <ul *ngIf="secondBoxCategory?.SubCategories">
+                <li *ngFor="let item of secondBoxCategory?.SubCategories.slice(0,5); let catIndex = index" [class.current]="catIndex == 0">
+                  <a (click)="load_specialized_articles(item?.id, catIndex, 'cultureBox')">{{item?.title}}</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <app-medium-tab-articles [entries]="middleArticles"></app-medium-tab-articles>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

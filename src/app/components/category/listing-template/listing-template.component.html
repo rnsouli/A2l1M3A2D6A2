@@ -11,69 +11,45 @@
 										<li>
 											<a routerLink="/">الصفحة الرئيسية</a>
 										</li>
-
 										<li>
 											<a routerLink="/Category/{{CategoryModel?.id}}/{{CategoryModel?.customUrlTitle}}">{{CategoryModel?.title}}</a>
 										</li>
 									</ul>
 								</nav>
-								<!-- /.breadcrumbs -->
 							</div>
-							<!-- /.section__body -->
 						</section>
-						<!-- /.section-breadcrumbs -->
-
 						<section class="section-default section-articles-political">
 							<div class="section__body">
 								<div class="widget-banner visible-xs-block">
 									<a class="widget__image" *ngIf="sharedModel?.mobileLeaderboardBanner" target="_blank" [attr.href]="sharedModel.mobileLeaderboardBanner?.link">
-										<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt=""><!-- height="50" width="300" -->
+										<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt="">
+										<!-- height="50" width="300" -->
 									</a>
-									<!-- /.widget__image -->
 								</div>
-								<!-- /.widget-banner -->
-
 								<div class="articles articles--medium articles--news" app-articles [pillarsType]="pillarsType" [entries]="CategoryModel.firstTabOfArticles">
 								</div>
-								<!-- /.articles articles--medium -->
-
 							</div>
-							<!-- /.section__body -->
-
 							<div class="section__bar hidden-xs">
 								<a class="section__image" *ngIf="sharedModel?.leaderboardBanner" target="_blank" [attr.href]="sharedModel.leaderboardBanner?.link">
 									<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.leaderboardBanner?.image}}" height="90" width="728" alt="">
-								</a><!-- /.section__image -->
+								</a>
 							</div>
-							<!-- /.section__bar -->
 						</section>
-						<!-- /.-->
-
 						<section class="section-default section-articles-political">
 							<div class="section__body">
 								<div class="articles articles--medium articles--news" app-articles [pillarsType]="pillarsType" [entries]="CategoryModel.secondTabOfArticles">
 								</div>
-								<!-- /.articles articles--medium -->
 							</div>
-							<!-- /.section__body -->
 						</section>
-						<!-- /.section-articles-political -->
 					</div>
-					<!-- /.content__body -->
-
 					<div class="content__actions">
-						<a (click)="load_more_articles()" class="btn btn-default btn-default--large loadMore {{isLoading ? 'loading' : ''}}">المزيد <i class="fa fa-plus" aria-hidden="true"></i></a>
+						<a (click)="load_more_articles()" class="btn btn-default btn-default--large loadMore {{isLoading ? 'loading' : ''}}">المزيد
+							<i class="fa fa-plus" aria-hidden="true"></i>
+						</a>
 					</div>
-					<!-- /.content__actions -->
 				</div>
-				<!-- /.content -->
-
 				<app-sidebar [globalModel]="globalModel"></app-sidebar>
 			</div>
-			<!-- /.main__body -->
 		</div>
-		<!-- /.shell -->
 	</div>
-	<!-- /.main -->
 </div>
-<!-- /.container -->

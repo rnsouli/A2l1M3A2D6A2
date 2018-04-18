@@ -1,95 +1,87 @@
 <div class="container container--alt">
-		<div class="main main--primary main--alt">
-			<div class="shell">
-				<div class="main__body">
-					<div class="content content--alt">
-						<div class="content__body">
-							<section class="section-breadcrumbs">
-								<div class="section__body">
-									<nav class="breadcrumbs">
-										<ul>
-											<li>
-												<a routerLink="/">الصفحة الرئيسية</a>
-											</li>
-											
-											<li>
-												<a routerLink="/">{{Model?.title}}</a>
-											</li>
-										</ul>
-									</nav><!-- /.breadcrumbs -->
-								</div><!-- /.section__body -->
-							</section><!-- /.section-breadcrumbs -->
-
-							<section class="section-default section-articles-profile">
-								<div class="section__body">
-									<div class="widget-banner visible-xs-block">
-										<a class="widget__image" *ngIf="sharedModel?.mobileLeaderboardBanner" target="_blank" [attr.href]="sharedModel.mobileLeaderboardBanner?.link">
-											<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt=""><!-- height="50" width="300" -->
-										</a><!-- /.widget__image -->
-									</div><!-- /.widget-banner -->
-
-									<div class="articles articles--text articles--profile">
-										<div class="profile">
-											<div class="profile__inner">
-												<div class="profile__image fullsize-image" *ngIf="Model?.image != null">
-													<img src="{{CONTENT_PATH + '/ArticleWriter/' + Model?.image}}" height="303" width="233" alt="">
-												</div><!-- /.profile__image -->
-											
-												<div class="profile__content">
-													<span>{{Model?.title}}</span>
-												</div><!-- /.profile__content -->
-
-												<a href="mailto:{{Model?.email}}"  class="writer-email text-en">{{Model?.email}}</a>
-												<ul class="writer-social">  																
-													<li *ngIf="Model?.facebook != null && Model?.facebook != ''">
-														<a target="_blank" target="_blank" href="{{Model?.facebook}}">
-															<i class="fa fa-facebook"  aria-hidden="true"></i><!-- fa-instagram,fa-youtube-play,fa-linkedin,fa-google-plus,fa-twitter,fa-facebook -->
-														</a>
-													</li>
-													<li *ngIf="Model?.twitter != null && Model?.twitter != ''">
-														<a target="_blank" target="_blank" href="{{Model?.twitter}}">
-															<i class="fa fa-twitter"  aria-hidden="true"></i><!-- fa-instagram,fa-youtube-play,fa-linkedin,fa-google-plus,fa-twitter,fa-facebook -->
-														</a>
-													</li>	
-													<li *ngIf="Model?.linkedin != null && Model?.linkedin != ''">
-														<a target="_blank" target="_blank" href="{{Model?.linkedin}}">
-															<i class="fa fa-linkedin"  aria-hidden="true"></i><!-- fa-instagram,fa-youtube-play,fa-linkedin,fa-google-plus,fa-twitter,fa-facebook -->
-														</a>
-													</li>
-												</ul>
-
-
-											</div><!-- /.profile__inner -->
-										</div><!-- /.profile -->
-
-										<div class="articlesEditorialContainer" app-articles-text [entries]="Model?.firstTabOfArticles"></div>
-										
-									</div><!-- /.articles articles--text articles--profile -->
-								</div><!-- /.section__body -->
-
-								<div class="section__bar hidden-xs">
-									<a class="section__image" *ngIf="sharedModel?.leaderboardBanner" target="_blank" [attr.href]="sharedModel.leaderboardBanner?.link">
-										<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.leaderboardBanner?.image}}" height="90" width="728" alt="">
-									</a><!-- /.section__image -->
-								</div><!-- /.section__bar -->
-							</section><!-- /.section-articles-profile -->
-
-							<section class="section-default section-articles-profile">
-								<div class="section__body">
-									<div class="articles articles--text articles--text-alt" app-articles-text [entries]="Model?.secondTabOfArticles">
-																				
-									</div><!-- /.articles articles--text -->
-								</div><!-- /.section__body -->
-							</section><!-- /.section-articles-alt -->
-						</div><!-- /.content__body -->
-
-						<div class="content__actions">
-							<a (click)="load_more_articles()" class="btn btn-default btn-default--large loadMore {{isLoading ? 'loading' : ''}}">المزيد <i class="fa fa-plus" aria-hidden="true"></i></a>
-						</div><!-- /.content__actions -->
-					</div><!-- /.content -->
-				
-					<app-sidebar [globalModel]="globalModel"></app-sidebar>
-				</div><!-- /.main__body -->
-			</div><!-- /.shell -->
-		</div><!-- /.main -->
-	</div><!-- /.container -->
+	<div class="main main--primary main--alt">
+		<div class="shell">
+			<div class="main__body">
+				<div class="content content--alt">
+					<div class="content__body">
+						<section class="section-breadcrumbs">
+							<div class="section__body">
+								<nav class="breadcrumbs">
+									<ul>
+										<li>
+											<a routerLink="/">الصفحة الرئيسية</a>
+										</li>
+										<li>
+											<a routerLink="/">{{Model?.title}}</a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</section>
+						<section class="section-default section-articles-profile">
+							<div class="section__body">
+								<div class="widget-banner visible-xs-block">
+									<a class="widget__image" *ngIf="sharedModel?.mobileLeaderboardBanner" target="_blank" [attr.href]="sharedModel.mobileLeaderboardBanner?.link">
+										<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt="">
+										<!-- height="50" width="300" -->
+									</a>
+								</div>
+								<div class="articles articles--text articles--profile">
+									<div class="profile">
+										<div class="profile__inner">
+											<div class="profile__image fullsize-image" *ngIf="Model?.image != null">
+												<img src="{{CONTENT_PATH + '/ArticleWriter/' + Model?.image}}" height="303" width="233" alt="">
+											</div>
+											<div class="profile__content">
+												<span>{{Model?.title}}</span>
+											</div>
+											<a href="mailto:{{Model?.email}}" class="writer-email text-en">{{Model?.email}}</a>
+											<ul class="writer-social">
+												<li *ngIf="Model?.facebook != null && Model?.facebook != ''">
+													<a target="_blank" target="_blank" href="{{Model?.facebook}}">
+														<i class="fa fa-facebook" aria-hidden="true"></i>
+														<!-- fa-instagram,fa-youtube-play,fa-linkedin,fa-google-plus,fa-twitter,fa-facebook -->
+													</a>
+												</li>
+												<li *ngIf="Model?.twitter != null && Model?.twitter != ''">
+													<a target="_blank" target="_blank" href="{{Model?.twitter}}">
+														<i class="fa fa-twitter" aria-hidden="true"></i>
+														<!-- fa-instagram,fa-youtube-play,fa-linkedin,fa-google-plus,fa-twitter,fa-facebook -->
+													</a>
+												</li>
+												<li *ngIf="Model?.linkedin != null && Model?.linkedin != ''">
+													<a target="_blank" target="_blank" href="{{Model?.linkedin}}">
+														<i class="fa fa-linkedin" aria-hidden="true"></i>
+														<!-- fa-instagram,fa-youtube-play,fa-linkedin,fa-google-plus,fa-twitter,fa-facebook -->
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="articlesEditorialContainer" app-articles-text [entries]="Model?.firstTabOfArticles"></div>
+								</div>
+							</div>
+							<div class="section__bar hidden-xs">
+								<a class="section__image" *ngIf="sharedModel?.leaderboardBanner" target="_blank" [attr.href]="sharedModel.leaderboardBanner?.link">
+									<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.leaderboardBanner?.image}}" height="90" width="728" alt="">
+								</a>
+							</div>
+						</section>
+						<section class="section-default section-articles-profile">
+							<div class="section__body">
+								<div class="articles articles--text articles--text-alt" app-articles-text [entries]="Model?.secondTabOfArticles">
+								</div>
+							</div>
+						</section>
+					</div>
+					<div class="content__actions">
+						<a (click)="load_more_articles()" class="btn btn-default btn-default--large loadMore {{isLoading ? 'loading' : ''}}">المزيد
+							<i class="fa fa-plus" aria-hidden="true"></i>
+						</a>
+					</div>
+				</div>
+				<app-sidebar [globalModel]="globalModel"></app-sidebar>
+			</div>
+		</div>
+	</div>
+</div>

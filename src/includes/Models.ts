@@ -188,6 +188,7 @@ export interface issueModel{
   image: string;
   pdf: string;
   year: number;
+  supplement: string;
 }
 
 export interface ContactInfoModel{

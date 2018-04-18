@@ -6,7 +6,7 @@ import { SharedService } from '../../../services/shared.service';
 import { FunctionsService } from '../../../services/functions.service';
 
  import { GlobalService } from '../../../services/global.service';
-import { GlobalModel, CategoryModel } from '../../../../includes/Models';
+import { GlobalModel, SharedModel, CategoryModel } from '../../../../includes/Models';
 
 import { MomentModule } from 'angular2-moment';
 //import 'moment/locale/ar-sa';
@@ -35,10 +35,14 @@ export class HassubcategoriesTemplateComponent implements OnInit {
 
   isLoading:boolean = false;
   
+  sharedModel:SharedModel;
+  
   constructor(private globalService: GlobalService, private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { 
   }
 
   ngOnInit() {
+    this.sharedService.sharedModel.subscribe((sharedModel:any) => this.sharedModel = sharedModel);
+    
     this.CONTENT_PATH = this.globalService.globalLinks.CONTENT_PATH;
     this.RESIZED_CONTENT_PATH = this.globalService.globalLinks.RESIZED_CONTENT_PATH;
 

@@ -10,40 +10,33 @@
                   					<div class="widget-banner visible-xs-block">
 										<a class="widget__image" *ngIf="sharedModel?.mobileLeaderboardBanner" target="_blank" [attr.href]="sharedModel.mobileLeaderboardBanner?.link">
 											<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt=""><!-- height="50" width="300" -->
-										</a><!-- /.widget__image -->
-									</div><!-- /.widget-banner -->
-									
-									<h2 class="section__title" [innerHTML]="Model?.title"></h2><!-- /.section__title -->
-
+										</a>
+									</div>
+									<h2 class="section__title" [innerHTML]="Model?.title"></h2>
 									<div class="section__head-inner">
 										<nav class="breadcrumbs">
 											<ul>
 												<li>
 													<a routerLink="/">الصفحة الرئيسية</a>
 												</li>
-												
 												<li>
 													<a [innerHTML]="Model?.title"></a>
 												</li>
 											</ul>
-										</nav><!-- /.breadcrumbs -->
-									</div><!-- /.section__head-inner -->
-								</header><!-- /.section__head -->
-
+										</nav>
+									</div>
+								</header>
 								<div class="section__body">
 									<div class="section__row">
 										<h4 [innerHTML]="Model?.smallDescription"></h4>
-									</div><!-- /.section__row -->
-
-									<div class="section__entry" [innerHTML]="Model?.description"></div><!-- /.section__entry -->
-								</div><!-- /.section__body -->
-							</section><!-- /.section-default section-default--about -->
-						</div><!-- /.content__body -->
-					</div><!-- /.content -->
-				
+									</div>
+									<div class="section__entry" [innerHTML]="Model?.description"></div>
+								</div>
+							</section>
+						</div>
+					</div>
           <app-sidebar [globalModel]="globalModel"></app-sidebar>
-          
-				</div><!-- /.main__body -->
-			</div><!-- /.shell -->
-		</div><!-- /.main -->
-	</div><!-- /.container -->
+				</div>
+			</div>
+		</div>
+	</div>

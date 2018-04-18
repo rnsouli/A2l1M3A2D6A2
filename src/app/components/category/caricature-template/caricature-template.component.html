@@ -1,105 +1,93 @@
 <div class="container container--alt">
-		<div class="main main--primary main--alt">
-			<div class="shell">
-				<div class="main__body">
-					<div class="content">
-						<div class="content__body">
-							<section class="section-breadcrumbs">
-								<div class="section__body">
-									<nav class="breadcrumbs">
-										<ul>
-											<li>
-												<a routerLink="/">الصفحة الرئيسية</a>
-											</li>
-											
-											<li>
-												<a routerLink="/Category/{{CategoryModel?.id}}/{{CategoryModel?.customUrlTitle}}">{{CategoryModel?.title}}</a>
-											</li>
-										</ul>
-									</nav><!-- /.breadcrumbs -->
-								</div><!-- /.section__body -->
-							</section><!-- /.section-breadcrumbs -->
-
-							<section class="section-caricatures section-caricatures--first" *ngIf="CategoryModel?.articles && CategoryModel?.articles.length">
-								<div class="section__body">
-									<div class="widget-banner visible-xs-block">
-										<a class="widget__image" *ngIf="sharedModel?.mobileLeaderboardBanner" target="_blank" [attr.href]="sharedModel.mobileLeaderboardBanner?.link">
-											<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt=""><!-- height="50" width="300" -->
-										</a><!-- /.widget__image -->
-									</div><!-- /.widget-banner -->
-									
-									<div class="cols">
-										<div class="col col--1of2">
-											<div class="section__image">
-												<img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/461x335xo/{{CategoryModel.firstArticle?.image}}" height="335" width="461" alt="">
-											</div><!-- /.section__image -->
-										</div><!-- /.col col--1of2 -->
-										
-										<div class="col col--1of2">
-											<div class="section__content">
-												<a routerLink="/Details/{{CategoryModel.firstArticle?.id}}/{{CategoryModel.firstArticle?.customUrlTitle}}" class="btn btn-default btn-default--xlarge">{{CategoryModel?.title.replace('اليوم', '') }} اليوم</a>
-
-												<h2>{{CategoryModel.firstArticle?.title}}</h2>
-
-												<ul class="list-meta">
-													<li *ngIf="CategoryModel.firstArticle?.writer != null">
-														<a routerLink="/Writer/{{CategoryModel.firstArticle?.writer?.id}}/{{CategoryModel.firstArticle?.writer?.customUrlTitle}}">
-															<span>{{CategoryModel.firstArticle?.writer?.name}}</span>															
-															<i class="fa fa-pencil" aria-hidden="true"></i>
-														</a>
-													</li>
-								
-													<li>
-														<a routerLink="/Details/{{CategoryModel.firstArticle?.id}}/{{CategoryModel.firstArticle?.customUrlTitle}}">
-															<span>{{CategoryModel.firstArticle?.date | date: 'dd/MM/yyyy'}}</span>
-															
-															<i class="fa fa-clock-o" aria-hidden="true"></i>
-														</a>
-													</li>
-												</ul><!-- /.list-meta -->
-											</div><!-- /.section__content -->
-										</div><!-- /.col col--1of2 -->
-									</div><!-- /.cols -->
-								</div><!-- /.section__body -->
-							</section><!-- /.section-caricatures -->
-	
-							<section class="section-default section-default--caricatures" *ngIf="CategoryModel.articles">
-								<div class="section__body">
-									<div class="articles articles--medium articles--medium-alt" app-articles [entries]="CategoryModel.firstTabOfArticles">
-
-									</div><!-- /.articles articles--medium -->																		
-									<div class="section__bar hidden-xs">
-										<a class="section__image" *ngIf="sharedModel?.leaderboardBanner" target="_blank" [attr.href]="sharedModel.leaderboardBanner?.link">
-											<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.leaderboardBanner?.image}}" height="90" width="728" alt="">
-										</a><!-- /.section__image -->
-									</div><!-- /.section__bar -->
-
-									<div class="widget-banner visible-xs-block">
-										<a class="widget__image" *ngIf="sharedModel?.mobileLeaderboardBanner" target="_blank" [attr.href]="sharedModel.mobileLeaderboardBanner?.link">
-											<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt=""><!-- height="50" width="300" -->
-										</a><!-- /.widget__image -->
-									</div><!-- /.widget-banner -->
-								</div><!-- /.section__body -->
-							</section><!-- /.section-default -->
-	
-								<section class="section-default section-articles-alt">
-									<div class="section__body">
-										<div class="articles articles--medium articles--medium-alt" app-articles [entries]="CategoryModel.secondTabOfArticles">
-											
-										</div><!-- /.articles articles--medium -->
-									</div><!-- /.section__body -->
-								</section><!-- /.section-articles-alt -->	
-
-						</div><!-- /.content__body -->
-
-						<div class="content__actions">
-							<a (click)="load_more_articles()" class="btn btn-default btn-default--large loadMore {{isLoading ? 'loading' : ''}}">المزيد <i class="fa fa-plus" aria-hidden="true"></i></a>
-						</div><!-- /.content__actions -->
-					</div><!-- /.content -->
-				
-					<app-sidebar [globalModel]="globalModel"></app-sidebar>
-				</div><!-- /.main__body -->
-			</div><!-- /.shell -->
-		</div><!-- /.main -->
-	</div><!-- /.container -->
-
+	<div class="main main--primary main--alt">
+		<div class="shell">
+			<div class="main__body">
+				<div class="content">
+					<div class="content__body">
+						<section class="section-breadcrumbs">
+							<div class="section__body">
+								<nav class="breadcrumbs">
+									<ul>
+										<li>
+											<a routerLink="/">الصفحة الرئيسية</a>
+										</li>
+										<li>
+											<a routerLink="/Category/{{CategoryModel?.id}}/{{CategoryModel?.customUrlTitle}}">{{CategoryModel?.title}}</a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</section>
+						<section class="section-caricatures section-caricatures--first" *ngIf="CategoryModel?.articles && CategoryModel?.articles.length">
+							<div class="section__body">
+								<div class="widget-banner visible-xs-block">
+									<a class="widget__image" *ngIf="sharedModel?.mobileLeaderboardBanner" target="_blank" [attr.href]="sharedModel.mobileLeaderboardBanner?.link">
+										<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt="">
+										<!-- height="50" width="300" -->
+									</a>
+								</div>
+								<div class="cols">
+									<div class="col col--1of2">
+										<div class="section__image">
+											<img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/461x335xo/{{CategoryModel.firstArticle?.image}}"
+											 height="335" width="461" alt="">
+										</div>
+									</div>
+									<div class="col col--1of2">
+										<div class="section__content">
+											<a routerLink="/Details/{{CategoryModel.firstArticle?.id}}/{{CategoryModel.firstArticle?.customUrlTitle}}" class="btn btn-default btn-default--xlarge">{{CategoryModel?.title.replace('اليوم', '') }} اليوم</a>
+											<h2>{{CategoryModel.firstArticle?.title}}</h2>
+											<ul class="list-meta">
+												<li *ngIf="CategoryModel.firstArticle?.writer != null">
+													<a routerLink="/Writer/{{CategoryModel.firstArticle?.writer?.id}}/{{CategoryModel.firstArticle?.writer?.customUrlTitle}}">
+														<span>{{CategoryModel.firstArticle?.writer?.name}}</span>
+														<i class="fa fa-pencil" aria-hidden="true"></i>
+													</a>
+												</li>
+												<li>
+													<a routerLink="/Details/{{CategoryModel.firstArticle?.id}}/{{CategoryModel.firstArticle?.customUrlTitle}}">
+														<span>{{CategoryModel.firstArticle?.date | date: 'dd/MM/yyyy'}}</span>
+														<i class="fa fa-clock-o" aria-hidden="true"></i>
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						<section class="section-default section-default--caricatures" *ngIf="CategoryModel.articles">
+							<div class="section__body">
+								<div class="articles articles--medium articles--medium-alt" app-articles [entries]="CategoryModel.firstTabOfArticles">
+								</div>
+								<div class="section__bar hidden-xs">
+									<a class="section__image" *ngIf="sharedModel?.leaderboardBanner" target="_blank" [attr.href]="sharedModel.leaderboardBanner?.link">
+										<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.leaderboardBanner?.image}}" height="90" width="728" alt="">
+									</a>
+								</div>
+								<div class="widget-banner visible-xs-block">
+									<a class="widget__image" *ngIf="sharedModel?.mobileLeaderboardBanner" target="_blank" [attr.href]="sharedModel.mobileLeaderboardBanner?.link">
+										<img src="{{CONTENT_PATH + '/BannerPage/' + sharedModel.mobileLeaderboardBanner?.image}}" alt="">
+										<!-- height="50" width="300" -->
+									</a>
+								</div>
+							</div>
+						</section>
+						<section class="section-default section-articles-alt">
+							<div class="section__body">
+								<div class="articles articles--medium articles--medium-alt" app-articles [entries]="CategoryModel.secondTabOfArticles">
+								</div>
+							</div>
+						</section>
+					</div>
+					<div class="content__actions">
+						<a (click)="load_more_articles()" class="btn btn-default btn-default--large loadMore {{isLoading ? 'loading' : ''}}">المزيد
+							<i class="fa fa-plus" aria-hidden="true"></i>
+						</a>
+					</div>
+				</div>
+				<app-sidebar [globalModel]="globalModel"></app-sidebar>
+			</div>
+		</div>
+	</div>
+</div>

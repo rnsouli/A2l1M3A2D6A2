@@ -1,94 +1,65 @@
 <div class="container">
-		<div class="intro">
+	<div class="intro">
+		<div class="shell">
+			<div class="intro__body">
+				<div class="cssload-spin-box" *ngIf="topArticle == undefined || topArticle == null"></div>
+				<app-home-slideshow [topArticle]="topArticle" [slideshow]="slideshow"></app-home-slideshow>
+			</div>
+		</div>
+	</div>
+	<div class="section__bar hidden-xs">
+		<a class="section__image" *ngIf="aboveMenuBanner" target="_blank" [attr.href]="aboveMenuBanner?.link">
+			<img src="{{CONTENT_PATH + '/BannerPage/' + aboveMenuBanner?.image}}" height="90" width="728" alt="">
+		</a>
+	</div>
+	<div class="bar-nav js-bar-nav">
+		<div class="bar__inner">
 			<div class="shell">
-				<div class="intro__body">
-					<div class="cssload-spin-box" *ngIf="topArticle == undefined || topArticle == null"></div>
-					<app-home-slideshow [topArticle]="topArticle"
-					[slideshow]="slideshow"></app-home-slideshow>
-				</div><!-- /.intro__body -->
-			</div><!-- /.shell -->
-		</div><!-- /.intro -->
-
-		<div class="section__bar hidden-xs">
-			<a class="section__image" *ngIf="aboveMenuBanner" target="_blank" [attr.href]="aboveMenuBanner?.link">
-				<img src="{{CONTENT_PATH + '/BannerPage/' + aboveMenuBanner?.image}}" height="90" width="728" alt="">
-			</a><!-- /.section__image -->
+				<div class="bar__body">
+					<a routerLink="/" class="logo logo--small-white" [style.background-image]="'url(' + sharedModel?.logoMobile + ')'"></a>
+					<nav class="nav nav--bar">
+						<ul app-navigation>
+						</ul>
+					</nav>
+				</div>
+			</div>
 		</div>
-
-		<div class="bar-nav js-bar-nav">
-			<div class="bar__inner">
-				<div class="shell">
-					<div class="bar__body">
-						<a routerLink="/" class="logo logo--small-white" [style.background-image]="'url(' + sharedModel?.logoMobile + ')'"></a>
-
-						<nav class="nav nav--bar">
-							<ul app-navigation>
-							</ul>
-						</nav>
-
-					</div><!-- /.bar__body -->
-				</div><!-- /.shell -->
-			</div><!-- /.bar__inner -->
-		</div><!-- /.bar-nav -->
-
-		<div id="middleHome">
-			<div class="cssload-spin-box" *ngIf="!part1IsReady"></div>
-			<app-middle-home [todaysPicArticles]="todaysPicArticles"
-			[underTodaysPic]="underTodaysPic"
-			[latestNews]="latestNews"
-			[leftArticles]="leftArticles"
-			[bannerArticle]="bannerArticle"></app-middle-home>
+	</div>
+	<div id="middleHome">
+		<div class="cssload-spin-box" *ngIf="!part1IsReady"></div>
+		<app-middle-home [todaysPicArticles]="todaysPicArticles" [underTodaysPic]="underTodaysPic" [latestNews]="latestNews" [leftArticles]="leftArticles"
+		 [bannerArticle]="bannerArticle"></app-middle-home>
+	</div>
+	<div hidden class="section__bar hidden-xs">
+		<a class="section__image" *ngIf="leaderboardBanner" target="_blank" [attr.href]="sharedModel.leaderboardBanner?.link">
+			<img src="{{CONTENT_PATH + '/BannerPage/' + leaderboardBanner?.image}}" height="90" width="728" alt="">
+		</a>
+	</div>
+	<div id="yellowMiddleHome">
+		<div class="cssload-spin-box" *ngIf="!part2IsReady"></div>
+		<app-yellow-middle-home [firstBoxCategory]="firstBoxCategory" [bigPoliticals]="bigPoliticals" [politicalsSmall]="politicalsSmall"
+		 [politicals]="politicals" [secondBoxCategory]="secondBoxCategory" [localNews]="localNews" [todaysIssues]="todaysIssues"
+		 [todaysSupplementIssues]="todaysSupplementIssues"></app-yellow-middle-home>
+	</div>
+	<div class="main main--primary">
+		<div class="shell">
+			<div class="main__body">
+				<div class="content">
+					<div class="content__body">
+						<div id="whiteMiddleHome">
+							<div class="cssload-spin-box" *ngIf="!part3IsReady"></div>
+							<app-white-middle-home [whiteBox]="whiteBox" [specializedArticles]="specializedArticles" [middleArticles]="middleArticles"
+							 [tabCategories]="tabCategories" [firstBoxCategory]="firstBoxCategoryForWhite" [secondBoxCategory]="secondBoxCategoryForWhite"></app-white-middle-home>
+						</div>
+						<div id="bottomHome">
+							<div class="cssload-spin-box" *ngIf="!part4IsReady"></div>
+							<app-bottom-home [bottomCategory]="bottomCategory" [bottomSlideshowArticles]="bottomSlideshowArticles" [bottomArticles]="bottomArticles"
+							 [videoArticles]="videoArticles" [currentPoll]="currentPoll"></app-bottom-home>
+						</div>
+					</div>
+				</div>
+				<app-sidebar [globalModel]="globalModel"></app-sidebar>
+			</div>
 		</div>
-			
-		<div hidden class="section__bar hidden-xs">
-			<a class="section__image" *ngIf="leaderboardBanner" target="_blank" [attr.href]="sharedModel.leaderboardBanner?.link">
-				<img src="{{CONTENT_PATH + '/BannerPage/' + leaderboardBanner?.image}}" height="90" width="728" alt="">
-			</a><!-- /.section__image -->
-		</div>
-		<!-- /.section__bar -->
-
-		<div id="yellowMiddleHome">
-			<div class="cssload-spin-box" *ngIf="!part2IsReady"></div>
-			<app-yellow-middle-home [firstBoxCategory]="firstBoxCategory"
-			[bigPoliticals]="bigPoliticals"
-			[politicalsSmall]="politicalsSmall"
-			[politicals]="politicals"
-			[secondBoxCategory]="secondBoxCategory"
-			[localNews]="localNews"
-			[todaysIssues]="todaysIssues"
-			[todaysSupplementIssues]="todaysSupplementIssues"></app-yellow-middle-home>
-		</div>
-
-		<div class="main main--primary">
-			<div class="shell">
-				<div class="main__body">
-					<div class="content">
-						<div class="content__body">
-							
-							<div id="whiteMiddleHome">
-								<div class="cssload-spin-box" *ngIf="!part3IsReady"></div>
-								<app-white-middle-home [whiteBox]="whiteBox"
-								[specializedArticles]="specializedArticles"
-								[middleArticles]="middleArticles"
-								[tabCategories]="tabCategories"
-								[firstBoxCategory]="firstBoxCategoryForWhite"
-								[secondBoxCategory]="secondBoxCategoryForWhite"></app-white-middle-home>
-							</div>
-							<div id="bottomHome">
-								<div class="cssload-spin-box" *ngIf="!part4IsReady"></div>
-								<app-bottom-home [bottomCategory]="bottomCategory"
-								[bottomSlideshowArticles]="bottomSlideshowArticles"
-								[bottomArticles]="bottomArticles"
-								[videoArticles]="videoArticles"
-								[currentPoll]="currentPoll"></app-bottom-home>	
-							</div>						
-							
-						</div><!-- /.content__body -->
-					</div><!-- /.content -->
-				
-					<app-sidebar [globalModel]="globalModel"></app-sidebar>
-
-				</div><!-- /.main__body -->
-			</div><!-- /.shell -->
-		</div><!-- /.main -->
-	</div><!-- /.container -->
+	</div>
+</div>
