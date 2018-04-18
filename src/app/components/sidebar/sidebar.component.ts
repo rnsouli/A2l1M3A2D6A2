@@ -41,6 +41,7 @@ export class SidebarComponent implements OnInit {
     caricatureId:number;
     pillarOfTheDayId:number;
   
+    facebookPageUrl:string = "";
   
     sharedModel:SharedModel;
     
@@ -76,6 +77,11 @@ export class SidebarComponent implements OnInit {
 
             if(this.sharedModel.FACEBOOK_PAGE_LINK != ""){
               this.FACEBOOK_PAGE_LINK = this.sharedModel.FACEBOOK_PAGE_LINK;
+              this.facebookPageUrl = 'https://www.facebook.com/plugins/page.php?href=';
+              this.facebookPageUrl += this.FACEBOOK_PAGE_LINK;
+              this.facebookPageUrl += '&tabs=timeline&width=300&height=300&small_header=true';
+              this.facebookPageUrl += '&adapt_container_width=true&hide_cover=true&show_facepile=true';
+              this.facebookPageUrl += '&appId=149120775752240';
             }
       
             if(this.sharedModel.TWITTER_PAGE_LINK != ""){

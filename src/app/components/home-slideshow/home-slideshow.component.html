@@ -2,8 +2,9 @@
   <article class="article-alt article-alt--xlarge template_1216_433" *ngIf="topArticle">
     <a routerLink="/Details/{{topArticle?.id}}/{{topArticle?.customUrlTitle}}">
       <div class="article__image fullsize-image">
-        <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/1217x434xo/{{topArticle?.image}}" height="434"
-          width="1217" alt="">
+        <img (error)="sharedService.errorHandler($event)" src="{{RESIZED_CONTENT_PATH}}/1217x434xo/{{topArticle?.image}}" alt="">
+        <!-- height="434"
+          width="1217" -->
       </div>
       <div class="article__content">
         <span *ngIf="topArticle?.isVideo" class="btn btn-play btn-play--large"></span>

@@ -101,10 +101,15 @@
 
 												<!-- <fb-like [attr.href]="entry?.urlBrowser"></fb-like> -->
 
-												<div class="fb-like" [attr.data-href]="entry?.urlBrowser" 
+												<!-- <div class="fb-like" [attr.data-href]="entry?.urlBrowser" 
 												data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" 
-												data-share="false"></div>
-
+												data-share="false"></div> -->
+												<div class="btn btn-social btn-social--alt btn-social--facebook">
+												<iframe [src]="facebookLikeUrl | safeUrl" 
+												width="79" height="21" 
+												style="border:none;overflow:hidden" 
+												scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+												</div>
 											</div><!-- /.article__bar-actions -->
 
 											<div class="article__bar-aside">

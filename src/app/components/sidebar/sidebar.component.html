@@ -217,12 +217,16 @@
           </div>
         </div>
       </div>
-      <div id="facebookPage" class="fb-page" [attr.data-href]="FACEBOOK_PAGE_LINK" data-tabs="timeline" data-small-header="true"
+      <!-- <div id="facebookPage" class="fb-page" [attr.data-href]="FACEBOOK_PAGE_LINK" data-tabs="timeline" data-small-header="true"
         data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true" data-height="300">
         <blockquote [attr.cite]="FACEBOOK_PAGE_LINK" class="fb-xfbml-parse-ignore">
           <a [attr.href]="FACEBOOK_PAGE_LINK">‎مؤسسة المدى‎</a>
         </blockquote>
-      </div>
+      </div> -->
+
+      <iframe id="facebookPage" [src]="facebookPageUrl | safeUrl" width="300" height="300" style="border:none;overflow:hidden" 
+      scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+
       <!-- <a class="twitter-timeline" href="https://twitter.com/madanewspaper" data-width="300" data-height="300">
           Tweets by @madanewspaper
         </a> -->

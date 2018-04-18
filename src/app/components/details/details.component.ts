@@ -46,6 +46,8 @@ export class DetailsComponent implements OnInit {
   whatsappLink:any = "";
 
   relatedArticleTitle:string = "";
+
+  facebookLikeUrl: string = "";
   
   constructor(private globalService: GlobalService, private titleService: Title, private sanitizer: DomSanitizer, private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { }
 
@@ -126,6 +128,10 @@ export class DetailsComponent implements OnInit {
         this.myFunctions.loadScript("http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a4ce5ff163c4827");
 
         this.relatedArticleTitle = this.entry.categoryId == 2 ? 'مقالات ذات صلة' : 'أخبار ذات صلة';
+
+        this.facebookLikeUrl = 'https://www.facebook.com/plugins/like.php?href=';
+        this.facebookLikeUrl += this.entry.urlBrowser + '&width=79&layout=button_count&action=like';
+        this.facebookLikeUrl += '&size=small&show_faces=false&share=false&height=21&appId=149120775752240';
       });
 
     });
