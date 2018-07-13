@@ -66,6 +66,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ArchiveComponent } from './components/archive/archive.component';
 import { IssueDetailsComponent } from './components/issues/issuedetails/issuedetails.component';
 import { PrintComponent } from './components/details/print/print.component';
+import { LatestArticlesComponent } from './components/details/latest-articles/latest-articles.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   //suppressScrollX: true
@@ -180,6 +182,8 @@ let routes = [
     ArchiveComponent,
     IssueDetailsComponent,
     PrintComponent,
+    LatestArticlesComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'al-mada'}),

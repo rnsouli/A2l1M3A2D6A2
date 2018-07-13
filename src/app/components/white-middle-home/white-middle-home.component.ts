@@ -80,6 +80,8 @@ export class WhiteMiddleHomeComponent implements OnInit {
           this.myFunctions.ArticleAsBgJs();
           this.myFunctions.hide_comments_counter();
         
+      }, (err:any) => {
+        this.myFunctions.alertPopup(err.error);
       });
     //}
   }
@@ -99,6 +101,8 @@ export class WhiteMiddleHomeComponent implements OnInit {
             this.myFunctions.hide_comments_counter();
           }
         
+      }, (err:any) => {
+        this.myFunctions.alertPopup(err.error);
       });
     //}
   }

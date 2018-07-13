@@ -63,6 +63,8 @@ export class MiddleHomeComponent implements OnInit {
         this.myFunctions.hide_comments_counter();
         //this.myFunctions.SliderSingleSwiper();
 
+      }, (err:any) => {
+        this.myFunctions.alertPopup(err.error);
       });
     
     }, 150000);

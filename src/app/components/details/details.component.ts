@@ -119,7 +119,7 @@ export class DetailsComponent implements OnInit {
         this.myFunctions.SliderSingleSwiper();
         this.entry.urlBrowser = this.BASE_URL + "Details/" + this.entry.id;// + (this.entry.customUrlTitle ? '/' + this.entry.customUrlTitle : '');
         this.whatsappLink = this.sanitizer.bypassSecurityTrustUrl('whatsapp://send?text=' + this.entry.urlBrowser);
-        this.myFunctions.load_fb_comments("fbComment");
+        //this.myFunctions.load_fb_comments("fbComment");
         this.myFunctions.loadScript("https://platform.twitter.com/widgets.js");
         this.myFunctions.getFacebookCounterAjax(this.entry.urlBrowser);
         this.addArticleViewCounter();
@@ -132,6 +132,10 @@ export class DetailsComponent implements OnInit {
         this.facebookLikeUrl = 'https://www.facebook.com/plugins/like.php?href=';
         this.facebookLikeUrl += this.entry.urlBrowser + '&width=79&layout=button_count&action=like';
         this.facebookLikeUrl += '&size=small&show_faces=false&share=false&height=21&appId=149120775752240';
+      }, (err:any) => {
+        this.formErrors = [];
+        this.formErrors.push(err.error.message);
+        this.myFunctions.alertPopup(err.error);
       });
 
     });
@@ -149,7 +153,7 @@ export class DetailsComponent implements OnInit {
     
     }, (err:any) => {
       this.formErrors.push(err.error.message);
-      console.log(err.error.message);
+      this.myFunctions.alertPopup(err.error);
     });
 
   }

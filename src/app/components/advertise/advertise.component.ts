@@ -80,6 +80,8 @@ export class AdvertiseComponent implements OnInit {
             this.advertiseGenders = data.advertiseGenders;
             this.targetAges = data.targetAges; 
             //this.myFunctions.CustomSelect(); 
+          }, (err:any) => {
+            this.myFunctions.alertPopup(err.error);
           });
         }
       },100);
@@ -100,7 +102,7 @@ export class AdvertiseComponent implements OnInit {
       }, (err:any) => {
         this.isSubmitted = false;
         this.formErrors.push(err.error.message);
-        console.log(err.error.message);
+        this.myFunctions.alertPopup(err.error);
       });
     }
   }

@@ -68,6 +68,8 @@ export class NavigationComponent implements OnInit {
           this.myFunctions.ArticleAsBgJs();
           //console.log(this.headerCategoryArticles);
           //console.log(this.headerCategoryArticles[catId]);        
+      }, (err:any) => {
+        this.myFunctions.alertPopup(err.error);
       });
     }
   }
@@ -82,6 +84,8 @@ export class NavigationComponent implements OnInit {
           this.myFunctions.ArticleAsBgJs();  
           //document.getElementsByClassName("nav__dropdown-inner")[catNumber].removeAttribute('style');
 
+      }, (err:any) => {
+        this.myFunctions.alertPopup(err.error);
       });
     }
   }

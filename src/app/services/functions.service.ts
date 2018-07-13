@@ -128,4 +128,8 @@ export class FunctionsService {
     myFunctions.pinterestShare(linkUrl, title, text, imageUrl);
   }
 
+  alertPopup(message){
+    myFunctions.alertPopup(message);
+  }
+
 }

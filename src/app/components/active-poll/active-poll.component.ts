@@ -73,7 +73,7 @@ export class ActivePollComponent implements OnInit {
     }, (err:any) => {
       this.isSubmitted = false;
       this.formErrors.push(err.error.message);
-      console.log(err.error.message);
+      this.myFunctions.alertPopup(err.error);
     });
   }
 

@@ -93,6 +93,8 @@ export class ContactUsComponent implements OnInit {
             this.countries = data.countries;   
             this.showMessageUs = data.showMessageUs;   
             //this.myFunctions.CustomSelect(); 
+          }, (err:any) => {
+            this.myFunctions.alertPopup(err.error);
           });
         }
       },100);
@@ -118,7 +120,7 @@ export class ContactUsComponent implements OnInit {
       }, (err:any) => {
         this.isSubmitted = false;
         this.formErrors.push(err.error.message);
-        console.log(err.error.message);
+        this.myFunctions.alertPopup(err.error);
       });
     }
 

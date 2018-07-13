@@ -25,7 +25,7 @@ export class AboutUsComponent implements OnInit {
     
     @Input() globalModel:GlobalModel;
   
-    constructor(private globalService: GlobalService, private route: ActivatedRoute, private sharedService:SharedService, private http:HttpClient) { }
+    constructor(private globalService: GlobalService, private route: ActivatedRoute, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { }
     
     ngOnInit() {
       this.sharedService.sharedModel.subscribe((sharedModel:any) => this.sharedModel = sharedModel);
@@ -43,6 +43,8 @@ export class AboutUsComponent implements OnInit {
             this.Model = data.entry;
             //console.log(this.model);
             
+          }, (err:any) => {
+            this.myFunctions.alertPopup(err.error);
           });
         }
       },100);

@@ -1,0 +1,41 @@
+<div class="widget-default widget-last-news">
+  <header class="widget__head">
+    <h3 class="widget__title">الأكثر قراءة</h3><!-- /.widget__title --> <!-- أحدث الأخبار -->
+  </header><!-- /.widget__head -->
+
+  <div class="widget__body" *ngIf="entries && entries.length">
+    <ol class="news-items">
+
+      <li class="news-item" *ngFor="let item of entries">
+        <div class="news__content">
+          <h6><a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">{{item?.title}}</a></h6>
+
+          <ul class="list-meta">
+          <li>
+            <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+              <span class="text-en">{{item?.date | date: 'dd/MM/yyyy HH:mm' }}</span>
+              
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+            </a>
+          </li>
+
+          <li>
+            <a routerLink="/Details/{{item?.id}}/{{item?.customUrlTitle}}">
+              <span class="text-en">500</span>
+              
+              <i class="fa fa-comment-o" aria-hidden="true"></i>
+            </a>
+          </li>
+          </ul><!-- /.list-meta -->
+        </div><!-- /.news__content -->
+      </li><!-- /.news-item -->
+      
+    </ol><!-- /.news-items -->
+  </div><!-- /.widget__body -->
+
+  <!-- <div class="widget__actions">
+    <a href="#" class="link link--red link-more">
+      <i class="fa fa-long-arrow-left" aria-hidden="true"></i>المزيد
+    </a>
+  </div> --><!-- /.widget__actions -->
+</div><!-- /.widget-default widget-last-news -->

@@ -22,6 +22,9 @@ export class RelatedArticlesComponent implements OnInit {
 
   @Input() relatedArticleTitle:string;
 
+  @Input() articleId:number;
+  @Input() articleWriterId:number;
+
   CONTENT_PATH:string;
   RESIZED_CONTENT_PATH:string;
 
@@ -31,6 +34,15 @@ export class RelatedArticlesComponent implements OnInit {
 
     this.CONTENT_PATH = this.globalService.globalLinks.CONTENT_PATH;
     this.RESIZED_CONTENT_PATH = this.globalService.globalLinks.RESIZED_CONTENT_PATH;
+
+    this.http.get(this.globalService.globalLinks.API_URL + "Data/GetRelatedArticlesById?id=" + this.articleId + "&articleWriterId=" + this.articleWriterId).subscribe((data:any) =>{
+      //console.log(data);
+      this.entries = data;
+      this.myFunctions.hide_comments_counter();
+    }, (err:any) => {
+      this.myFunctions.alertPopup(err.error);
+    });
+
   }
 
 }

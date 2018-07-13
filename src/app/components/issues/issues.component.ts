@@ -151,6 +151,8 @@ export class IssuesComponent implements OnInit {
         //   this.myFunctions.loadScript("/assets/js/lightbox.js");      
         // }, 800);
         
+      }, (err:any) => {
+        this.myFunctions.alertPopup(err.error);
       }); 
     }); 
   }
@@ -208,6 +210,8 @@ export class IssuesComponent implements OnInit {
         this.isLoading = false;
       },200); 
 
+    }, (err:any) => {
+      this.myFunctions.alertPopup(err.error);
     });
   }
 
@@ -248,6 +252,8 @@ export class IssuesComponent implements OnInit {
           this.isLoading = false;
         },200); 
   
+      }, (err:any) => {
+        this.myFunctions.alertPopup(err.error);
       });
 
     }

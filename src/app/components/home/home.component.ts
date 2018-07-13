@@ -136,6 +136,8 @@ export class HomeComponent implements OnInit {
         this.myFunctions.hide_comments_counter();
         this.startScrollLoading = true;
       },200);
+    }, (err:any) => {
+      this.myFunctions.alertPopup(err.error);
     });
 
 
@@ -165,6 +167,8 @@ export class HomeComponent implements OnInit {
             this.myFunctions.ArticleAsBgJs();
             this.myFunctions.hide_comments_counter();
             this.myFunctions.SliderSingleSwiper();
+          }, (err:any) => {
+            this.myFunctions.alertPopup(err.error);
           });
         }
       }
@@ -192,6 +196,8 @@ export class HomeComponent implements OnInit {
             this.myFunctions.hide_comments_counter();
             this.myFunctions.SliderSingleSwiper();
             
+          }, (err:any) => {
+            this.myFunctions.alertPopup(err.error);
           });
 
         }
@@ -222,6 +228,8 @@ export class HomeComponent implements OnInit {
             this.myFunctions.ArticleAsBgJs();
             this.myFunctions.hide_comments_counter();
             this.myFunctions.TabsOnMobileSelect();
+          }, (err:any) => {
+            this.myFunctions.alertPopup(err.error);
           });
 
         }
@@ -252,6 +260,8 @@ export class HomeComponent implements OnInit {
 
             this.myFunctions.progress_bar();   
             this.myFunctions.hide_comments_counter();   
+          }, (err:any) => {
+            this.myFunctions.alertPopup(err.error);
           });
 
         }

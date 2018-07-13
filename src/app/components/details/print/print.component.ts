@@ -81,6 +81,8 @@ export class PrintComponent implements OnInit {
           this.printpage();
         }
 
+      }, (err:any) => {
+        this.myFunctions.alertPopup(err.error);
       });
 
     });

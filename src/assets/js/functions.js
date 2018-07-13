@@ -966,6 +966,17 @@ module.exports.myFunctions = {
 				}
 			}
 		},100);
+	},
+
+	alertPopup(message){
+		document.getElementsByClassName('alert-mssg')[0].innerHTML = message;
+        document.getElementsByClassName('bar-alert')[0].classList.add("show-alert");
+        $(".bar-alert .fa-close").click(function () {
+            $(".bar-alert").removeClass("show-alert");
+            $timeout(function () {
+                $(".bar-alert .alert-mssg").text("");
+            }, 100);
+        });
 	}
 
 }

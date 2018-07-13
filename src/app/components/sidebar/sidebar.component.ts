@@ -63,7 +63,7 @@ export class SidebarComponent implements OnInit {
       //this.TWITTER_PAGE_LINK = 'https://twitter.com/Dar_Almada?ref_src=twsrc%5Etfw';
       //this.TWITTER_PAGE_LINK = 'https://twitter.com/Dar_Almada';
 
-      this.myFunctions.load_fb_comments("facebookPage");      
+      //this.myFunctions.load_fb_comments("facebookPage");      
       this.myFunctions.loadScript("https://platform.twitter.com/widgets.js");
       
       this.sharedService.sharedModel.subscribe((sharedModel:any) => this.sharedModel = sharedModel);
@@ -110,6 +110,9 @@ export class SidebarComponent implements OnInit {
         this.myFunctions.SliderSingleSwiper();
         this.myFunctions.hide_comments_counter();
 
+      }, (err:any) => {
+        //console.log(err.error.message);
+        this.myFunctions.alertPopup(err.error);
       });
     }
 

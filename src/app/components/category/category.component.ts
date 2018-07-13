@@ -104,6 +104,8 @@ export class CategoryComponent implements OnInit {
           
           this.myFunctions.ArticleAsBgJs();
           this.myFunctions.ImageAsBgJs();
+        }, (err:any) => {
+          this.myFunctions.alertPopup(err.error);
         });
 
       }
@@ -159,6 +161,8 @@ export class CategoryComponent implements OnInit {
             this.myFunctions.ArticleAsBgJs();
             this.myFunctions.ImageAsBgJs();
         }
+      }, (err:any) => {
+        this.myFunctions.alertPopup(err.error);
       });
 
     }

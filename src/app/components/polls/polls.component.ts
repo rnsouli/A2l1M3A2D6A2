@@ -43,6 +43,8 @@ export class PollsComponent implements OnInit {
           this.entries = data.entries;  
           this.oldEntries = data.oldEntries;  
           this.myFunctions.progress_bar();      
+      }, (err:any) => {
+        this.myFunctions.alertPopup(err.error);
       });
     }
   

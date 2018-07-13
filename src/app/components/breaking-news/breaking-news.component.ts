@@ -26,7 +26,7 @@ export class BreakingNewsComponent implements OnInit {
   RESIZED_CONTENT_PATH:string;
   API_URL: string;
   
-  constructor(private globalService: GlobalService, private route: ActivatedRoute, private router:Router, private sharedService:SharedService, private http:HttpClient) { }
+  constructor(private globalService: GlobalService, private route: ActivatedRoute, private router:Router, private myFunctions:FunctionsService, private sharedService:SharedService, private http:HttpClient) { }
   
   ngOnInit() {
 
@@ -48,10 +48,14 @@ export class BreakingNewsComponent implements OnInit {
         //if(this.sharedModel.currentRoute != "print"){
           this.http.get(this.API_URL + 'Data/GetBreakingNews').subscribe((data:any) => {
             this.Model = data.breakingArticle;
+          }, (err:any) => {
+            this.myFunctions.alertPopup(err.error);
           });
           setInterval(() => {
             this.http.get(this.API_URL + 'Data/GetBreakingNews').subscribe((data:any) => {
               this.Model = data.breakingArticle;
+            }, (err:any) => {
+              this.myFunctions.alertPopup(err.error);
             });
           }, 150000);//every 2.5 minutes (300,000 = 1000 * 60sec * 5min) / 2
         //}

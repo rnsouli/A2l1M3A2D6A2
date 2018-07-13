@@ -118,6 +118,9 @@ export class AppComponent {
           //this.globalModel.footerCategories = data.categories.slice(0, 17);
           //this.globalModel.mobileLinks = data.socialMedia.filter(d => d.id == 8 || d.id == 9);
           
+        }, (err:any) => {
+          console.log(err);
+          this.myFunctions.alertPopup(err.error);
         });
         //}
 

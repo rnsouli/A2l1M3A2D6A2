@@ -63,6 +63,8 @@ export class IssueDetailsComponent implements OnInit {
           this.http.get(this.globalService.globalLinks.API_URL + 'Data/GetIssueDetails?id=' + this.issueNumber).subscribe((data:any) => {
             this.Model = data;     
             this.issueNb = +(this.Model.title); 
+          }, (err:any) => {
+            this.myFunctions.alertPopup(err.error);
           }); 
         }); 
       }

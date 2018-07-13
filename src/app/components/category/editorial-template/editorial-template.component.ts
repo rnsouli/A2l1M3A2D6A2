@@ -64,6 +64,8 @@ export class EditorialTemplateComponent implements OnInit {
           //this.myFunctions.load_init_category_page();
           this.isLoading = false;
         },200); 
+      }, (err:any) => {
+        this.myFunctions.alertPopup(err.error);
       });
     }
   }
